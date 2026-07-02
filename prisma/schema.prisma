@@ -1,8 +1,11 @@
-// MITAN — Prisma schema scaffold
+// MITAN — Production Prisma schema
 //
-// This mirrors only the entities needed by the screens converted so far
-// (auth + onboarding steps 1-3 of 7). Extend as discovery/chat/matches
-// features are built out. Not wired to a live database yet.
+// Scalable data model for the MITAN matrimony platform. Covers identity,
+// profiles, discovery (likes/passes/matches), messaging, trust & safety,
+// billing, notifications, and admin/audit concerns.
+//
+// Not wired to a live database in this environment — set DATABASE_URL in your
+// environment and run `pnpm prisma migrate dev` to provision.
 
 generator client {
   provider = "prisma-client-js"
@@ -13,39 +16,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id                     String    @id @default(uuid())
-  email                  String    @unique
-  passwordHash           String
-  fullName               String
-  displayName            String?
-  emailVerifiedAt        DateTime?
-  onboardingCompletedAt  DateTime?
-  createdAt              DateTime  @default(now())
-  updatedAt              DateTime  @updatedAt
+// ============================================================
+// ENUMS
+// ============================================================
 
-  profile          Profile?
-  religiousProfile ReligiousProfile?
+enum Role {
+  USER
+  MODERATOR
+  ADMIN
+  SUPER_ADMIN
+}
 
-  @@map("users")
+enum AccountStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+  BANNED
+  DEACTIVATED
 }
 
 enum Gender {
   MALE
   FEMALE
-}
-
-model Profile {
-  id        String   @id @default(uuid())
-  userId    String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  gender    Gender?
-  dateOfBirth DateTime?
-  city      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("profiles")
 }
 
 enum PrayerFrequency {
@@ -79,6 +71,203 @@ enum HijabStatus {
   PLANNING
 }
 
+enum MaritalStatus {
+  NEVER_MARRIED
+  DIVORCED
+  WIDOWED
+}
+
+enum PhotoStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum VerificationType {
+  EMAIL
+  PHONE
+  IDENTITY
+  PHOTO
+}
+
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum MatchStatus {
+  PENDING
+  ACTIVE
+  UNMATCHED
+}
+
+enum ConversationStatus {
+  ACTIVE
+  ARCHIVED
+  CLOSED
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  SYSTEM
+}
+
+enum NotificationType {
+  MATCH
+  LIKE
+  MESSAGE
+  SYSTEM
+  VERIFICATION
+  SUBSCRIPTION
+}
+
+enum SubscriptionPlan {
+  FREE
+  PREMIUM
+  GOLD
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  EXPIRED
+  PAST_DUE
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+enum ReportStatus {
+  OPEN
+  REVIEWING
+  RESOLVED
+  DISMISSED
+}
+
+// ============================================================
+// IDENTITY
+// ============================================================
+
+model User {
+  id                    String        @id @default(uuid())
+  email                 String        @unique
+  passwordHash          String
+  fullName              String
+  displayName           String?
+  role                  Role          @default(USER)
+  status                AccountStatus @default(PENDING)
+  emailVerifiedAt       DateTime?
+  onboardingCompletedAt DateTime?
+  lastLoginAt           DateTime?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  profile          Profile?
+  religiousProfile ReligiousProfile?
+  partnerPref      PartnerPreference?
+  subscription     Subscription?
+
+  photos         Photo[]
+  verifications  Verification[]
+  refreshTokens  RefreshToken[]
+  passwordResets PasswordResetToken[]
+  notifications  Notification[]
+  payments       Payment[]
+  auditLogs      AuditLog[]
+
+  likesSent      Like[] @relation("LikesSent")
+  likesReceived  Like[] @relation("LikesReceived")
+  passesSent     Pass[] @relation("PassesSent")
+  passesReceived Pass[] @relation("PassesReceived")
+
+  matchesAsUserA Match[] @relation("MatchUserA")
+  matchesAsUserB Match[] @relation("MatchUserB")
+
+  messagesSent Message[] @relation("MessageSender")
+
+  reportsFiled   Report[] @relation("ReportReporter")
+  reportsAgainst Report[] @relation("ReportReported")
+
+  blocksMade     Block[] @relation("BlockBlocker")
+  blocksReceived Block[] @relation("BlockBlocked")
+
+  @@index([status])
+  @@index([role])
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @unique
+  userAgent String?
+  ipAddress String?
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("refresh_tokens")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@map("password_reset_tokens")
+}
+
+model Admin {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  permissions String[] @default([])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("admins")
+}
+
+// ============================================================
+// PROFILES
+// ============================================================
+
+model Profile {
+  id            String         @id @default(uuid())
+  userId        String         @unique
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  gender        Gender?
+  dateOfBirth   DateTime?
+  city          String?
+  country       String?
+  bio           String?
+  heightCm      Int?
+  maritalStatus MaritalStatus?
+  profession    String?
+  education     String?
+  ethnicity     String?
+  languages     String[]       @default([])
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([gender])
+  @@index([city])
+  @@map("profiles")
+}
+
 model ReligiousProfile {
   id                    String                @id @default(uuid())
   userId                String                @unique
@@ -89,19 +278,253 @@ model ReligiousProfile {
   alcohol               LifestyleChoice?
   willingnessToRelocate RelocationPreference?
   hijabStatus           HijabStatus?
+  sect                  String?
+  bornMuslim            Boolean?
   createdAt             DateTime              @default(now())
   updatedAt             DateTime              @updatedAt
 
   @@map("religious_profiles")
 }
 
-model PasswordResetToken {
-  id        String   @id @default(uuid())
+model PartnerPreference {
+  id                 String   @id @default(uuid())
+  userId             String   @unique
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  minAge             Int?
+  maxAge             Int?
+  preferredGender    Gender?
+  preferredCities    String[] @default([])
+  preferredCountries String[] @default([])
+  minHeightCm        Int?
+  maxHeightCm        Int?
+  preferredSects     String[] @default([])
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("partner_preferences")
+}
+
+model Photo {
+  id        String      @id @default(uuid())
   userId    String
-  token     String   @unique
-  expiresAt DateTime
-  usedAt    DateTime?
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  url       String
+  publicId  String?
+  isPrimary Boolean     @default(false)
+  status    PhotoStatus @default(PENDING)
+  order     Int         @default(0)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@index([userId])
+  @@map("photos")
+}
+
+model Verification {
+  id          String             @id @default(uuid())
+  userId      String
+  user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type        VerificationType
+  status      VerificationStatus @default(PENDING)
+  evidenceUrl String?
+  reviewedBy  String?
+  reviewedAt  DateTime?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@map("verifications")
+}
+
+// ============================================================
+// DISCOVERY / MATCHING
+// ============================================================
+
+model Like {
+  id         String   @id @default(uuid())
+  fromUserId String
+  toUserId   String
+  fromUser   User     @relation("LikesSent", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser     User     @relation("LikesReceived", fields: [toUserId], references: [id], onDelete: Cascade)
+  message    String?
+  createdAt  DateTime @default(now())
+
+  @@unique([fromUserId, toUserId])
+  @@index([toUserId])
+  @@map("likes")
+}
+
+model Pass {
+  id         String   @id @default(uuid())
+  fromUserId String
+  toUserId   String
+  fromUser   User     @relation("PassesSent", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser     User     @relation("PassesReceived", fields: [toUserId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([fromUserId, toUserId])
+  @@index([fromUserId])
+  @@map("passes")
+}
+
+model Match {
+  id           String        @id @default(uuid())
+  userAId      String
+  userBId      String
+  userA        User          @relation("MatchUserA", fields: [userAId], references: [id], onDelete: Cascade)
+  userB        User          @relation("MatchUserB", fields: [userBId], references: [id], onDelete: Cascade)
+  status       MatchStatus   @default(ACTIVE)
+  matchedAt    DateTime      @default(now())
+  conversation Conversation?
+
+  @@unique([userAId, userBId])
+  @@index([userAId])
+  @@index([userBId])
+  @@map("matches")
+}
+
+// ============================================================
+// MESSAGING
+// ============================================================
+
+model Conversation {
+  id            String             @id @default(uuid())
+  matchId       String             @unique
+  match         Match              @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  status        ConversationStatus @default(ACTIVE)
+  lastMessageAt DateTime?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  messages Message[]
+
+  @@map("conversations")
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User         @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+  type           MessageType  @default(TEXT)
+  body           String
+  readAt         DateTime?
+  createdAt      DateTime     @default(now())
+
+  @@index([conversationId])
+  @@index([senderId])
+  @@map("messages")
+}
+
+// ============================================================
+// NOTIFICATIONS
+// ============================================================
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType
+  title     String
+  body      String?
+  data      Json?
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+
+  @@index([userId])
+  @@index([readAt])
+  @@map("notifications")
+}
+
+// ============================================================
+// BILLING
+// ============================================================
+
+model Subscription {
+  id                 String             @id @default(uuid())
+  userId             String             @unique
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan               SubscriptionPlan   @default(FREE)
+  status             SubscriptionStatus @default(ACTIVE)
+  currentPeriodStart DateTime?
+  currentPeriodEnd   DateTime?
+  externalId         String?
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  payments Payment[]
+
+  @@map("subscriptions")
+}
+
+model Payment {
+  id             String        @id @default(uuid())
+  userId         String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subscriptionId String?
+  subscription   Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  amount         Int
+  currency       String        @default("usd")
+  status         PaymentStatus @default(PENDING)
+  provider       String        @default("stripe")
+  externalId     String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@map("payments")
+}
+
+// ============================================================
+// TRUST & SAFETY
+// ============================================================
+
+model Report {
+  id         String       @id @default(uuid())
+  reporterId String
+  reportedId String
+  reporter   User         @relation("ReportReporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  reported   User         @relation("ReportReported", fields: [reportedId], references: [id], onDelete: Cascade)
+  reason     String
+  details    String?
+  status     ReportStatus @default(OPEN)
+  resolvedBy String?
+  resolvedAt DateTime?
+  createdAt  DateTime     @default(now())
+
+  @@index([reportedId])
+  @@index([status])
+  @@map("reports")
+}
+
+model Block {
+  id        String   @id @default(uuid())
+  blockerId String
+  blockedId String
+  blocker   User     @relation("BlockBlocker", fields: [blockerId], references: [id], onDelete: Cascade)
+  blocked   User     @relation("BlockBlocked", fields: [blockedId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 
-  @@map("password_reset_tokens")
+  @@unique([blockerId, blockedId])
+  @@index([blockerId])
+  @@map("blocks")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String
+  entity    String?
+  entityId  String?
+  metadata  Json?
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@map("audit_logs")
 }
