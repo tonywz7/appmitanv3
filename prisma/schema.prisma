@@ -1,0 +1,107 @@
+// MITAN — Prisma schema scaffold
+//
+// This mirrors only the entities needed by the screens converted so far
+// (auth + onboarding steps 1-3 of 7). Extend as discovery/chat/matches
+// features are built out. Not wired to a live database yet.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                     String    @id @default(uuid())
+  email                  String    @unique
+  passwordHash           String
+  fullName               String
+  displayName            String?
+  emailVerifiedAt        DateTime?
+  onboardingCompletedAt  DateTime?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  profile          Profile?
+  religiousProfile ReligiousProfile?
+
+  @@map("users")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+model Profile {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  gender    Gender?
+  dateOfBirth DateTime?
+  city      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("profiles")
+}
+
+enum PrayerFrequency {
+  ALWAYS
+  USUALLY
+  SOMETIMES
+  RARELY
+}
+
+enum HalalLifestyle {
+  ALWAYS
+  USUALLY
+  FLEXIBLE
+}
+
+enum LifestyleChoice {
+  NO
+  SOCIALLY
+  YES
+}
+
+enum RelocationPreference {
+  YES
+  NO
+  OPEN
+}
+
+enum HijabStatus {
+  WEARS
+  DOES_NOT_WEAR
+  PLANNING
+}
+
+model ReligiousProfile {
+  id                    String                @id @default(uuid())
+  userId                String                @unique
+  user                  User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  prayerFrequency       PrayerFrequency?
+  halalLifestyle        HalalLifestyle?
+  smoking               LifestyleChoice?
+  alcohol               LifestyleChoice?
+  willingnessToRelocate RelocationPreference?
+  hijabStatus           HijabStatus?
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+
+  @@map("religious_profiles")
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@map("password_reset_tokens")
+}
