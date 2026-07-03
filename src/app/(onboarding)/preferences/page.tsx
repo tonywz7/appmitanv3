@@ -37,7 +37,7 @@ export default function PreferencesPage() {
       <div className="mx-auto max-w-2xl px-4 py-8 md:px-6">
         {/* Progress */}
         <div className="mb-8">
-          <ProgressBar steps={steps} currentStep={2} />
+          <ProgressBar step={3} totalSteps={6} />
         </div>
 
         {/* Content */}
@@ -77,13 +77,14 @@ export default function PreferencesPage() {
               Religion Level
             </label>
             <ChipRadioGroup
+              label=""
+              name="religion-level"
               options={[
                 { value: 'any', label: 'Any' },
                 { value: 'practicing', label: 'Practicing' },
                 { value: 'very-religious', label: 'Very Religious' },
               ]}
-              value={religionLevel}
-              onChange={setReligionLevel}
+              defaultValue={religionLevel}
             />
           </div>
 
@@ -131,7 +132,7 @@ export default function PreferencesPage() {
 
           {/* Navigation */}
           <div className="flex gap-3 border-t border-outline-variant pt-6">
-            <Button variant="secondary" className="flex-1" onClick={handleBack}>
+            <Button variant="outline" className="flex-1" onClick={handleBack}>
               <Icon name="arrow-back" className="mr-2 h-5 w-5" />
               Back
             </Button>

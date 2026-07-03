@@ -1,15 +1,14 @@
-import { NextResponse } from 'next/server';
+import { type NextRequest } from 'next/server';
 import { onboardingService } from '@/services/onboarding.service';
 import { religiousProfileSchema } from '@/schemas/onboarding.schema';
 import { getCurrentUser } from '@/server/session';
-import { ApiError } from '@/lib/errors';
-import { apiResponse } from '@/lib/api-response';
+import { ok, handleApiError, fail } from '@/lib/api-response';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const user = await getCurrentUser(request);
     if (!user) {
-      return apiResponse.error(401, 'Unauthorized');
+      return fail("UNAUTHORIZED", "Unauthorized", 401);
     }
 
     const body = await request.json();
@@ -17,33 +16,22 @@ export async function POST(request: Request) {
 
     const result = await onboardingService.saveReligiousProfile(user.id, validated);
 
-    return apiResponse.success(result, 'Religious profile saved');
+    return ok(result);
   } catch (error) {
-    if (error instanceof ApiError) {
-      return apiResponse.error(error.statusCode, error.message);
-    }
-    if (error instanceof Error && error.message.includes('validation')) {
-      return apiResponse.error(400, 'Invalid request: ' + error.message);
-    }
-    console.error('[onboarding/religious] Error:', error);
-    return apiResponse.error(500, 'Internal server error');
+    return handleApiError(error);
   }
 }
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     const user = await getCurrentUser(request);
     if (!user) {
-      return apiResponse.error(401, 'Unauthorized');
+      return fail("UNAUTHORIZED", "Unauthorized", 401);
     }
 
     const progress = await onboardingService.getProgress(user.id);
-    return apiResponse.success(progress, 'Progress retrieved');
+    return ok(progress);
   } catch (error) {
-    if (error instanceof ApiError) {
-      return apiResponse.error(error.statusCode, error.message);
-    }
-    console.error('[onboarding/religious] GET Error:', error);
-    return apiResponse.error(500, 'Internal server error');
+    return handleApiError(error);
   }
 }

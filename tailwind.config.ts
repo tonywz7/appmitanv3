@@ -16,6 +16,37 @@ import type { Config } from "tailwindcss";
 const config: Config = {
   darkMode: "class",
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  // Stitch semantic scale — these are custom fontSize/fontFamily tokens whose
+  // names contain hyphens that Tailwind v3 JIT sometimes fails to generate.
+  // Safelisting ensures they are always present in the output CSS.
+  safelist: [
+    "text-display-lg",
+    "text-display-lg-mobile",
+    "text-headline-md",
+    "text-headline-sm",
+    "text-headline-lg",
+    "text-headline-xl",
+    "text-body-lg",
+    "text-body-md",
+    "text-body-sm",
+    "text-label-md",
+    "text-label-sm",
+    "font-display-lg",
+    "font-display-lg-mobile",
+    "font-headline-md",
+    "font-headline-sm",
+    "font-headline-lg",
+    "font-body-lg",
+    "font-body-md",
+    "font-body-sm",
+    "font-label-md",
+    "font-label-sm",
+    "md:text-display-lg",
+    "md:text-display-lg-mobile",
+    "md:font-display-lg",
+    "lg:text-\\[64px\\]",
+    "lg:leading-\\[72px\\]",
+  ],
   theme: {
     extend: {
       colors: {
@@ -30,35 +61,45 @@ const config: Config = {
         "surface-container-highest": "#E3E2E0",
         "surface-variant": "#E3E2E0",
         "on-surface": "#1A1C1B",
-        "on-surface-variant": "#52625A",
+        "on-surface-variant": "#3C4A42",
         "inverse-surface": "#2F3130",
         "inverse-on-surface": "#F1F1EF",
-        outline: "#8A968F",
-        "outline-variant": "#DDE3DF",
+        outline: "#6C7A72",
+        "outline-variant": "#BBCAC0",
 
-        // Brand / primary (MITAN emerald)
+        // Brand / primary (MITAN emerald) — values from tokens.css / tailwind-config.js
         primary: "#006C4B",
         "on-primary": "#FFFFFF",
-        "primary-container": "#E7F5EE",
+        "primary-container": "#00B37E",
         "on-primary-container": "#003D28",
         "inverse-primary": "#50DEA5",
+        "primary-fixed": "#71FBC0",
+        "primary-fixed-dim": "#50DEA5",
+        "on-primary-fixed": "#002114",
+        "on-primary-fixed-variant": "#005137",
         "surface-tint": "#006C4B",
         "mitan-emerald": "#006C4B",
         "emerald-custom": "#006C4B",
 
-        // Secondary (muted body/footer text — NOT the gold accent from the
-        // raw design.md; screens consistently render `text-secondary` as
-        // muted gray body copy, so that usage takes precedence for fidelity)
-        secondary: "#52625A",
+        // Secondary (Subtle Gold — from design-tokens.json / tailwind-config.js canonical)
+        secondary: "#735C00",
         "on-secondary": "#FFFFFF",
         "secondary-container": "#FED65B",
-        "on-secondary-container": "#5B6B63",
+        "on-secondary-container": "#745C00",
+        "secondary-fixed": "#FFE088",
+        "secondary-fixed-dim": "#E9C349",
+        "on-secondary-fixed": "#241A00",
+        "on-secondary-fixed-variant": "#574500",
 
         // Tertiary
         tertiary: "#476363",
         "on-tertiary": "#FFFFFF",
         "tertiary-container": "#86A3A3",
-        "on-tertiary-container": "#5B6B63",
+        "on-tertiary-container": "#1D3939",
+        "tertiary-fixed": "#CAE8E8",
+        "tertiary-fixed-dim": "#AECCCC",
+        "on-tertiary-fixed": "#022020",
+        "on-tertiary-fixed-variant": "#304B4B",
 
         // Background
         background: "#FAF9F7",
@@ -78,12 +119,15 @@ const config: Config = {
         manrope: ["var(--font-manrope)", "sans-serif"],
         jakarta: ["var(--font-jakarta)", "sans-serif"],
         "plus-jakarta": ["var(--font-jakarta)", "sans-serif"],
-        // Screens apply typography via `font-{semantic}` utilities that are
-        // expected to resolve a family, mirroring the source export.
+        // Stitch semantic font families — each resolves to the design system typeface
+        "display-lg": ["var(--font-manrope)", "sans-serif"],
+        "display-lg-mobile": ["var(--font-manrope)", "sans-serif"],
         "headline-xl": ["var(--font-manrope)", "sans-serif"],
         "headline-lg": ["var(--font-manrope)", "sans-serif"],
-        "headline-md": ["var(--font-manrope)", "sans-serif"],
         "headline-lg-mobile": ["var(--font-manrope)", "sans-serif"],
+        // Stitch uses font-headline-md / font-headline-sm as font-family utilities
+        "headline-md": ["var(--font-manrope)", "sans-serif"],
+        "headline-sm": ["var(--font-manrope)", "sans-serif"],
         "body-lg": ["var(--font-jakarta)", "sans-serif"],
         "body-md": ["var(--font-jakarta)", "sans-serif"],
         "body-sm": ["var(--font-jakarta)", "sans-serif"],
@@ -91,6 +135,15 @@ const config: Config = {
         "label-sm": ["var(--font-jakarta)", "sans-serif"],
       },
       fontSize: {
+        // Stitch display scale (from design-tokens.json)
+        "display-lg": [
+          "48px",
+          { lineHeight: "56px", fontWeight: "700", letterSpacing: "-0.02em" },
+        ],
+        "display-lg-mobile": [
+          "36px",
+          { lineHeight: "44px", fontWeight: "700", letterSpacing: "-0.02em" },
+        ],
         "headline-xl": [
           "48px",
           { lineHeight: "56px", fontWeight: "700", letterSpacing: "-0.02em" },
@@ -103,11 +156,16 @@ const config: Config = {
           "28px",
           { lineHeight: "36px", fontWeight: "600", letterSpacing: "-0.025em" },
         ],
-        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
-        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
-        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
-        "body-sm": ["14px", { lineHeight: "1.6", fontWeight: "400" }],
-        "label-md": ["14px", { lineHeight: "20px", fontWeight: "600" }],
+        // Stitch canonical headline scale
+        "headline-md": ["32px", { lineHeight: "40px", fontWeight: "600" }],
+        "headline-sm": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+        "label-md": [
+          "14px",
+          { lineHeight: "16px", fontWeight: "600", letterSpacing: "0.05em" },
+        ],
         "label-sm": [
           "12px",
           { lineHeight: "16px", fontWeight: "500", letterSpacing: "0.05em" },
@@ -123,16 +181,23 @@ const config: Config = {
       },
       spacing: {
         base: "4px",
+        unit: "8px",
         gutter: "24px",
         "margin-mobile": "16px",
-        "margin-desktop": "32px",
+        "margin-desktop": "40px",
         "section-py": "160px",
         "card-p": "32px",
         "btn-px": "32px",
         "btn-py": "12px",
+        // Stitch stack tokens
+        "stack-sm": "8px",
+        "stack-md": "16px",
+        "stack-lg": "32px",
       },
       maxWidth: {
         "max-width": "1440px",
+        // Stitch uses max-w-container-max throughout pages
+        "container-max": "1200px",
       },
       boxShadow: {
         ambient: "0 4px 20px rgba(26, 54, 54, 0.04)",

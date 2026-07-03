@@ -1,74 +1,111 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent } from "react";
-import { TextField } from "@/components/ui/TextField";
-import { PasswordField } from "@/components/ui/PasswordField";
-import { Button } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
+import { FormEvent, useState } from "react";
 
+/**
+ * Login form — pixel-perfect port of mitan-source/src/app/login/index.html
+ * Centered card, no split layout. Matches the Stitch design exactly.
+ */
 export function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // TODO: call authService.login() from src/services/auth.service.ts
   }
 
   return (
-    <div
-      className="w-full max-w-md rounded-mitan-card border border-outline-variant bg-surface-container-lowest p-10 ambient-shadow fade-in-up md:p-12"
-      data-visible="true"
-    >
-      <div className="mb-10 text-center">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/5 px-3 py-1 font-label-sm text-label-sm text-primary">
-          <Icon name="lock" className="text-[16px]" />
-          Secure Authentication
-        </div>
-        <h2 className="font-headline-lg text-headline-lg text-on-surface">Welcome back</h2>
-        <p className="mt-2 font-jakarta text-body-md text-secondary">
-          Enter your credentials to continue your journey.
-        </p>
-      </div>
-
+    <div className="tonal-card rounded-xl border border-outline-variant/30 p-8 md:p-10">
       <form className="space-y-6" onSubmit={handleSubmit}>
-        <TextField id="email" name="email" label="Email Address" type="email" placeholder="name@example.com" required />
-        <PasswordField
-          id="password"
-          name="password"
-          label="Password"
-          forgotPasswordHref="/forgot-password"
-          required
-        />
-
-        <div className="flex items-center">
-          <input
-            id="remember"
-            name="remember"
-            type="checkbox"
-            className="h-4 w-4 rounded border-outline-variant text-primary focus:ring-primary"
-          />
-          <label htmlFor="remember" className="ml-3 font-jakarta text-[14px] text-secondary">
-            Remember me for 30 days
+        {/* Email */}
+        <div className="space-y-2">
+          <label
+            className="block font-body-sm text-body-sm font-bold text-on-surface"
+            htmlFor="email"
+          >
+            Email
           </label>
+          <input
+            id="email"
+            type="email"
+            placeholder="nama@email.com"
+            className="w-full rounded-lg border border-outline-variant bg-white px-4 py-3 font-body-md text-body-md placeholder:text-outline/50 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
+          />
         </div>
 
-        <Button type="submit" fullWidth className="h-14">
-          Sign In
-        </Button>
-      </form>
+        {/* Password */}
+        <div className="space-y-2">
+          <label
+            className="block font-body-sm text-body-sm font-bold text-on-surface"
+            htmlFor="password"
+          >
+            Kata Sandi
+          </label>
+          <div className="relative">
+            <input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="••••••••"
+              className="w-full rounded-lg border border-outline-variant bg-white px-4 py-3 font-body-md text-body-md placeholder:text-outline/50 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-outline-variant transition-colors hover:text-primary"
+            >
+              <span className="material-symbols-outlined">
+                {showPassword ? "visibility_off" : "visibility"}
+              </span>
+            </button>
+          </div>
+        </div>
 
-      <div className="mt-8 border-t border-outline-variant pt-8 text-center">
-        <p className="font-jakarta text-body-md text-secondary">
-          New to MITAN?{" "}
-          <Link href="/register" className="ml-1 font-bold text-primary hover:underline">
-            Create an account
+        {/* Remember & Forgot */}
+        <div className="flex items-center justify-between">
+          <label className="group flex cursor-pointer items-center gap-2">
+            <input
+              type="checkbox"
+              className="h-5 w-5 rounded border-outline-variant text-primary transition-all focus:ring-primary/20"
+            />
+            <span className="font-body-sm text-body-sm text-on-surface-variant transition-colors group-hover:text-on-surface">
+              Ingat Saya
+            </span>
+          </label>
+          <Link
+            href="/forgot-password"
+            className="font-body-sm text-body-sm font-semibold text-primary transition-all hover:underline"
+          >
+            Lupa Kata Sandi?
           </Link>
-        </p>
-      </div>
+        </div>
 
-      <div className="mt-10 flex items-center justify-center gap-2 font-jakarta text-[12px] text-outline">
-        <Icon name="info" className="text-[14px]" />
-        <p>Your data is handled with the utmost privacy and respect.</p>
-      </div>
+        {/* Submit */}
+        <button
+          type="submit"
+          className="w-full rounded-lg bg-primary py-4 font-label-md text-label-md text-on-primary shadow-sm transition-all duration-150 hover:bg-on-primary-fixed-variant active:scale-[0.98]"
+        >
+          Masuk
+        </button>
+
+        {/* Divider */}
+        <div className="relative flex items-center py-4">
+          <div className="flex-grow border-t border-outline-variant/40" />
+          <span className="mx-4 flex-shrink font-body-sm text-body-sm text-on-surface-variant">
+            atau
+          </span>
+          <div className="flex-grow border-t border-outline-variant/40" />
+        </div>
+
+        {/* Register link */}
+        <div className="text-center">
+          <p className="font-body-md text-body-md text-on-surface-variant">
+            Belum punya akun?{" "}
+            <Link href="/register" className="ml-1 font-bold text-primary hover:underline">
+              Buat Akun
+            </Link>
+          </p>
+        </div>
+      </form>
     </div>
   );
 }

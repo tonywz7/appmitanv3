@@ -38,7 +38,7 @@ export default function LifestylePage() {
       <div className="mx-auto max-w-2xl px-4 py-8 md:px-6">
         {/* Progress */}
         <div className="mb-8">
-          <ProgressBar steps={steps} currentStep={3} />
+          <ProgressBar step={4} totalSteps={6} />
         </div>
 
         {/* Content */}
@@ -55,17 +55,18 @@ export default function LifestylePage() {
           {/* Education */}
           <div>
             <SelectField
+              id="education"
               label="Education Level"
+              placeholder="Select education level"
               value={education}
               onChange={(e) => setEducation(e.target.value)}
-              options={[
-                { value: 'high-school', label: 'High School' },
-                { value: 'diploma', label: 'Diploma' },
-                { value: 'university', label: 'University' },
-                { value: 'masters', label: "Master's Degree" },
-                { value: 'phd', label: 'PhD' },
-              ]}
-            />
+            >
+              <option value="high-school">High School</option>
+              <option value="diploma">Diploma</option>
+              <option value="university">University</option>
+              <option value="masters">Master&apos;s Degree</option>
+              <option value="phd">PhD</option>
+            </SelectField>
           </div>
 
           {/* Profession */}
@@ -137,7 +138,7 @@ export default function LifestylePage() {
 
           {/* Navigation */}
           <div className="flex gap-3 border-t border-outline-variant pt-6">
-            <Button variant="secondary" className="flex-1" onClick={handleBack}>
+            <Button variant="outline" className="flex-1" onClick={handleBack}>
               <Icon name="arrow-back" className="mr-2 h-5 w-5" />
               Back
             </Button>

@@ -1,26 +1,22 @@
-import { NextResponse } from 'next/server';
+import { type NextRequest } from 'next/server';
 import { discoveryService } from '@/services/discovery.service';
 import { getCurrentUser } from '@/server/session';
-import { ApiError } from '@/lib/errors';
-import { apiResponse } from '@/lib/api-response';
+import { ok, handleApiError, fail } from '@/lib/api-response';
 
 export async function GET(
-  request: Request,
-  { params }: { params: { userId: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ userId: string }> }
 ) {
   try {
+    const { userId } = await params;
     const viewer = await getCurrentUser(request);
     if (!viewer) {
-      return apiResponse.error(401, 'Unauthorized');
+      return fail("UNAUTHORIZED", "Unauthorized", 401);
     }
 
-    const profile = await discoveryService.getPublicProfile(viewer.id, params.userId);
-    return apiResponse.success(profile, 'Profile retrieved');
+    const profile = await discoveryService.getPublicProfile(viewer.id, userId);
+    return ok(profile);
   } catch (error) {
-    if (error instanceof ApiError) {
-      return apiResponse.error(error.statusCode, error.message);
-    }
-    console.error('[profiles/[userId]] Error:', error);
-    return apiResponse.error(500, 'Internal server error');
+    return handleApiError(error);
   }
 }

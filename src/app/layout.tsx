@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "MITAN | For Marriage, Not Dating",
   description:
     "A premium platform engineered for Muslims seeking meaningful, lifelong commitment.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

@@ -1,3 +1,4 @@
+import type { NextRequest } from "next/server";
 import type { Role } from "@prisma/client";
 import { readAccessToken } from "@/lib/cookies";
 import { verifyAccessToken, type AccessTokenPayload } from "@/lib/jwt";
@@ -45,4 +46,21 @@ export async function requireRole(required: Role): Promise<SessionUser> {
     throw new ForbiddenError(`Requires ${required} role or higher`);
   }
   return session;
+}
+
+/**
+ * Legacy function for backward compatibility with existing API route handlers.
+ * Resolves session from NextRequest cookies.
+ */
+export async function getCurrentUser(
+  request: NextRequest,
+): Promise<SessionUser | null> {
+  const token = request.cookies.get("accessToken")?.value;
+  if (!token) return null;
+  try {
+    const payload: AccessTokenPayload = verifyAccessToken(token);
+    return { id: payload.sub, email: payload.email, role: payload.role };
+  } catch {
+    return null;
+  }
 }

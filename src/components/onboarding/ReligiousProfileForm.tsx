@@ -14,7 +14,7 @@ export function ReligiousProfileForm() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // TODO: call onboardingService.saveReligiousProfile(), then advance to step 4
+    router.push("/onboarding/lifestyle");
   }
 
   return (

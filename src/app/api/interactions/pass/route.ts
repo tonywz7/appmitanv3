@@ -1,28 +1,23 @@
-import { NextResponse } from 'next/server';
+import { type NextRequest } from 'next/server';
 import { interactionService } from '@/services/interaction.service';
 import { getCurrentUser } from '@/server/session';
-import { ApiError } from '@/lib/errors';
-import { apiResponse } from '@/lib/api-response';
+import { ok, handleApiError, fail } from '@/lib/api-response';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const user = await getCurrentUser(request);
     if (!user) {
-      return apiResponse.error(401, 'Unauthorized');
+      return fail("UNAUTHORIZED", "Unauthorized", 401);
     }
 
     const { targetUserId } = await request.json();
     if (!targetUserId) {
-      return apiResponse.error(400, 'Target user ID is required');
+      return fail("VALIDATION_ERROR", "Target user ID is required", 400);
     }
 
     const result = await interactionService.passUser(user.id, targetUserId);
-    return apiResponse.success(result, 'User passed');
+    return ok(result);
   } catch (error) {
-    if (error instanceof ApiError) {
-      return apiResponse.error(error.statusCode, error.message);
-    }
-    console.error('[interactions/pass] Error:', error);
-    return apiResponse.error(500, 'Internal server error');
+    return handleApiError(error);
   }
 }

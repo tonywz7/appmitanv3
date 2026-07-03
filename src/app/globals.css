@@ -2,6 +2,114 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Stitch semantic typography scale — explicit CSS utilities.
+ * These must be declared after @tailwind utilities so they override any
+ * Tailwind-generated rules. The Tailwind config uses safelist to try to
+ * emit these, but Tailwind v3 JIT silently drops custom fontSize keys
+ * that begin with "display" (conflicts with the display property namespace).
+ * Declaring them here is the authoritative fix.
+ */
+@layer utilities {
+  /* Display scale */
+  .text-display-lg {
+    font-size: 48px;
+    line-height: 56px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .text-display-lg-mobile {
+    font-size: 36px;
+    line-height: 44px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Headline scale */
+  .text-headline-md {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 600;
+  }
+  .text-headline-sm {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+  }
+  .text-headline-lg {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  /* Body scale */
+  .text-body-lg {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+  }
+  .text-body-md {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  .text-body-sm {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+
+  /* Label scale */
+  .text-label-md {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .text-label-sm {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  /* Responsive overrides */
+  @media (min-width: 768px) {
+    .md\:text-display-lg {
+      font-size: 48px;
+      line-height: 56px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .md\:text-display-lg-mobile {
+      font-size: 36px;
+      line-height: 44px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .md\:font-display-lg {
+      font-family: var(--font-manrope), sans-serif;
+    }
+  }
+
+  /* Font family utilities (semantic) */
+  .font-display-lg,
+  .font-display-lg-mobile,
+  .font-headline-md,
+  .font-headline-sm,
+  .font-headline-lg {
+    font-family: var(--font-manrope), sans-serif;
+  }
+  .font-body-lg,
+  .font-body-md,
+  .font-body-sm,
+  .font-label-md,
+  .font-label-sm {
+    font-family: var(--font-jakarta), sans-serif;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -44,11 +152,12 @@
     transform: translateY(0);
   }
 
+  /* glass-panel — matches FAQ Stitch: background 0.7, blur 10px, border rgba(229,226,218,0.5) */
   .glass-panel {
     background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(229, 226, 218, 0.5);
   }
 
   .glass-card {
@@ -60,6 +169,15 @@
 
   .ambient-shadow {
     box-shadow: 0 4px 20px rgba(26, 54, 54, 0.04);
+  }
+
+  /* Blog/card editorial shadow — mirrors .editorial-shadow from the Stitch source */
+  .editorial-shadow {
+    box-shadow: 0px 4px 20px rgba(26, 54, 54, 0.04);
+    transition: box-shadow 0.3s ease;
+  }
+  .editorial-shadow:hover {
+    box-shadow: 0px 8px 30px rgba(26, 54, 54, 0.08);
   }
 
   .brand-gradient-overlay {
@@ -105,5 +223,29 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  /* Login page card — from login/index.html */
+  .tonal-card {
+    background: #ffffff;
+    box-shadow: 0px 4px 20px rgba(26, 54, 54, 0.04);
+    transition: box-shadow 0.3s ease;
+  }
+  .tonal-card:hover {
+    box-shadow: 0px 8px 30px rgba(26, 54, 54, 0.08);
+  }
+
+  /* Register page card — from register/index.html */
+  .premium-card-shadow {
+    box-shadow: 0px 4px 20px rgba(26, 54, 54, 0.04);
+    transition: box-shadow 0.3s ease;
+  }
+  .premium-card-shadow:hover {
+    box-shadow: 0px 8px 30px rgba(26, 54, 54, 0.08);
+  }
+  
+  /* on-primary-fixed-variant as hover bg for primary button */
+  .hover\:bg-on-primary-fixed-variant:hover {
+    background-color: #005137;
   }
 }

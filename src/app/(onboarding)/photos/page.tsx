@@ -42,7 +42,7 @@ export default function PhotosPage() {
       <div className="mx-auto max-w-2xl px-4 py-8 md:px-6">
         {/* Progress */}
         <div className="mb-8">
-          <ProgressBar steps={steps} currentStep={4} />
+          <ProgressBar step={5} totalSteps={6} />
         </div>
 
         {/* Content */}
@@ -124,7 +124,7 @@ export default function PhotosPage() {
 
           {/* Navigation */}
           <div className="flex gap-3 border-t border-outline-variant pt-6">
-            <Button variant="secondary" className="flex-1" onClick={handleBack}>
+            <Button variant="outline" className="flex-1" onClick={handleBack}>
               <Icon name="arrow-back" className="mr-2 h-5 w-5" />
               Back
             </Button>

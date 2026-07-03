@@ -115,6 +115,7 @@ export default function UsersPage() {
           <div className="flex gap-4">
             <div className="flex-1">
               <TextField
+                label="Search"
                 placeholder="Search by name or email..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -152,12 +153,12 @@ export default function UsersPage() {
           size="lg"
           footer={
             <div className="flex justify-end gap-3">
-              <Button variant="secondary" onClick={() => setShowModal(false)}>
+              <Button variant="outline" onClick={() => setShowModal(false)}>
                 Close
               </Button>
               <Button
                 variant={
-                  selectedUser.status === 'active' ? 'danger' : 'primary'
+                  selectedUser.status === 'active' ? 'outline' : 'primary'
                 }
               >
                 {selectedUser.status === 'active' ? 'Suspend' : 'Reactivate'}

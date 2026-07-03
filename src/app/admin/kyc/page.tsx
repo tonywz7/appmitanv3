@@ -138,11 +138,11 @@ export default function KYCPage() {
           size="xl"
           footer={
             <div className="flex justify-end gap-3">
-              <Button variant="secondary" onClick={() => setShowReviewModal(false)}>
+              <Button variant="outline" onClick={() => setShowReviewModal(false)}>
                 Close
               </Button>
               <Button
-                variant="danger"
+                variant="outline"
                 onClick={() => {
                   setShowReviewModal(false);
                   setShowRejectionModal(true);
@@ -220,10 +220,10 @@ export default function KYCPage() {
         size="md"
         footer={
           <div className="flex justify-end gap-3">
-            <Button variant="secondary" onClick={() => setShowRejectionModal(false)}>
+            <Button variant="outline" onClick={() => setShowRejectionModal(false)}>
               Cancel
             </Button>
-            <Button variant="danger">Confirm Rejection</Button>
+            <Button variant="outline">Confirm Rejection</Button>
           </div>
         }
       >

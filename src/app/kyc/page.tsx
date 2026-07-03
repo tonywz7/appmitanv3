@@ -89,7 +89,7 @@ export default function KYCPage() {
         {/* Progress bar */}
         {kycStatus === 'not_started' && (
           <div className="mb-8">
-            <ProgressBar steps={steps} currentStep={currentStep} />
+            <ProgressBar step={currentStep} totalSteps={steps.length} />
           </div>
         )}
 
@@ -197,7 +197,7 @@ export default function KYCPage() {
 
             {/* Submit */}
             <div className="flex gap-4">
-              <Button variant="secondary" className="flex-1">
+              <Button variant="outline" className="flex-1">
                 Save Draft
               </Button>
               <Button
