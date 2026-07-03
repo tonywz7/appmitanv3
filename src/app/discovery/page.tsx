@@ -1,291 +1,265 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
-import { SelectField } from '@/components/ui/SelectField';
-import { ChipRadioGroup } from '@/components/ui/ChipRadioGroup';
-import { Icon } from '@/components/ui/Icon';
-import { Navbar } from '@/components/layout/Navbar';
-import { Avatar } from '@/components/ui/Avatar';
+import { useState } from "react";
+import Link from "next/link";
+import { Navbar } from "@/components/layout/Navbar";
+import { Icon } from "@/components/ui/Icon";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { SelectField } from "@/components/ui/SelectField";
 
 interface Profile {
   id: string;
   name: string;
   age: number;
   location: string;
-  initials: string;
-  religionLevel: string;
-  education: string;
   bio: string;
-  liked?: boolean;
+  tags: string[];
   isMatch?: boolean;
+  image: string;
 }
 
-const profiles: Profile[] = [
+const PROFILES: Profile[] = [
   {
-    id: '1',
-    name: 'Zainab Ahmed',
+    id: "1",
+    name: "Zainab Ahmed",
     age: 26,
-    location: 'Jakarta, Indonesia',
-    initials: 'ZA',
-    religionLevel: 'Practicing',
-    education: 'University',
-    bio: 'Love reading, cooking, and community work',
+    location: "Jakarta, Indonesia",
+    bio: "Loves reading, community work, and cooking. Looking for someone sincere and committed to faith.",
+    tags: ["Practicing", "Teacher", "Jakarta"],
     isMatch: true,
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuC9SdpT7mouYVFYkzTEZfGlabWHjy4ARKUvWT8gshHn5ExJ9vtIBqqXUx6kuZRO4W4PnLkzpf-Pe3ac6aH8hSLA5R2uiI-Uf3XJOUg7Urm2IAVBKLQ8TzC3DAGbTni1tkCaHv8i9KBbKFXnDudbNbjXt1iHB1951zUEgt2jItULkdKu933MGOfv1vF5Ahszmzi0kDKmLYaCmEIgekqAKe6JsG6DhfZAk4fDEEjcyQjD8vIQ7dcwjFt_TlM7CLdSfqrhqWB20xloZw",
   },
   {
-    id: '2',
-    name: 'Mariam Khan',
+    id: "2",
+    name: "Mariam Khan",
     age: 24,
-    location: 'Kuala Lumpur, Malaysia',
-    initials: 'MK',
-    religionLevel: 'Very Religious',
-    education: 'Master&apos;s Degree',
-    bio: 'Teacher by profession, teacher by passion',
-    liked: true,
+    location: "Kuala Lumpur, Malaysia",
+    bio: "Teacher by profession and passion. Dedicated to lifelong learning and community service.",
+    tags: ["Very Religious", "Master's Degree", "KL"],
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCehtHF30m1p3lB7-3h74gTdwMRrmrb198gFckrmXmoqrl_eDuDmJTlOFU7xq_sHAdYlWFNRyaoOBvwuXH3QqCUSQQA0cTCDW00tmyKbbNC05jgelGqh_adKVc3rUEvm0qmxWeqX9enAUGaYsHEd2vX_SgurkRH5Dbul9DjlsZ4LyRQUpx0Bl7pNbwrlbj1nguMfiPwiyMwyEji27wGdig7uOPkcslUuZl6SIcQoxxSOuDt_gNUJZfWSJ-fH-f_uduZQ0LzlJyZEA",
   },
   {
-    id: '3',
-    name: 'Fatima Hassan',
+    id: "3",
+    name: "Fatima Hassan",
     age: 28,
-    location: 'Dubai, UAE',
-    initials: 'FH',
-    religionLevel: 'Practicing',
-    education: 'University',
-    bio: 'Entrepreneur and philanthropist',
+    location: "Dubai, UAE",
+    bio: "Entrepreneur and philanthropist. Passionate about social impact and meaningful relationships.",
+    tags: ["Practicing", "Entrepreneur", "Dubai"],
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuAALmyZU_JLN1bvkBVS3u5B2iPGWzoZpLnoI00_bzNVwLW-HVMRTn0k6kJuRKR7Fg6dXaHBTide3EohS4b5Svtx_lncBvT9uRiTS8zT5Qpt4fo2q_vOFPpIcqxTU3Xei4MAvmMoerYSzYdEu6TeeQhWGXDzDcdKIlIMepjAowRtK7_rSORRsmJdEEgbHwxuPhc2E2shSDZu0VMfdEL8n65OOsMu4buqAi5dkZGzojEdW1KkneYDHaqb6n1SxE1w72fblP2Zn6ID6A",
   },
 ];
 
+const MAX_LIKES = 5;
+
 export default function DiscoveryPage() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [viewMode, setViewMode] = useState<'card' | 'grid'>('card');
-  const [filters, setFilters] = useState({
-    ageRange: '20-35',
-    religionLevel: 'all',
-    location: 'all',
-  });
-  const [activeLikes, setActiveLikes] = useState(0);
+  const [cardIndex, setCardIndex] = useState(0);
+  const [likesUsed, setLikesUsed] = useState(0);
+  const [viewMode, setViewMode] = useState<"card" | "grid">("card");
+  const [passed, setPassed] = useState<string[]>([]);
 
-  const currentProfile = profiles[currentIndex];
-  const maxLikes = 5;
+  const remaining = MAX_LIKES - likesUsed;
+  const current = PROFILES[cardIndex % PROFILES.length];
+  const gridProfiles = PROFILES.filter((p) => !passed.includes(p.id));
 
-  const handleLike = () => {
-    if (activeLikes < maxLikes) {
-      setActiveLikes(activeLikes + 1);
-      setCurrentIndex((currentIndex + 1) % profiles.length);
+  function handleLike() {
+    if (remaining > 0) {
+      setLikesUsed((n) => n + 1);
+      setCardIndex((n) => n + 1);
     }
-  };
+  }
 
-  const handlePass = () => {
-    setCurrentIndex((currentIndex + 1) % profiles.length);
-  };
+  function handlePass() {
+    setPassed((prev) => [...prev, current.id]);
+    setCardIndex((n) => n + 1);
+  }
 
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="min-h-screen bg-surface-container-lowest">
       <Navbar />
 
-      <main className="mx-auto max-w-4xl px-4 py-8 md:px-6">
+      <main className="mx-auto max-w-container-max px-margin-mobile py-8 md:px-margin-desktop">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-headline-lg font-semibold text-on-surface md:text-headline-xl">
-            Discover Matches
-          </h1>
-          <div className="flex gap-2">
+          <div>
+            <h1 className="font-headline-md text-headline-md text-on-surface">Discover Matches</h1>
+            <p className="font-body-sm text-body-sm text-on-surface-variant">Find your compatible partner</p>
+          </div>
+          <div className="flex items-center gap-2">
             <button
-              onClick={() => setViewMode('card')}
-              className={`rounded-lg p-2 ${viewMode === 'card' ? 'bg-primary-container text-primary' : 'text-on-surface-variant'}`}
+              onClick={() => setViewMode("card")}
+              aria-label="Card view"
+              className={`rounded-lg p-2.5 transition-colors ${
+                viewMode === "card"
+                  ? "bg-primary-container text-primary"
+                  : "text-on-surface-variant hover:bg-surface-container"
+              }`}
             >
-              <Icon name="view-agenda" className="h-5 w-5" />
+              <Icon name="view_agenda" style={{ fontSize: "20px" }} />
             </button>
             <button
-              onClick={() => setViewMode('grid')}
-              className={`rounded-lg p-2 ${viewMode === 'grid' ? 'bg-primary-container text-primary' : 'text-on-surface-variant'}`}
+              onClick={() => setViewMode("grid")}
+              aria-label="Grid view"
+              className={`rounded-lg p-2.5 transition-colors ${
+                viewMode === "grid"
+                  ? "bg-primary-container text-primary"
+                  : "text-on-surface-variant hover:bg-surface-container"
+              }`}
             >
-              <Icon name="grid-3x3" className="h-5 w-5" />
+              <Icon name="grid_view" style={{ fontSize: "20px" }} />
             </button>
           </div>
         </div>
 
-        {/* Filters */}
-        <Card className="mb-8 space-y-4">
-          <h3 className="text-label-md font-semibold text-on-surface">Filters</h3>
-          <div className="grid gap-4 md:grid-cols-3">
-            <SelectField
-              id="age-range"
-              label="Age Range"
-              placeholder="Select age range"
-              value={filters.ageRange}
-              onChange={(e) => setFilters({ ...filters, ageRange: e.target.value })}
-            >
-              <option value='18-25'>18-25</option>
-              <option value='20-35'>20-35</option>
-              <option value='25-40'>25-40</option>
-            </SelectField>
-            <SelectField
-              id="religion-level"
-              label="Religion Level"
-              placeholder="Select religion level"
-              value={filters.religionLevel}
-              onChange={(e) => setFilters({ ...filters, religionLevel: e.target.value })}
-            >
-              <option value='all'>All</option>
-              <option value='practicing'>Practicing</option>
-              <option value='very-religious'>Very Religious</option>
-            </SelectField>
-            <SelectField
-              id="location"
-              label="Location"
-              placeholder="Select location"
-              value={filters.location}
-              onChange={(e) => setFilters({ ...filters, location: e.target.value })}
-            >
-              <option value='all'>All</option>
-              <option value='nearby'>Nearby (50km)</option>
-              <option value='country'>My Country</option>
+        {/* Filters strip */}
+        <div className="mb-6 flex flex-wrap items-end gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-4">
+          <div className="min-w-[140px] flex-1">
+            <SelectField id="age_range" name="age_range" label="Age Range">
+              <option value="18-25">18 – 25</option>
+              <option value="20-35" selected>20 – 35</option>
+              <option value="25-40">25 – 40</option>
             </SelectField>
           </div>
-        </Card>
-
-        {/* Active Likes Indicator */}
-        <Card className="mb-8 bg-primary-container">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-label-md text-on-primary-container">Daily Likes Remaining</p>
-              <p className="mt-1 text-headline-lg font-bold text-primary">
-                {maxLikes - activeLikes} / {maxLikes}
-              </p>
-            </div>
-            <div className="text-right">
-              {activeLikes >= maxLikes && (
-                <p className="text-label-md font-semibold text-primary">
-                  Come back tomorrow for more!
-                </p>
-              )}
-            </div>
+          <div className="min-w-[140px] flex-1">
+            <SelectField id="religion" name="religion" label="Religion Level">
+              <option value="all" selected>All</option>
+              <option value="practicing">Practicing</option>
+              <option value="very_religious">Very Religious</option>
+            </SelectField>
           </div>
-        </Card>
+          <div className="min-w-[140px] flex-1">
+            <SelectField id="location" name="location" label="Location">
+              <option value="all" selected>All Locations</option>
+              <option value="nearby">Nearby (50 km)</option>
+              <option value="country">My Country</option>
+            </SelectField>
+          </div>
+        </div>
 
-        {/* Card View */}
-        {viewMode === 'card' && (
+        {/* Likes counter */}
+        <div className="mb-6 flex items-center justify-between rounded-xl border border-outline-variant bg-primary-container px-5 py-4">
           <div>
-            {activeLikes < maxLikes ? (
-              <Card
-                className="space-y-6"
-                variant="elevated"
-              >
-                {/* Profile Header */}
-                <div>
-                  <div className="relative mb-4 h-80 w-full rounded-xl bg-surface-container md:h-96">
-                    <Icon name="image" className="absolute inset-0 m-auto h-16 w-16 text-on-surface-variant" />
-                  </div>
+            <p className="font-label-sm text-label-sm text-on-primary-container">Daily Likes Remaining</p>
+            <p className="font-headline-md text-headline-md font-bold text-primary">{remaining} / {MAX_LIKES}</p>
+          </div>
+          {remaining === 0 && (
+            <p className="font-body-sm text-body-sm font-semibold text-primary">Come back tomorrow!</p>
+          )}
+        </div>
 
-                  <div className="space-y-3">
-                    <div className="flex items-baseline gap-2">
-                      <h2 className="text-headline-lg font-semibold text-on-surface">
-                        {currentProfile.name}
-                      </h2>
-                      <span className="text-headline-md text-on-surface-variant">
-                        {currentProfile.age}
+        {/* Card view */}
+        {viewMode === "card" && (
+          <div className="mx-auto max-w-md">
+            {remaining > 0 ? (
+              <div className="overflow-hidden rounded-2xl border border-outline-variant bg-surface-container-lowest shadow-[0_4px_20px_rgba(26,54,54,0.04)]">
+                {/* Photo */}
+                <div className="relative h-[420px] w-full overflow-hidden bg-surface-container">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={current.image} alt={current.name} className="h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  {current.isMatch && (
+                    <div className="absolute left-4 top-4">
+                      <span className="rounded-full bg-success-green px-3 py-1 font-label-sm text-label-sm text-white">
+                        Mutual Match
                       </span>
                     </div>
-                    <p className="text-body-md text-on-surface-variant">
-                      <Icon name="location-on" className="mr-1 inline h-4 w-4" />
-                      {currentProfile.location}
+                  )}
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <p className="font-headline-lg text-headline-lg font-bold">{current.name}, {current.age}</p>
+                    <p className="flex items-center gap-1 font-body-sm text-body-sm opacity-90">
+                      <Icon name="location_on" style={{ fontSize: "14px" }} />{current.location}
                     </p>
-
-                    {currentProfile.isMatch && (
-                      <Badge label="Mutual Match" variant="success" />
-                    )}
                   </div>
                 </div>
 
-                {/* Profile Info */}
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-label-sm text-on-surface-variant">Religion Level</p>
-                    <Badge label={currentProfile.religionLevel} variant="primary" size="sm" />
+                {/* Info */}
+                <div className="p-6">
+                  <p className="mb-4 font-body-md text-body-md text-on-surface-variant">{current.bio}</p>
+                  <div className="mb-6 flex flex-wrap gap-2">
+                    {current.tags.map((t) => (
+                      <span key={t} className="rounded-full bg-surface-container-low px-3 py-1 font-label-sm text-label-sm text-on-surface-variant">
+                        {t}
+                      </span>
+                    ))}
                   </div>
-                  <div>
-                    <p className="text-label-sm text-on-surface-variant">Education</p>
-                    <p className="text-body-md text-on-surface">{currentProfile.education}</p>
-                  </div>
-                  <div>
-                    <p className="text-label-sm text-on-surface-variant">About</p>
-                    <p className="text-body-md text-on-surface">{currentProfile.bio}</p>
-                  </div>
-                </div>
 
-                {/* Actions */}
-                <div className="flex gap-4 pt-4">
-                  <Button
-                    variant="outline"
-                    className="flex-1"
-                    onClick={handlePass}
+                  {/* Actions */}
+                  <div className="flex gap-4">
+                    <Button variant="outline" fullWidth onClick={handlePass}>
+                      <Icon name="close" style={{ fontSize: "20px" }} />
+                      Pass
+                    </Button>
+                    <Button variant="primary" fullWidth onClick={handleLike}>
+                      <Icon name="favorite" style={{ fontSize: "20px" }} />
+                      Like
+                    </Button>
+                  </div>
+                  <Link
+                    href={`/profile/${current.id}`}
+                    className="mt-3 block text-center font-body-sm text-body-sm text-primary hover:underline"
                   >
-                    <Icon name="close" className="mr-2 h-5 w-5" />
-                    Pass
-                  </Button>
-                  <Button
-                    variant="primary"
-                    className="flex-1"
-                    onClick={handleLike}
-                  >
-                    <Icon name="favorite" className="mr-2 h-5 w-5" />
-                    Like
-                  </Button>
+                    View full profile
+                  </Link>
                 </div>
-              </Card>
+              </div>
             ) : (
-              <Card className="space-y-4 text-center">
-                <Icon name="favorite" className="mx-auto h-12 w-12 text-warning-amber" />
-                <div>
-                  <h2 className="text-headline-md font-semibold text-on-surface">
-                    Daily Limit Reached
-                  </h2>
-                  <p className="mt-2 text-body-md text-on-surface-variant">
-                    You&apos;ve reached your daily like limit. Come back tomorrow!
-                  </p>
-                </div>
+              <div className="flex flex-col items-center gap-4 rounded-2xl border border-outline-variant bg-surface-container-lowest p-12 text-center">
+                <Icon name="favorite" className="text-outline" style={{ fontSize: "56px" }} />
+                <h2 className="font-headline-sm text-headline-sm text-on-surface">Daily Limit Reached</h2>
+                <p className="font-body-md text-body-md text-on-surface-variant">
+                  You have used all your likes for today. Come back tomorrow for more!
+                </p>
                 <Button variant="primary">Explore Premium</Button>
-              </Card>
+              </div>
             )}
           </div>
         )}
 
-        {/* Grid View */}
-        {viewMode === 'grid' && (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {profiles.map((profile) => (
-              <Card
+        {/* Grid view */}
+        {viewMode === "grid" && (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {gridProfiles.map((profile) => (
+              <div
                 key={profile.id}
-                interactive
-                className="overflow-hidden space-y-3"
+                className="group overflow-hidden rounded-2xl border border-outline-variant bg-surface-container-lowest shadow-[0_4px_20px_rgba(26,54,54,0.04)] transition-all hover:shadow-[0_8px_30px_rgba(26,54,54,0.08)]"
               >
-                <div className="h-40 w-full rounded-lg bg-surface-container flex items-center justify-center">
-                  <Avatar alt={profile.name} size="xl" initials={profile.initials} />
+                <div className="relative h-56 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={profile.image} alt={profile.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  {profile.isMatch && (
+                    <div className="absolute left-3 top-3">
+                      <span className="rounded-full bg-success-green px-2.5 py-0.5 font-label-sm text-label-sm text-white">Match</span>
+                    </div>
+                  )}
+                  <div className="absolute bottom-3 left-3 text-white">
+                    <p className="font-headline-sm text-headline-sm font-bold">{profile.name}, {profile.age}</p>
+                    <p className="flex items-center gap-1 font-body-sm text-body-sm opacity-80">
+                      <Icon name="location_on" style={{ fontSize: "13px" }} />{profile.location}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-headline-md font-semibold text-on-surface">
-                    {profile.name}, {profile.age}
-                  </h3>
-                  <p className="text-body-sm text-on-surface-variant">
-                    {profile.location}
-                  </p>
+                <div className="p-4">
+                  <div className="mb-4 flex flex-wrap gap-1.5">
+                    {profile.tags.map((t) => (
+                      <span key={t} className="rounded-full bg-surface-container-low px-2.5 py-0.5 font-label-sm text-label-sm text-on-surface-variant">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="outline" fullWidth onClick={() => setPassed((prev) => [...prev, profile.id])}>
+                      Pass
+                    </Button>
+                    <Button variant="primary" fullWidth onClick={() => setLikesUsed((n) => Math.min(n + 1, MAX_LIKES))}>
+                      Like
+                    </Button>
+                  </div>
                 </div>
-                {profile.isMatch && (
-                  <Badge label="Mutual Match" variant="success" size="sm" />
-                )}
-                <div className="flex gap-2 pt-2">
-                  <Button variant="outline" className="flex-1 text-sm">
-                    Pass
-                  </Button>
-                  <Button variant="primary" className="flex-1 text-sm">
-                    Like
-                  </Button>
-                </div>
-              </Card>
+              </div>
             ))}
           </div>
         )}
