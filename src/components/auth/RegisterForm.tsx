@@ -2,133 +2,195 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { TextField } from "@/components/ui/TextField";
-import { PasswordField } from "@/components/ui/PasswordField";
-import { Button } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
-import { cn } from "@/lib/utils";
 
-type Strength = "empty" | "weak" | "medium" | "strong";
+type StrengthLevel = 0 | 1 | 2 | 3 | 4;
 
-function getStrength(value: string): Strength {
-  if (value.length === 0) return "empty";
-  if (value.length < 5) return "weak";
-  if (value.length < 10) return "medium";
-  return "strong";
+function getStrength(password: string): StrengthLevel {
+  let score = 0;
+  if (password.length >= 8) score++;
+  if (/[A-Z]/.test(password)) score++;
+  if (/[0-9]/.test(password)) score++;
+  if (/[^A-Za-z0-9]/.test(password)) score++;
+  return score as StrengthLevel;
 }
 
-const strengthStyles: Record<Strength, string> = {
-  empty: "w-0",
-  weak: "w-1/3 bg-error",
-  medium: "w-2/3 bg-warning-amber",
-  strong: "w-full bg-primary",
-};
+const STRENGTH_COLORS = ["", "bg-error", "bg-secondary-container", "bg-primary-container", "bg-primary"];
+const STRENGTH_LABELS = ["", "Sangat Lemah", "Lemah", "Cukup Kuat", "Sangat Kuat"];
 
+/**
+ * Register form — pixel-perfect port of mitan-source/src/app/register/index.html
+ * Centered card with password strength indicator and Material Symbols icons.
+ */
 export function RegisterForm() {
-  const [strength, setStrength] = useState<Strength>("empty");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const strength = password.length === 0 ? 0 : getStrength(password);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // TODO: call authService.register() from src/services/auth.service.ts
   }
 
   return (
-    <div className="flex w-full max-w-[520px] flex-col gap-6 rounded-2xl border border-outline-variant/30 bg-white p-card-p ambient-shadow">
-      <div className="flex flex-col gap-4">
-        <div className="inline-flex w-fit items-center gap-2 rounded-full border border-outline-variant bg-surface-container-low px-3 py-1">
-          <Icon name="lock" className="text-[16px]" />
-          <span className="font-label-sm text-label-sm uppercase text-secondary">
-            Secure Authentication
-          </span>
-        </div>
-        <div className="flex flex-col gap-2">
-          <h2 className="font-headline-md text-headline-md font-bold tracking-tight text-primary">
-            Create your account
-          </h2>
-          <p className="font-jakarta text-body-md text-secondary">
-            Join the intentional community seeking lifelong commitment.
-          </p>
-        </div>
-      </div>
+    <div className="premium-card-shadow w-full rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-8 transition-all duration-500 md:p-12">
+      <header className="mb-8 text-center">
+        <h1 className="font-headline-md text-headline-md text-on-surface mb-2">
+          Buat Akun Baru
+        </h1>
+        <p className="font-body-md text-body-md text-on-surface-variant">
+          Mulai perjalanan Anda dengan niat yang murni.
+        </p>
+      </header>
 
-      <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-        <TextField id="fullName" name="fullName" label="Full Name" placeholder="e.g., Sarah Ahmad" required />
-        <TextField id="email" name="email" label="Email Address" type="email" placeholder="name@example.com" required />
-
-        <div className="flex flex-col gap-2">
-          <label htmlFor="password" className="font-jakarta text-label-md font-semibold text-on-surface">
-            Password
+      <form className="space-y-6" id="registerForm" onSubmit={handleSubmit}>
+        {/* Email */}
+        <div className="space-y-2">
+          <label
+            className="block font-body-sm text-body-sm font-bold text-on-surface-variant"
+            htmlFor="email"
+          >
+            Email
           </label>
           <div className="relative">
+            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">
+              mail
+            </span>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="nama@email.com"
+              className="w-full rounded-lg border border-outline-variant bg-surface-container-lowest py-3 pl-12 pr-4 font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary-container"
+            />
+          </div>
+        </div>
+
+        {/* Password */}
+        <div className="space-y-2">
+          <label
+            className="block font-body-sm text-body-sm font-bold text-on-surface-variant"
+            htmlFor="password"
+          >
+            Kata Sandi
+          </label>
+          <div className="relative">
+            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">
+              lock
+            </span>
             <input
               id="password"
               name="password"
-              type="password"
-              onChange={(e) => setStrength(getStrength(e.target.value))}
-              className="w-full rounded-lg border border-outline-variant px-4 py-3 pr-12 font-jakarta text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary"
-              required
+              type={showPassword ? "text" : "password"}
+              placeholder="Min. 8 karakter"
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-lg border border-outline-variant bg-surface-container-lowest py-3 pl-12 pr-12 font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary-container"
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-outline transition-colors hover:text-primary"
+            >
+              <span className="material-symbols-outlined">
+                {showPassword ? "visibility_off" : "visibility"}
+              </span>
+            </button>
           </div>
-          <div className="mt-1 flex flex-col gap-1.5">
-            <div className="h-1 w-full overflow-hidden rounded-full bg-surface-container">
+
+          {/* Strength bars */}
+          <div className="mt-2 flex gap-1">
+            {[1, 2, 3, 4].map((bar) => (
               <div
-                className={cn("h-full rounded-full transition-all duration-500", strengthStyles[strength])}
+                key={bar}
+                className={`h-1 flex-1 rounded-full transition-colors ${
+                  strength >= bar && strength > 0
+                    ? STRENGTH_COLORS[strength]
+                    : "bg-surface-container-highest"
+                }`}
               />
-            </div>
-            <span className="font-label-sm text-label-sm text-secondary/60">
-              Use 8+ characters with a mix of letters and symbols
+            ))}
+          </div>
+          <p
+            className={`mt-1 text-[12px] font-body-sm ${
+              strength > 0
+                ? strength < 3
+                  ? "font-bold text-secondary"
+                  : "font-bold text-primary"
+                : "text-on-surface-variant"
+            }`}
+          >
+            {strength === 0
+              ? "Gunakan kombinasi huruf, angka, dan simbol."
+              : STRENGTH_LABELS[strength]}
+          </p>
+        </div>
+
+        {/* Confirm Password */}
+        <div className="space-y-2">
+          <label
+            className="block font-body-sm text-body-sm font-bold text-on-surface-variant"
+            htmlFor="confirm-password"
+          >
+            Konfirmasi Kata Sandi
+          </label>
+          <div className="relative">
+            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">
+              lock_reset
             </span>
+            <input
+              id="confirm-password"
+              name="confirm-password"
+              type="password"
+              placeholder="Ulangi kata sandi"
+              className="w-full rounded-lg border border-outline-variant bg-surface-container-lowest py-3 pl-12 pr-4 font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary-container"
+            />
           </div>
         </div>
 
-        <TextField
-          id="confirmPassword"
-          name="confirmPassword"
-          label="Confirm Password"
-          type="password"
-          required
-        />
-
-        <div className="flex items-start gap-3 py-2">
-          <input
-            id="terms"
-            name="terms"
-            type="checkbox"
-            className="mt-1 h-5 w-5 rounded border-outline-variant text-primary focus:ring-primary"
-            required
-          />
-          <label htmlFor="terms" className="font-jakarta text-label-md text-secondary">
-            I agree to the{" "}
-            <Link href="/legal/terms" className="font-semibold text-primary hover:underline">
-              Terms of Service
-            </Link>{" "}
-            and{" "}
-            <Link href="/legal/privacy" className="font-semibold text-primary hover:underline">
-              Privacy Policy
-            </Link>
-            .
+        {/* Agreements */}
+        <div className="space-y-3 pt-2">
+          <label className="group flex cursor-pointer items-start gap-3">
+            <input
+              type="checkbox"
+              className="peer mt-0.5 h-5 w-5 rounded border-outline-variant text-primary transition-all focus:ring-primary-container"
+            />
+            <span className="font-body-sm text-body-sm text-on-surface-variant transition-colors group-hover:text-on-surface">
+              Saya menyetujui{" "}
+              <a href="#" className="font-bold text-primary hover:underline">
+                Syarat &amp; Ketentuan
+              </a>
+            </span>
+          </label>
+          <label className="group flex cursor-pointer items-start gap-3">
+            <input
+              type="checkbox"
+              className="peer mt-0.5 h-5 w-5 rounded border-outline-variant text-primary transition-all focus:ring-primary-container"
+            />
+            <span className="font-body-sm text-body-sm text-on-surface-variant transition-colors group-hover:text-on-surface">
+              Saya menyetujui{" "}
+              <a href="#" className="font-bold text-primary hover:underline">
+                Kebijakan Privasi
+              </a>
+            </span>
           </label>
         </div>
 
-        <Button type="submit" fullWidth>
-          Create Account
-        </Button>
+        {/* Submit */}
+        <button
+          type="submit"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-4 font-bold text-on-primary shadow-lg transition-all active:scale-[0.98] hover:bg-primary/90"
+        >
+          <span>Buat Akun</span>
+          <span className="material-symbols-outlined">arrow_forward</span>
+        </button>
       </form>
 
-      <div className="flex flex-col items-center gap-6 pt-4">
-        <p className="font-jakarta text-body-md text-secondary">
-          Already have an account?{" "}
-          <Link href="/login" className="font-bold text-primary hover:underline">
-            Sign In
+      {/* Sign in link */}
+      <div className="mt-8 text-center">
+        <p className="font-body-md text-body-md text-on-surface-variant">
+          Sudah punya akun?{" "}
+          <Link href="/login" className="font-bold text-primary transition-all hover:underline">
+            Masuk
           </Link>
         </p>
-        <div className="h-[1px] w-full bg-outline-variant/30" />
-        <div className="flex items-center gap-2 text-secondary/60">
-          <Icon name="verified_user" filled className="text-[18px]" />
-          <p className="font-jakarta text-label-sm">
-            Your data is handled with the utmost privacy and respect.
-          </p>
-        </div>
       </div>
     </div>
   );
