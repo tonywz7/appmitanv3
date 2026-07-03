@@ -200,7 +200,7 @@ export default function ProfilePage() {
               </div>
             </div>
             <Button
-              variant={isEditing ? 'secondary' : 'primary'}
+              variant={isEditing ? 'outline' : 'primary'}
               onClick={() => setIsEditing(!isEditing)}
             >
               <Icon name={isEditing ? 'close' : 'edit'} className="mr-2 h-5 w-5" />
