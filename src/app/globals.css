@@ -69,4 +69,41 @@
       rgba(0, 0, 0, 0.55) 100%
     );
   }
+
+  /* Landing Page Styles */
+  .text-mitan-teal { @apply text-[#10b981]; }
+  .bg-mitan-teal { @apply bg-[#10b981]; }
+  .border-mitan-teal { @apply border-[#10b981]; }
+  
+  .main-canvas {
+    max-width: 1100px;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 12px #94a3b8;
+    border: 1px solid #e2e8f0;
+  }
+
+  .hero-image-container {
+    position: relative;
+  }
+
+  .hero-image-bg-shape {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 105%;
+    height: 105%;
+    background-color: #ecfdf5;
+    border-radius: 40px;
+    z-index: 0;
+  }
+
+  .landing-glass-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
 }
