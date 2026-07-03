@@ -1,0 +1,23 @@
+<!--
+  MITAN — Shared site header
+  Extracted from src/app/faq/index.html (chosen as canonical: most complete header markup found).
+  NOT YET WIRED into other pages — each route still has its own near-duplicate header inline.
+  This is a STRUCTURAL extraction only (STEP 4 reusable-UI candidate).
+  Wiring this into every route requires a templating/include mechanism, which is framework
+  migration work and is explicitly out of scope for this normalization pass.
+-->
+<header class="sticky top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop h-20">
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-primary">MITAN</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Discover</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Matches</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Messages</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Events</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="px-6 py-2 rounded-lg font-label-md text-primary border border-primary hover:bg-surface-container-low transition-all active:scale-95">Sign In</button>
+<button class="px-6 py-2 rounded-lg font-label-md bg-secondary-container text-on-secondary-container shadow-sm hover:shadow-md transition-all active:scale-95">Premium</button>
+</div>
+</div>
+</header>

@@ -1,0 +1,131 @@
+/**
+ * MITAN — Design Tokens
+ * Extracted from mitan_design_system/DESIGN.md (single source of truth).
+ * These are the same values previously duplicated inline across 7 code.html
+ * exports as a Tailwind `theme.extend` block. See src/styles/tailwind-config.js
+ * for the Tailwind-consumable version of the same tokens.
+ */
+
+:root {
+  /* ---- Color: surface ---- */
+  --color-surface: #faf9f7;
+  --color-surface-dim: #dadad8;
+  --color-surface-bright: #faf9f7;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f4f3f1;
+  --color-surface-container: #efeeec;
+  --color-surface-container-high: #e9e8e6;
+  --color-surface-container-highest: #e3e2e0;
+  --color-surface-variant: #e3e2e0;
+  --color-surface-tint: #006c4b;
+  --color-on-surface: #1a1c1b;
+  --color-on-surface-variant: #3c4a42;
+  --color-inverse-surface: #2f3130;
+  --color-inverse-on-surface: #f1f1ef;
+
+  /* ---- Color: outline ---- */
+  --color-outline: #6c7a72;
+  --color-outline-variant: #bbcac0;
+
+  /* ---- Color: primary (Emerald Green) ---- */
+  --color-primary: #006c4b;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #00b37e;
+  --color-on-primary-container: #003d28;
+  --color-inverse-primary: #50dea5;
+  --color-primary-fixed: #71fbc0;
+  --color-primary-fixed-dim: #50dea5;
+  --color-on-primary-fixed: #002114;
+  --color-on-primary-fixed-variant: #005137;
+
+  /* ---- Color: secondary (Subtle Gold) ---- */
+  --color-secondary: #735c00;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #fed65b;
+  --color-on-secondary-container: #745c00;
+  --color-secondary-fixed: #ffe088;
+  --color-secondary-fixed-dim: #e9c349;
+  --color-on-secondary-fixed: #241a00;
+  --color-on-secondary-fixed-variant: #574500;
+
+  /* ---- Color: tertiary ---- */
+  --color-tertiary: #476363;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #86a3a3;
+  --color-on-tertiary-container: #1d3939;
+  --color-tertiary-fixed: #cae8e8;
+  --color-tertiary-fixed-dim: #aecccc;
+  --color-on-tertiary-fixed: #022020;
+  --color-on-tertiary-fixed-variant: #304b4b;
+
+  /* ---- Color: error ---- */
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  /* ---- Color: background ---- */
+  --color-background: #faf9f7;
+  --color-on-background: #1a1c1b;
+
+  /* ---- Typography ---- */
+  --font-family-display: 'Manrope', sans-serif;
+  --font-family-body: 'Plus Jakarta Sans', sans-serif;
+
+  --text-display-lg-size: 48px;
+  --text-display-lg-line: 56px;
+  --text-display-lg-weight: 700;
+  --text-display-lg-tracking: -0.02em;
+
+  --text-display-lg-mobile-size: 36px;
+  --text-display-lg-mobile-line: 44px;
+  --text-display-lg-mobile-weight: 700;
+  --text-display-lg-mobile-tracking: -0.02em;
+
+  --text-headline-md-size: 32px;
+  --text-headline-md-line: 40px;
+  --text-headline-md-weight: 600;
+
+  --text-headline-sm-size: 24px;
+  --text-headline-sm-line: 32px;
+  --text-headline-sm-weight: 600;
+
+  --text-body-lg-size: 18px;
+  --text-body-lg-line: 28px;
+  --text-body-lg-weight: 400;
+
+  --text-body-md-size: 16px;
+  --text-body-md-line: 24px;
+  --text-body-md-weight: 400;
+
+  --text-body-sm-size: 14px;
+  --text-body-sm-line: 20px;
+  --text-body-sm-weight: 400;
+
+  --text-label-md-size: 14px;
+  --text-label-md-line: 16px;
+  --text-label-md-weight: 600;
+  --text-label-md-tracking: 0.05em;
+
+  /* ---- Spacing (8px base rhythm) ---- */
+  --spacing-unit: 8px;
+  --spacing-container-max: 1200px;
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 16px;
+  --spacing-margin-desktop: 40px;
+  --spacing-stack-sm: 8px;
+  --spacing-stack-md: 16px;
+  --spacing-stack-lg: 32px;
+
+  /* ---- Radius ---- */
+  --radius-sm: 0.25rem;
+  --radius-default: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ---- Elevation (from DESIGN.md) ---- */
+  --shadow-level1: 0px 4px 20px rgba(26, 54, 54, 0.04);
+  --shadow-level2: 0px 8px 30px rgba(26, 54, 54, 0.08);
+}

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MITAN — Hubungi Kami</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="../../styles/tailwind-config.js"></script>
+<style>
+        body {
+            background-color: #faf9f7;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #1a1c1b;
+        }
+        .profile-card-shadow {
+            box-shadow: 0px 4px 20px rgba(26, 54, 54, 0.04);
+        }
+        .profile-card-hover:hover {
+            box-shadow: 0px 8px 30px rgba(26, 54, 54, 0.08);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-md shadow-sm">
+<nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-headline-sm font-headline-sm font-bold text-primary" href="#">MITAN</a>
+<div class="hidden md:flex gap-8">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Discover</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Premium</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Stories</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="#">Help</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="hidden md:block font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all active:scale-95">Log In</button>
+<button class="bg-primary text-white px-6 py-2.5 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95 shadow-md">Join Now</button>
+</div>
+</nav>
+</header>
+<main class="pt-24">
+<!-- 1. Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8 animate-in fade-in slide-in-from-left duration-1000">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface leading-tight">Kami Siap Membantu</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                        Punya pertanyaan, masukan, atau membutuhkan bantuan? Tim MITAN siap membantu Anda. Kami siap mendengar dan membantu setiap langkah perjalanan Anda.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="bg-primary text-white px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95 inline-flex items-center gap-2" href="#contact-form">
+                            Hubungi Kami
+                            <span class="material-symbols-outlined text-base">arrow_downward</span>
+</a>
+<a class="border-2 border-primary text-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-surface-container transition-all active:scale-95" href="#help-center">Baca FAQ</a>
+</div>
+</div>
+<div class="relative rounded-xl overflow-hidden aspect-[4/3] lg:aspect-auto h-full profile-card-shadow">
+<img class="w-full h-full object-cover" data-alt="A warm and professional portrait of a customer success team in a bright, modern office with plants and soft natural light. The style is premium minimalist photography, featuring diverse people smiling authentically. The atmosphere is helpful, welcoming, and high-trust, using a soft palette of emerald greens and off-whites." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4Qz0fcvDLax3Qy8yOV0scQ94cDQHVYpuGLfAaFufz9jMqZH2x5TIt1WPaLMLdj3hFgNl6uLsJbaShxe2P120XWi54Zyq8km9hFntel19s81iEFszg5zSjjr-uGrw1wFqWkiF7Oys7elivjxA0q_UbuG6B-oJ74zxTMf87_5dTlq0gYWxS5dsRdBa92O649ZKkF4CJIUq7UyHMIaDsXqKZKlHCj6CLysbJvBnKfa5xNR9iEUTkf3QIdGPrq-XsynX-K5dyL1tPyg"/>
+</div>
+</div>
+</section>
+<!-- 2. Contact Options Grid -->
+<section class="bg-surface-container-low py-20">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Customer Support -->
+<div class="bg-white p-8 rounded-lg profile-card-shadow profile-card-hover border border-outline-variant/30 flex flex-col justify-between h-full">
+<div>
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2">Customer Support</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 leading-relaxed">
+                                Butuh bantuan teknis atau bantuan akun? Tim kami siap melayani.
+                            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/30">
+<a class="font-label-md text-label-md text-primary hover:underline" href="mailto:support@mita.app">support@mita.app</a>
+<p class="font-body-sm text-xs text-outline mt-1 italic">Respons: 1-2 hari kerja</p>
+</div>
+</div>
+<!-- Partnerships -->
+<div class="bg-white p-8 rounded-lg profile-card-shadow profile-card-hover border border-outline-variant/30 flex flex-col justify-between h-full">
+<div>
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">handshake</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2">Partnerships</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 leading-relaxed">
+                                Mari bekerja sama untuk menciptakan koneksi yang lebih bermakna.
+                            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/30">
+<a class="font-label-md text-label-md text-primary hover:underline" href="mailto:partnership@mita.app">partnership@mita.app</a>
+</div>
+</div>
+<!-- Media & Press -->
+<div class="bg-white p-8 rounded-lg profile-card-shadow profile-card-hover border border-outline-variant/30 flex flex-col justify-between h-full">
+<div>
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2">Media &amp; Press</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 leading-relaxed">
+                                Untuk pertanyaan media dan kit press MITAN Matrimony.
+                            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/30">
+<a class="font-label-md text-label-md text-primary hover:underline" href="mailto:media@mita.app">media@mita.app</a>
+</div>
+</div>
+<!-- Careers -->
+<div class="bg-white p-8 rounded-lg profile-card-shadow profile-card-hover border border-outline-variant/30 flex flex-col justify-between h-full">
+<div>
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">work</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2">Careers</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 leading-relaxed">
+                                There are currently no open positions, but we're always happy to hear from talented people.
+                            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant/30">
+<a class="font-label-md text-label-md text-primary hover:underline" href="mailto:careers@mita.app">careers@mita.app</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Contact Form & Map Section -->
+<section class="py-24 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop" id="contact-form">
+<div class="flex flex-col lg:flex-row gap-16 items-start">
+<div class="w-full lg:w-3/5">
+<div class="bg-white p-8 md:p-12 rounded-xl profile-card-shadow border border-outline-variant/30">
+<div class="mb-10">
+<h2 class="font-headline-md text-headline-md mb-2">Kirim Pesan</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">We usually respond within 1–2 business days.</p>
+</div>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-body-sm font-bold block text-on-surface">Full Name</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none font-body-md" placeholder="Your full name" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-body-sm font-bold block text-on-surface">Email Address</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none font-body-md" placeholder="email@example.com" type="email"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-body-sm font-bold block text-on-surface">Subject</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none font-body-md" placeholder="What can we help with?" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-body-sm font-bold block text-on-surface">Category</label>
+<select class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none font-body-md appearance-none">
+<option>Account Assistance</option>
+<option>Technical Issue</option>
+<option>Membership &amp; Billing</option>
+<option>Privacy Question</option>
+<option>Other</option>
+</select>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-body-sm font-bold block text-on-surface">Message</label>
+<textarea class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none font-body-md resize-none" placeholder="Tell us more about your inquiry..." rows="6"></textarea>
+</div>
+<button class="w-full md:w-auto bg-primary text-white px-12 py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95 shadow-lg flex items-center justify-center gap-2" type="submit">
+                                Kirim Pesan
+                                <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</form>
+</div>
+</div>
+<div class="w-full lg:w-2/5 space-y-8">
+<div class="rounded-xl overflow-hidden profile-card-shadow border border-outline-variant/30 h-80 lg:h-96 w-full">
+<img class="w-full h-full object-cover" data-alt="A highly stylized and artistic map of a modern metropolitan city center, featuring clean lines, emerald green accent colors for parks and water, and soft neutral tones for buildings. The map is presented in a premium digital interface style with subtle glowing markers for office locations. Minimalist, high-end, and modern aesthetic." data-location="Jakarta" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8DC1znLw8b2i9XIu_pJKy0fCFky9sB4WEX_LsoSZETCIYLbi1sOj0fK3ujfGcB_zXHzoqcIhE6sYTYEqMFKOalyuHTTc7qs4ciYTvbeGKWcWO0VpYTSPuPA2PSZrRSC1m8b2hsAAHQY32r44bPdb42UxS3DDMRAQ_ejuke4PfX5bqZ7z2wt1PebuP1Xly5ZQ-QA8mV7CLHAdR0jlCle4qGyTtU4jCTxvhgKwA_dOS8JetYuxT23jZAw-DgAcraWH7YnDJjhKWQw"/>
+</div>
+<div class="space-y-6">
+<h4 class="font-headline-sm text-headline-sm">Kunjungi Kantor Kami</h4>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<p class="font-body-md text-on-surface-variant">
+                                Level 25, Menara MITAN,<br/>
+                                Jl. Sudirman Kav. 52-53,<br/>
+                                Jakarta Selatan, 12190
+                            </p>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<p class="font-body-md text-on-surface-variant">Senin - Jumat, 09:00 - 18:00 WIB</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Help Center Quick Links -->
+<section class="bg-surface-container py-24" id="help-center">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<h2 class="font-headline-md text-headline-md mb-16">Pusat Bantuan Cepat</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+<a class="bg-white p-6 rounded-lg profile-card-shadow profile-card-hover group transition-all" href="#">
+<span class="material-symbols-outlined text-primary mb-4 block group-hover:scale-110 transition-transform">help_center</span>
+<span class="font-label-md text-label-md">FAQ</span>
+</a>
+<a class="bg-white p-6 rounded-lg profile-card-shadow profile-card-hover group transition-all" href="#">
+<span class="material-symbols-outlined text-primary mb-4 block group-hover:scale-110 transition-transform">verified_user</span>
+<span class="font-label-md text-label-md">Trust &amp; Safety</span>
+</a>
+<a class="bg-white p-6 rounded-lg profile-card-shadow profile-card-hover group transition-all" href="#">
+<span class="material-symbols-outlined text-primary mb-4 block group-hover:scale-110 transition-transform">auto_stories</span>
+<span class="font-label-md text-label-md">Cara Kerja</span>
+</a>
+<a class="bg-white p-6 rounded-lg profile-card-shadow profile-card-hover group transition-all" href="#">
+<span class="material-symbols-outlined text-primary mb-4 block group-hover:scale-110 transition-transform">rss_feed</span>
+<span class="font-label-md text-label-md">Blog</span>
+</a>
+<a class="bg-white p-6 rounded-lg profile-card-shadow profile-card-hover group transition-all" href="#">
+<span class="material-symbols-outlined text-primary mb-4 block group-hover:scale-110 transition-transform">policy</span>
+<span class="font-label-md text-label-md">Privacy Policy</span>
+</a>
+<a class="bg-white p-6 rounded-lg profile-card-shadow profile-card-hover group transition-all" href="#">
+<span class="material-symbols-outlined text-primary mb-4 block group-hover:scale-110 transition-transform">gavel</span>
+<span class="font-label-md text-label-md">Terms of Service</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 5. Community Commitment -->
+<section class="py-24 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md mb-4">Komitmen Kami kepada Komunitas</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">
+                    Kami membangun MITAN dengan landasan kepercayaan. Prinsip-prinsip ini memandu setiap interaksi dan layanan yang kami berikan kepada Anda.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="flex gap-6 items-start p-8 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<div class="w-14 h-14 bg-primary rounded-full shrink-0 flex items-center justify-center text-white">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-2">Respect</h4>
+<p class="font-body-md text-on-surface-variant">Kami menjunjung tinggi rasa hormat dan martabat dalam setiap interaksi antar anggota komunitas.</p>
+</div>
+</div>
+<div class="flex gap-6 items-start p-8 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<div class="w-14 h-14 bg-primary rounded-full shrink-0 flex items-center justify-center text-white">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-2">Privacy</h4>
+<p class="font-body-md text-on-surface-variant">Data pribadi Anda adalah hak Anda. Kami menggunakan enkripsi tingkat tinggi untuk melindunginya.</p>
+</div>
+</div>
+<div class="flex gap-6 items-start p-8 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<div class="w-14 h-14 bg-primary rounded-full shrink-0 flex items-center justify-center text-white">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-2">Safety</h4>
+<p class="font-body-md text-on-surface-variant">Sistem verifikasi ketat kami memastikan bahwa Anda terhubung dengan individu yang nyata dan serius.</p>
+</div>
+</div>
+<div class="flex gap-6 items-start p-8 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<div class="w-14 h-14 bg-primary rounded-full shrink-0 flex items-center justify-center text-white">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-2">Meaningful Relationships</h4>
+<p class="font-body-md text-on-surface-variant">Kami mengutamakan kualitas daripada kuantitas untuk membantu Anda menemukan pasangan hidup sejati.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. Final CTA -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop">
+<div class="max-w-container-max mx-auto bg-primary text-white rounded-3xl p-12 md:p-20 relative overflow-hidden text-center shadow-2xl">
+<div class="relative z-10 space-y-8">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg max-w-3xl mx-auto">Siap Memulai Perjalanan yang Lebih Bermakna?</h2>
+<div class="flex flex-wrap justify-center gap-6">
+<button class="bg-secondary-container text-on-secondary-container px-10 py-4 rounded-lg font-label-md text-label-md hover:brightness-105 transition-all active:scale-95 shadow-md">Buat Akun</button>
+<button class="bg-transparent border-2 border-white text-white px-10 py-4 rounded-lg font-label-md text-label-md hover:bg-white/10 transition-all active:scale-95">Pelajari Cara Kerja</button>
+</div>
+</div>
+<!-- Subtle decorative elements -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-24 -left-24 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl"></div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-inverse-surface border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-stack-lg px-margin-mobile md:px-margin-desktop py-stack-lg max-w-container-max mx-auto">
+<div class="space-y-6">
+<a class="text-headline-sm font-headline-sm text-primary" href="#">MITAN</a>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Dedicated to intentional connections and lifelong partnerships.</p>
+</div>
+<div class="space-y-4">
+<h5 class="font-label-md text-label-md text-on-surface">Legal</h5>
+<ul class="space-y-2">
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-all" href="#">Privacy Policy</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-all" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="font-label-md text-label-md text-on-surface">Support</h5>
+<ul class="space-y-2">
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-all" href="#">Community Guidelines</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-all" href="#">Safety Center</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="font-label-md text-label-md text-on-surface">Company</h5>
+<ul class="space-y-2">
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-all" href="#">Success Stories</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 border-t border-outline-variant/30">
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 MITAN Matrimony. Dedicated to intentional connections.</p>
+</div>
+</footer>
+<script>
+        // Simple form submission micro-interaction
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Mengirim...';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Pesan Terkirim';
+                btn.classList.replace('bg-primary', 'bg-emerald-700');
+                
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = originalContent;
+                    btn.classList.replace('bg-emerald-700', 'bg-primary');
+                    this.reset();
+                }, 3000);
+            }, 1500);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body></html>

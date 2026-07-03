@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mitan Matrimony - Built for Family &amp; Faith</title>
+<!-- Tailwind CSS v3 CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts for typography: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-configuration">
+    body {
+      font-family: 'Manrope', sans-serif;
+      background-color: #f3f4f6; /* Outer background color */
+      overflow-x: hidden;
+    }
+    .text-mitan-teal { color: #00b37e; }
+    .bg-mitan-teal { background-color: #00b37e; }
+    .border-mitan-teal { border-color: #00b37e; }
+
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .animate-fade-in-up {
+      opacity: 0;
+      animation: fade-in-up 0.8s ease-out forwards;
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .btn-interaction {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-interaction:active {
+      transform: scale(0.95);
+    }
+    .btn-shimmer:hover {
+      background-image: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    .reveal-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      transition: background-color 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+    }
+    .sticky-nav.scrolled {
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 179, 126, 0.1);
+    }
+  </style>
+<style data-purpose="hero-layout">
+    /* Custom shadow and rounded corners for the main container */
+    .main-canvas {
+      max-width: 1100px;
+      margin: 40px auto;
+      background-color: white;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 12px #94a3b8;
+      border: 1px solid #e2e8f0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-image-container {
+      position: relative;
+    }
+
+    .hero-image-bg-shape {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 105%;
+      height: 105%;
+      background-color: #ecfdf5;
+      border-radius: 40px;
+      z-index: 0;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body class="p-4 md:p-8">
+<!-- WebGL Background Shader -->
+<!-- STITCH_SHADER_START:ANIMATION_27 class="fixed inset-0 w-full h-full -z-10" -->
+<div class="fixed inset-0 w-full h-full -z-10" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_27" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_27');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+uniform float u_time;
+uniform vec2 u_resolution;
+varying vec2 v_texCoord;
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Create organic movement using sine waves
+    float noise = sin(uv.x * 3.0 + u_time * 0.5) * 0.1;
+    noise += sin(uv.y * 2.0 - u_time * 0.3) * 0.1;
+    
+    // Mitan Emerald Green (#00b37e) to a softer variation
+    vec3 color1 = vec3(0.0, 0.702, 0.494); // #00b37e
+    vec3 color2 = vec3(0.035, 0.212, 0.212); // Deep Emerald/Surface-Dim
+    vec3 color3 = vec3(0.98, 0.976, 0.968); // #faf9f7 (Mitan Warm White)
+    
+    // Mixing logic for a flowing background
+    float mixFactor = smoothstep(0.2, 0.8, uv.y + noise);
+    vec3 finalColor = mix(color3, color1 * 0.05, mixFactor); // Very subtle emerald tint on white
+    
+    // Add some soft "light" patches
+    float light = distance(uv, vec2(0.8, 0.2) + vec2(sin(u_time), cos(u_time)) * 0.1);
+    finalColor += color1 * (1.0 - smoothstep(0.0, 0.5, light)) * 0.03;
+
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_27 -->
+<!-- BEGIN: Browser Simulation Container -->
+<div class="main-canvas" data-purpose="page-wrapper">
+<!-- BEGIN: Header -->
+<header class="sticky-nav flex items-center justify-between px-10 py-6" data-purpose="navigation" id="navbar">
+<div class="flex items-center gap-2" data-purpose="logo">
+<div class="w-8 h-8 bg-mitan-teal rounded-md flex items-center justify-center">
+<svg class="text-white w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path></svg>
+</div>
+<span class="font-extrabold text-xl tracking-tight text-gray-800 uppercase">Mitan</span>
+</div>
+<nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-700">
+<a class="hover:text-mitan-teal transition-colors" href="#">Values</a>
+<a class="hover:text-mitan-teal transition-colors" href="#">How it Works</a>
+<a class="hover:text-mitan-teal transition-colors" href="#">Stories</a>
+<a class="hover:text-mitan-teal transition-colors" href="#">Pricing</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="btn-interaction btn-shimmer bg-mitan-teal text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-emerald-200/50 hover:bg-emerald-600">
+          Start Your Journey
+        </button>
+<button class="btn-interaction bg-gray-100 text-gray-800 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-gray-200">
+          Log In
+        </button>
+</div>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: Main Hero Section -->
+<main class="px-10 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center" data-purpose="hero-content">
+<!-- Left Content -->
+<div class="space-y-8" data-purpose="hero-text">
+<div class="animate-fade-in-up inline-flex items-center gap-2 bg-emerald-50 border border-emerald-100 px-4 py-1.5 rounded-full" style="animation-delay: 0ms;">
+<span class="text-[10px] font-bold text-mitan-teal tracking-widest uppercase">Family-First Matrimony</span>
+<span class="w-1 h-1 bg-mitan-teal rounded-full"></span>
+<span class="text-[10px] font-medium text-emerald-600">Built with Wali Oversight</span>
+</div>
+<h1 class="animate-fade-in-up text-6xl font-extrabold text-gray-900 leading-[1.1]" style="animation-delay: 200ms;">
+          Built for <span class="text-mitan-teal">Family</span> <br/> &amp; Faith
+        </h1>
+<p class="animate-fade-in-up text-gray-500 text-lg leading-relaxed max-w-md" style="animation-delay: 400ms;">
+          A community-centered matrimony platform designed for meaningful connection and respectful family involvement through our integrated Wali System.
+        </p>
+<div class="animate-fade-in-up flex flex-wrap gap-4 pt-4" data-purpose="hero-cta-buttons" style="animation-delay: 600ms;">
+<button class="btn-interaction btn-shimmer bg-mitan-teal text-white px-8 py-4 rounded-full text-md font-bold shadow-xl shadow-emerald-200/50 hover:scale-105">
+            Start Your Journey
+          </button>
+<button class="btn-interaction flex items-center gap-2 border border-gray-200 px-6 py-4 rounded-full text-md font-bold text-gray-800 hover:bg-gray-50">
+<svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            The Wali System
+          </button>
+</div>
+<!-- Social Proof -->
+<div class="reveal-on-scroll flex items-center gap-4 pt-4" data-purpose="social-proof" id="social-proof">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-white bg-gray-900 overflow-hidden">
+<img alt="Family 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnIZSkZ0en4BaPNFIUmafz7_PYtOWWaSy3MkFh_ZHhQXwx6qcDxezflI3w4FybRVlCK4Iw9AXNoH9SVLPaF0dSrzm22H4Oovo3Wrl3ChzRW1a3zWnHOZeCPAM7dPVKMSwAEMy1NHDMYIWxAg7NKoA24MPHKSnXHuc0dEVt3_ESDP-IFMmaVeXEFvxr9xhaH-w3V6KuzAwYoXPzqadHpEy9KXMSiQh4C46sQ_rTgoO9gcx3m4kQ4wgUO2Z8g9wuuWWAN0DBy2eKjQ"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-gray-700 overflow-hidden">
+<img alt="Family 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf9CG5ITo24YUE3PIGMzJ3a1PaSBhIXUBYcfk-DLQJz2TXwoZkv4e1kXY86_bfFggcYkEjtfO3HkzqyC2i5IhlqzXBLLwd610kTpoVOHms0NHvJpd6MZ0NTR8nhnPhAB8tq11vxNx2z8rBd19AUNg83eKO_kfCTfSrSQHSnc-QrZW4psHlqDwjXHVJipEXX1Tv3pqPZk2STO5LdPOVoj3YFFc-d9ryvArqDsKlkhdOxUf6JcTL32oHlwAyN1d4idvd1-935usOKA"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-emerald-900 overflow-hidden">
+<img alt="Family 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOnUk-eiwqrj-2prAx8vC9GG5bosLGw3WVr9bwWC_5BBp7mml479PHq9aGdC9hRL35rOUSKuGFAZeigtiRSfBS_jgd_Qxnx_duKM29Cx-JnPFBjFNNv6U_CotH3mj3v9iASNG6okbqY7ae9Jx0K8hggKgZFzR4YdjjHSrIp_6ScviYP60OvZFQ2faVA0f_hyVS2tAbFknmtJuvgD5t-ivR0aQRIKu9lFqKuha948GSx5jUWLEHm-4KL0_62KiTtshVIVVY7P0Qhw"/>
+</div>
+</div>
+<p class="text-sm text-gray-400">
+            Trusted by <span class="font-bold text-gray-700">2,400+</span> families this month
+          </p>
+</div>
+</div>
+<!-- Right Image Section -->
+<div class="hero-image-container flex justify-end" data-purpose="hero-image-wrapper">
+<div class="hero-image-bg-shape"></div>
+<div class="animate-float relative z-10 rounded-3xl overflow-hidden shadow-2xl max-w-sm lg:max-w-md">
+<img alt="Couple looking at each other" class="w-full h-auto object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrTsMqc7pu6GLgCUB7tqXYSkiSWjP1FgzUx7IhY_XFGSF4RRY897MbBW8nBteU9VdbiOn1paCRbvRzF6rzXeHPCoKp8oGev34SL_rQ9g5ykmu4133JzS0mEnOfEFyECx68PZQcZdFEgK96qu3Twbi51u4_37Y65pSlPnx0g0dYqX7diAAGqt3usCpdyfPQjdeUxOTa5j1Nkai_eKkOigEUbqTQgCQnooSyjgHMJFYKOlI_QOLmvwvSUIuMV9v9xkeeiXXGjO9tWQ"/>
+<!-- Floating Verification Card -->
+<div class="absolute bottom-6 left-6 right-6 glass-card p-4 rounded-2xl flex items-center gap-4" data-purpose="feature-badge">
+<div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-mitan-teal">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"></path></svg>
+</div>
+<div>
+<h4 class="text-sm font-bold text-gray-900">Wali Verified</h4>
+<p class="text-xs text-gray-600">Family-backed introduction</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- END: Main Hero Section -->
+<!-- BEGIN: Footer Brands/Regions -->
+<footer class="reveal-on-scroll px-10 py-10 bg-gray-50/50 border-t border-gray-100" data-purpose="brands-footer" id="footer-brands">
+<p class="text-center text-[10px] font-bold text-mitan-teal tracking-[0.2em] uppercase mb-8">
+        Uniting Communities Across
+      </p>
+<div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<span class="text-xl font-extrabold tracking-tighter text-gray-800">SINGAPORE</span>
+<span class="text-xl font-extrabold tracking-tighter text-gray-800">MALAYSIA</span>
+<span class="text-xl font-extrabold tracking-tighter text-gray-800">INDONESIA</span>
+<span class="text-xl font-extrabold tracking-tighter text-gray-800">UK</span>
+<span class="text-xl font-extrabold tracking-tighter text-gray-800">CANADA</span>
+</div>
+</footer>
+<!-- END: Footer Brands/Regions -->
+</div>
+<!-- END: Browser Simulation Container -->
+<script>
+    // Sticky Nav Scroll Logic
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Intersection Observer for Scroll Reveals
+    const revealOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, revealOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body></html>

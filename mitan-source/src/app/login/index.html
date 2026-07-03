@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MITAN - Masuk</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="../../styles/tailwind-config.js"></script>
+<style>
+        body {
+            background-color: #faf9f7;
+            color: #1a1c1b;
+            -webkit-font-smoothing: antialiased;
+        }
+        .tonal-card {
+            background: #ffffff;
+            box-shadow: 0px 4px 20px rgba(26, 54, 54, 0.04);
+            transition: box-shadow 0.3s ease;
+        }
+        .tonal-card:hover {
+            box-shadow: 0px 8px 30px rgba(26, 54, 54, 0.08);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .focus-ring:focus {
+            outline: none;
+            border-color: #006c4b;
+            box-shadow: 0 0 0 2px rgba(0, 108, 75, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md">
+<!-- Top Navigation / Language Switcher Corner -->
+<nav class="fixed top-0 right-0 p-8 z-10">
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-low text-on-surface-variant font-label-md transition-colors hover:bg-surface-container-high active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[20px]">language</span>
+<span>ID / EN</span>
+</button>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center px-margin-mobile md:px-margin-desktop py-20 relative overflow-hidden">
+<!-- Subtle Ambient Background Element -->
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary opacity-[0.03] rounded-full blur-[100px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary opacity-[0.05] rounded-full blur-[100px]"></div>
+<div class="w-full max-w-[480px] z-10">
+<!-- MITAN Identity -->
+<div class="text-center mb-10">
+<div class="inline-flex items-center justify-center gap-2 mb-8">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight">MITAN</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-3">Selamat Datang Kembali</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[320px] mx-auto">
+                    Lanjutkan ikhtiar Anda untuk menemukan pasangan hidup yang sejati.
+                </p>
+</div>
+<!-- Login Card -->
+<div class="tonal-card rounded-xl p-8 md:p-10 border border-outline-variant/30">
+<form class="space-y-6" onsubmit="return false;">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block font-body-sm text-body-sm font-bold text-on-surface" for="email">Email</label>
+<div class="relative">
+<input class="w-full px-4 py-3 bg-white border border-outline-variant rounded-lg font-body-md focus-ring transition-all placeholder:text-outline/50" id="email" placeholder="nama@email.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<label class="block font-body-sm text-body-sm font-bold text-on-surface" for="password">Kata Sandi</label>
+<div class="relative">
+<input class="w-full px-4 py-3 bg-white border border-outline-variant rounded-lg font-body-md focus-ring transition-all placeholder:text-outline/50" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant hover:text-primary transition-colors p-1" onclick="togglePassword()" type="button">
+<span class="material-symbols-outlined" id="eye-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember & Forgot -->
+<div class="flex items-center justify-between">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20 transition-all" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Ingat Saya</span>
+</label>
+<a class="font-body-sm text-body-sm font-semibold text-primary hover:underline transition-all" href="#">Lupa Kata Sandi?</a>
+</div>
+<!-- Primary Action -->
+<button class="w-full py-4 bg-primary text-white rounded-lg font-label-md text-label-md shadow-sm hover:bg-on-primary-fixed-variant active:scale-[0.98] transition-all duration-150" type="submit">
+                        Masuk
+                    </button>
+<!-- Divider -->
+<div class="relative flex items-center py-4">
+<div class="flex-grow border-t border-outline-variant/40"></div>
+<span class="flex-shrink mx-4 font-body-sm text-body-sm text-on-surface-variant">atau</span>
+<div class="flex-grow border-t border-outline-variant/40"></div>
+</div>
+<!-- Register Link -->
+<div class="text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                            Belum punya akun? 
+                            <a class="font-bold text-primary hover:underline ml-1" href="#">Buat Akun</a>
+</p>
+</div>
+</form>
+</div>
+</div>
+</main>
+<!-- Footer Area -->
+<footer class="w-full py-8 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 MITAN. All rights reserved.</p>
+<div class="flex items-center gap-6">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Kebijakan Privasi</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Syarat &amp; Ketentuan</a>
+</div>
+</div>
+</footer>
+<script>
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const icon = document.getElementById('eye-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+
+        // Simple enter key handling for demonstration
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const btn = document.querySelector('button[type="submit"]');
+                btn.classList.add('scale-95');
+                setTimeout(() => btn.classList.remove('scale-95'), 150);
+            }
+        });
+    </script>
+</body></html>
