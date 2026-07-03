@@ -76,3 +76,7 @@ export class RateLimitError extends AppError {
     super(message, 429, "RATE_LIMITED");
   }
 }
+
+// Alias for compatibility
+export type ApiError = AppError;
+export const ApiError = AppError;
