@@ -131,14 +131,17 @@ export default function FaqPage() {
                 </div>
               </div>
 
-              {/* Illustration */}
+              {/* Support image — Stitch asset */}
               <div className="relative w-full max-w-sm flex-1">
                 <div className="relative flex aspect-square w-full items-center justify-center">
                   <div className="absolute inset-0 animate-pulse rounded-full bg-primary/5 blur-3xl" />
-                  <div className="relative z-10 w-64 h-64 rounded-full bg-primary/10 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-primary" style={{ fontSize: "80px" }}>
-                      support_agent
-                    </span>
+                  <div className="relative z-10 h-full w-full overflow-hidden rounded-2xl shadow-2xl transition-transform duration-500 rotate-3 hover:rotate-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbFztZeGu1o-zTwchJLxNJTjhE9v1ghHS21QqyN78YoOvnY02BwYIntnHccLpzz-HHQM_sKTokr0ohQS-8WS9l3BP1CVxskAmNWhNmekdpIqOszquvGVp3QtQIsouykRRffHJiHrZIdLeogf7WRAAloGIMCON6YFbDSb6c2JhpWUT7EHJVERQzvDBUvMtjcPR3dcS5gqpaxrIuXKs27Vb_Aix6phUomBTZjGLhZECSKvhs5PBel4SJM5BUT869gzrQhMux_LDx_Q"
+                      alt="Tim dukungan pelanggan MITAN yang ramah"
+                      className="h-full w-full object-cover"
+                    />
                   </div>
                 </div>
               </div>

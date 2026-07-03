@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -24,7 +23,7 @@ const CATEGORIES = [
 
 const ARTICLE_CARDS = [
   {
-    image: "/images/blog-card-taaruf.png",
+    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAHgAiUO_TbZPsGzh7E5kUKH0IUrVO4rw9T6CknomW8dcaOsugAEkZGD449sapxhGzWHFaiRta7WYlcZh9FCMfD9AFUp7LzUgNULCZVI-uKlqaM0jQiAiznVBYG2cTb6ePVsb0nrCreeuIHsybCooJkhJw4O6_BmhdP5y6h6WKfmZ1avnJOBIe9UH3l8AzydPsCh7WCMNnzsAUim1rNe3VTLmLPpauM4bzbeHmobZotDysZhc9nNrsaRT7aK7jVtfHap04jfp3xMA",
     category: "Ta'aruf",
     readTime: "4 min read • 10 Okt",
     title: "Etika Menghubungi Calon Pasangan di MITAN",
@@ -33,7 +32,7 @@ const ARTICLE_CARDS = [
     author: "Sarah Az-Zahra",
   },
   {
-    image: "/images/blog-card-security.png",
+    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuA6t3JYF5tXxOLQ1tN704N93ew7IGHP4VIAdkGWwukDMfblGrDK85eY94K5o2XvGGONGVXbv-xSPE_v5malRHo9Yf7TK6fQQxiR9s6nW3bOHgpnHGJd0wWcBpGMiP6SfGK6QogJwcn2g4VC73fStk3NK-nsXCI6vH2hSnnnfvQ8VwBOLzhi65eRrzPOkUAznt1TwrDMJEKdYoKx3fPNrjdqVfQVKMSikMeMzl1rlmeZ2c3BAZ4exUjhHBPMXHexXs3Lvqr2wuy-Cw",
     category: "Keamanan",
     readTime: "6 min read • 08 Okt",
     title: "Cara MITAN Menjaga Privasi Foto Anda",
@@ -42,12 +41,12 @@ const ARTICLE_CARDS = [
     author: "Tim Keamanan MITAN",
   },
   {
-    image: "/images/blog-card-story.png",
+    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAALmyZU_JLN1bvkBVS3u5B2iPGWzoZpLnoI00_bzNVwLW-HVMRTn0k6kJuRKR7Fg6dXaHBTide3EohS4b5Svtx_lncBvT9uRiTS8zT5Qpt4fo2q_vOFPpIcqxTU3Xei4MAvmMoerYSzYdEu6TeeQhWGXDzDcdKIlIMepjAowRtK7_rSORRsmJdEEgbHwxuPhc2E2shSDZu0VMfdEL8n65OOsMu4buqAi5dkZGzojEdW1KkneYDHaqb6n1SxE1w72fblP2Zn6ID6A",
     category: "Cerita Inspiratif",
     readTime: "8 min read • 05 Okt",
     title: "Kisah Sukses: Menemukan Jodoh dalam 3 Bulan",
     excerpt:
-      "\"Niat yang lurus membawa hasil yang berkah.\" Simak perjalanan inspiratif pasangan Ahmad dan Fitri...",
+      '"Niat yang lurus membawa hasil yang berkah." Simak perjalanan inspiratif pasangan Ahmad dan Fitri...',
     author: "Redaksi Mitan",
   },
 ];
@@ -86,16 +85,15 @@ export default function BlogInsightsPage() {
             </div>
           </div>
 
-          {/* Right — Hero image */}
+          {/* Right — Hero image (Stitch asset) */}
           <div className="order-1 lg:order-2">
             <div className="editorial-shadow relative h-[400px] overflow-hidden rounded-xl group lg:h-[600px]">
               <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-              <Image
-                src="/images/blog-hero.png"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCehtHF30m1p3lB7-3h74gTdwMRrmrb198gFckrmXmoqrl_eDuDmJTlOFU7xq_sHAdYlWFNRyaoOBvwuXH3QqCUSQQA0cTCDW00tmyKbbNC05jgelGqh_adKVc3rUEvm0qmxWeqX9enAUGaYsHEd2vX_SgurkRH5Dbul9DjlsZ4LyRQUpx0Bl7pNbwrlbj1nguMfiPwiyMwyEji27wGdig7uOPkcslUuZl6SIcQoxxSOuDt_gNUJZfWSJ-fH-f_uduZQ0LzlJyZEA"
                 alt="Pasangan Muslim berjalan di taman"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                priority
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
           </div>
@@ -104,13 +102,12 @@ export default function BlogInsightsPage() {
         {/* ── Featured Article ─────────────────────────────────────────── */}
         <section className="py-stack-lg">
           <div className="editorial-shadow flex flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest lg:flex-row">
-            {/* Image */}
+            {/* Image — Stitch asset */}
             <div className="h-80 overflow-hidden lg:h-auto lg:w-3/5">
-              <Image
-                src="/images/blog-featured.png"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAszNXJpDBEwxsU_UX7LPBK0VsE9ROeGHXDLlcgPgZDSohB-FjfdJZEbauHRXNrsOI-ok_tlD-q_KsI7ZZuojKfxXQoXiF4K2M3EmEbnbUChpozlmAQQSX3vA08e3JL-7hj4K95-vXpx8TCdCQ2I8tZdQqP5ie9uufGsgvYb9eVPHEGBTItzGDT8zDnUjE-aAtLyNO_VOVvCaKmzmPHZRf5aVk-Cu1JscUzILGvJTp2OlfRvq8dDyX7s23781jee0c6Lnn4AMM6DA"
                 alt="Ruang shalat islami di rumah modern"
-                width={800}
-                height={500}
                 className="h-full w-full object-cover"
               />
             </div>
@@ -140,11 +137,12 @@ export default function BlogInsightsPage() {
 
               <div className="mb-8 flex items-center gap-3">
                 <div className="h-10 w-10 overflow-hidden rounded-full bg-surface-container-high">
-                  <div className="flex h-full w-full items-center justify-center bg-primary/20">
-                    <span className="material-symbols-outlined text-primary text-xl">
-                      person
-                    </span>
-                  </div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9SdpT7mouYVFYkzTEZfGlabWHjy4ARKUvWT8gshHn5ExJ9vtIBqqXUx6kuZRO4W4PnLkzpf-Pe3ac6aH8hSLA5R2uiI-Uf3XJOUg7Urm2IAVBKLQ8TzC3DAGbTni1tkCaHv8i9KBbKFXnDudbNbjXt1iHB1951zUEgt2jItULkdKu933MGOfv1vF5Ahszmzi0kDKmLYaCmEIgekqAKe6JsG6DhfZAk4fDEEjcyQjD8vIQ7dcwjFt_TlM7CLdSfqrhqWB20xloZw"
+                    alt="Ustadz Hanafi"
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <div>
                   <p className="font-label-md text-on-surface">
@@ -202,11 +200,10 @@ export default function BlogInsightsPage() {
             {ARTICLE_CARDS.map((card) => (
               <article key={card.title} className="group cursor-pointer">
                 <div className="editorial-shadow mb-6 h-64 overflow-hidden rounded-lg transition-all hover:shadow-lg">
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={card.image}
                     alt={card.title}
-                    width={400}
-                    height={256}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -86,14 +85,13 @@ export default function KeamananPrivasiPage() {
             </div>
           </div>
 
-          {/* Hero image */}
+          {/* Hero image — Stitch asset */}
           <div className="relative">
             <div className="absolute left-1/2 top-1/2 -z-10 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
-            <Image
-              src="/images/privacy-shield.png"
-              alt="Shield illustration representing security and privacy"
-              width={560}
-              height={480}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmD7vxakqIxY7SNH79eA3B6kvPH3YHqKEPiYFUbreZuMsR5n-ox7pgxPre32_tZI4IITMK5FEEqF2xKvKltCa2ylwFoqcVx1coWdntGwgZs05OMeOQ7eJ6tsRt935YNpMFqdzAjnlUfh5g_Ysi3nKUX3BMErw0-CE2rwCtQSJKoq9h2NYvbo8yLuVlzfrqoiEPLehF69rQgU35MN0IVySRYzqowR38wA0aF3ojfsRDcXNdyZaor7IH9OkxK2jCcnpGmzA0URRzuw"
+              alt="Ilustrasi perisai keamanan MITAN"
               className="h-auto w-full rounded-xl"
             />
           </div>
@@ -103,10 +101,13 @@ export default function KeamananPrivasiPage() {
         <section className="mx-margin-mobile rounded-xl bg-surface-container-low px-margin-mobile py-20 md:mx-margin-desktop md:px-margin-desktop">
           <div className="grid items-center gap-16 md:grid-cols-2">
             <div className="order-2 md:order-1">
-              <div className="aspect-square w-full overflow-hidden rounded-xl bg-surface-container-high shadow-ambient flex items-center justify-center">
-                <span className="material-symbols-outlined text-primary" style={{ fontSize: "120px" }}>
-                  handshake
-                </span>
+              <div className="aspect-square w-full overflow-hidden rounded-xl shadow-ambient">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRTOQC5H19C_79PW4cH-6lDalLgSCqbpRLRkw5Fa4Fds8mdyCSul4PEttgbvsHWEYO_pejmrdlFUHDh17fZttOtSxRuhrfbMou85TeO4wYftEwGX4t82usivlYXZl41LNIP_cUfqc0M7VfL-KQpqwzXTqJzXSrcv-6ALupCT3TMxS6Ko-3umQXC5CCNNuMM8Js4uW6L2IVCur_aKvlqnkbbLI1C_uDUa6IFUXPW4JoxgO8cpjBUE6qhOqrs_IZYeW0I80SM-EJzg"
+                  alt="Dua tangan berjabat tangan melambangkan kepercayaan dan komitmen"
+                  className="h-full w-full object-cover"
+                />
               </div>
             </div>
             <div className="order-1 space-y-stack-md md:order-2">

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -117,13 +116,13 @@ export default function HubungiKamiPage() {
               </div>
             </div>
 
-            {/* Image */}
+            {/* Image — Stitch asset */}
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl shadow-ambient lg:aspect-auto lg:h-full">
-              <Image
-                src="/images/contact-team.png"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4Qz0fcvDLax3Qy8yOV0scQ94cDQHVYpuGLfAaFufz9jMqZH2x5TIt1WPaLMLdj3hFgNl6uLsJbaShxe2P120XWi54Zyq8km9hFntel19s81iEFszg5zSjjr-uGrw1wFqWkiF7Oys7elivjxA0q_UbuG6B-oJ74zxTMf87_5dTlq0gYWxS5dsRdBa92O649ZKkF4CJIUq7UyHMIaDsXqKZKlHCj6CLysbJvBnKfa5xNR9iEUTkf3QIdGPrq-XsynX-K5dyL1tPyg"
                 alt="Tim customer success MITAN"
-                fill
-                className="object-cover"
+                className="h-full w-full object-cover"
               />
             </div>
           </div>
@@ -252,16 +251,14 @@ export default function HubungiKamiPage() {
 
             {/* Map & Address */}
             <div className="w-full space-y-8 lg:w-2/5">
-              {/* Map placeholder */}
+              {/* Map image — Stitch asset */}
               <div className="h-80 w-full overflow-hidden rounded-xl border border-outline-variant/30 shadow-ambient lg:h-96">
-                <div className="flex h-full w-full items-center justify-center bg-surface-container-low">
-                  <div className="text-center text-on-surface-variant">
-                    <span className="material-symbols-outlined mb-2 block text-primary" style={{ fontSize: "48px" }}>
-                      location_on
-                    </span>
-                    <p className="font-body-sm text-body-sm">Jakarta, Indonesia</p>
-                  </div>
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8DC1znLw8b2i9XIu_pJKy0fCFky9sB4WEX_LsoSZETCIYLbi1sOj0fK3ujfGcB_zXHzoqcIhE6sYTYEqMFKOalyuHTTc7qs4ciYTvbeGKWcWO0VpYTSPuPA2PSZrRSC1m8b2hsAAHQY32r44bPdb42UxS3DDMRAQ_ejuke4PfX5bqZ7z2wt1PebuP1Xly5ZQ-QA8mV7CLHAdR0jlCle4qGyTtU4jCTxvhgKwA_dOS8JetYuxT23jZAw-DgAcraWH7YnDJjhKWQw"
+                  alt="Peta lokasi kantor MITAN di Jakarta"
+                  className="h-full w-full object-cover"
+                />
               </div>
 
               {/* Address */}
