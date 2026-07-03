@@ -5,13 +5,8 @@ import { useState } from 'react';
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
 
-  const togglePassword = (e: React.MouseEvent<HTMLButtonElement>) => {
-    try {
-      e.preventDefault();
-      setShowPassword(!showPassword);
-    } catch (error) {
-      console.error("[v0] Password toggle error:", error);
-    }
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -60,14 +55,10 @@ export default function LoginPage() {
                 </label>
                 <div className="relative">
                   <input
-                    className="w-full px-4 py-3 bg-white border rounded-lg font-body-md transition-all focus:outline-none focus:border-[#006c4b] focus:ring-2 focus:ring-[rgba(0,108,75,0.1)]"
+                    className="w-full px-4 py-3 bg-white border border-[#bbcac0] text-[#1a1c1b] rounded-lg font-body-md transition-all focus:outline-none focus:border-[#006c4b] focus:ring-2 focus:ring-[rgba(0,108,75,0.1)]"
                     id="email"
                     placeholder="nama@email.com"
                     type="email"
-                    style={{
-                      borderColor: '#bbcac0',
-                      color: '#1a1c1b'
-                    }}
                   />
                 </div>
               </div>
@@ -79,22 +70,18 @@ export default function LoginPage() {
                 </label>
                 <div className="relative">
                   <input
-                    className="w-full px-4 py-3 bg-white border rounded-lg font-body-md transition-all focus:outline-none focus:border-[#006c4b] focus:ring-2 focus:ring-[rgba(0,108,75,0.1)]"
+                    className="w-full px-4 py-3 bg-white border border-[#bbcac0] text-[#1a1c1b] rounded-lg font-body-md transition-all focus:outline-none focus:border-[#006c4b] focus:ring-2 focus:ring-[rgba(0,108,75,0.1)]"
                     id="password"
                     placeholder="••••••••"
                     type={showPassword ? 'text' : 'password'}
-                    style={{
-                      borderColor: '#bbcac0',
-                      color: '#1a1c1b'
-                    }}
                   />
                   <button
-                    className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors p-1 hover:text-[#006c4b]"
+                    aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors p-1 text-[#bbcac0] hover:text-[#006c4b]"
                     onClick={togglePassword}
                     type="button"
-                    style={{ color: '#bbcac0' }}
                   >
-                    <span className="material-symbols-outlined">{showPassword ? 'visibility_off' : 'visibility'}</span>
+                    <span aria-hidden="true" className="material-symbols-outlined">{showPassword ? 'visibility_off' : 'visibility'}</span>
                   </button>
                 </div>
               </div>
