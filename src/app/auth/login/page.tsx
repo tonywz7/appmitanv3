@@ -5,8 +5,13 @@ import { useState } from 'react';
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
 
-  const togglePassword = () => {
-    setShowPassword(!showPassword);
+  const togglePassword = (e: React.MouseEvent<HTMLButtonElement>) => {
+    try {
+      e.preventDefault();
+      setShowPassword(!showPassword);
+    } catch (error) {
+      console.error("[v0] Password toggle error:", error);
+    }
   };
 
   return (
@@ -55,22 +60,13 @@ export default function LoginPage() {
                 </label>
                 <div className="relative">
                   <input
-                    className="w-full px-4 py-3 bg-white border rounded-lg font-body-md transition-all"
+                    className="w-full px-4 py-3 bg-white border rounded-lg font-body-md transition-all focus:outline-none focus:border-[#006c4b] focus:ring-2 focus:ring-[rgba(0,108,75,0.1)]"
                     id="email"
                     placeholder="nama@email.com"
                     type="email"
                     style={{
                       borderColor: '#bbcac0',
                       color: '#1a1c1b'
-                    }}
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = '#006c4b';
-                      e.currentTarget.style.boxShadow = '0 0 0 2px rgba(0, 108, 75, 0.1)';
-                      e.currentTarget.style.outline = 'none';
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = '#bbcac0';
-                      e.currentTarget.style.boxShadow = 'none';
                     }}
                   />
                 </div>
@@ -83,7 +79,7 @@ export default function LoginPage() {
                 </label>
                 <div className="relative">
                   <input
-                    className="w-full px-4 py-3 bg-white border rounded-lg font-body-md transition-all"
+                    className="w-full px-4 py-3 bg-white border rounded-lg font-body-md transition-all focus:outline-none focus:border-[#006c4b] focus:ring-2 focus:ring-[rgba(0,108,75,0.1)]"
                     id="password"
                     placeholder="••••••••"
                     type={showPassword ? 'text' : 'password'}
@@ -91,23 +87,12 @@ export default function LoginPage() {
                       borderColor: '#bbcac0',
                       color: '#1a1c1b'
                     }}
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = '#006c4b';
-                      e.currentTarget.style.boxShadow = '0 0 0 2px rgba(0, 108, 75, 0.1)';
-                      e.currentTarget.style.outline = 'none';
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = '#bbcac0';
-                      e.currentTarget.style.boxShadow = 'none';
-                    }}
                   />
                   <button
-                    className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors p-1"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors p-1 hover:text-[#006c4b]"
                     onClick={togglePassword}
                     type="button"
                     style={{ color: '#bbcac0' }}
-                    onMouseEnter={(e) => { e.currentTarget.style.color = '#006c4b'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.color = '#bbcac0'; }}
                   >
                     <span className="material-symbols-outlined">{showPassword ? 'visibility_off' : 'visibility'}</span>
                   </button>
