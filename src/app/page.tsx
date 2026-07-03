@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function LandingPage() {
   return (
     <div className="bg-gray-100" style={{ fontFamily: "'Inter', sans-serif" }}>
@@ -65,13 +67,13 @@ export default function LandingPage() {
               <div className="flex items-center gap-4 pt-4">
                 <div className="flex -space-x-3">
                   <div className="w-10 h-10 rounded-full border-2 border-white bg-gray-900 overflow-hidden">
-                    <img alt="Family 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnIZSkZ0en4BaPNFIUmafz7_PYtOWWaSy3MkFh_ZHhQXwx6qcDxezflI3w4FybRVlCK4Iw9AXNoH9SVLPaF0dSrzm22H4Oovo3Wrl3ChzRW1a3zWnHOZeCPAM7dPVKMSwAEMy1NHDMYIWxAg7NKoA24MPHKSnXHuc0dEVt3_ESDP-IFMmaVeXEFvxr9xhaH-w3V6KuzAwYoXPzqadHpEy9KXMSiQh4C46sQ_rTgoO9gcx3m4kQ4wgUO2Z8g9wuuWWAN0DBy2eKjQ" className="w-full h-full object-cover" />
+                    <Image alt="Family 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnIZSkZ0en4BaPNFIUmafz7_PYtOWWaSy3MkFh_ZHhQXwx6qcDxezflI3w4FybRVlCK4Iw9AXNoH9SVLPaF0dSrzm22H4Oovo3Wrl3ChzRW1a3zWnHOZeCPAM7dPVKMSwAEMy1NHDMYIWxAg7NKoA24MPHKSnXHuc0dEVt3_ESDP-IFMmaVeXEFvxr9xhaH-w3V6KuzAwYoXPzqadHpEy9KXMSiQh4C46sQ_rTgoO9gcx3m4kQ4wgUO2Z8g9wuuWWAN0DBy2eKjQ" width={40} height={40} className="w-full h-full object-cover" />
                   </div>
                   <div className="w-10 h-10 rounded-full border-2 border-white bg-gray-700 overflow-hidden">
-                    <img alt="Family 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf9CG5ITo24YUE3PIGMzJ3a1PaSBhIXUBYcfk-DLQJz2TXwoZkv4e1kXY86_bfFggcYkEjtfO3HkzqyC2i5IhlqzXBLLwd610kTpoVOHms0NHvJpd6MZ0NTR8nhnPhAB8tq11vxNx2z8rBd19AUNg83eKO_kfCTfSrSQHSnc-QrZW4psHlqDwjXHVJipEXX1Tv3pqPZk2STO5LdPOVoj3YFFc-d9ryvArqDsKlkhdOxUf6JcTL32oHlwAyN1d4idvd1-935usOKA" className="w-full h-full object-cover" />
+                    <Image alt="Family 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf9CG5ITo24YUE3PIGMzJ3a1PaSBhIXUBYcfk-DLQJz2TXwoZkv4e1kXY86_bfFggcYkEjtfO3HkzqyC2i5IhlqzXBLLwd610kTpoVOHms0NHvJpd6MZ0NTR8nhnPhAB8tq11vxNx2z8rBd19AUNg83eKO_kfCTfSrSQHSnc-QrZW4psHlqDwjXHVJipEXX1Tv3pqPZk2STO5LdPOVoj3YFFc-d9ryvArqDsKlkhdOxUf6JcTL32oHlwAyN1d4idvd1-935usOKA" width={40} height={40} className="w-full h-full object-cover" />
                   </div>
                   <div className="w-10 h-10 rounded-full border-2 border-white bg-emerald-900 overflow-hidden">
-                    <img alt="Family 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOnUk-eiwqrj-2prAx8vC9GG5bosLGw3WVr9bwWC_5BBp7mml479PHq9aGdC9hRL35rOUSKuGFAZeigtiRSfBS_jgd_Qxnx_duKM29Cx-JnPFBjFNNv6U_CotH3mj3v9iASNG6okbqY7ae9Jx0K8hggKgZFzR4YdjjHSrIp_6ScviYP60OvZFQ2faVA0f_hyVS2tAbFknmtJuvgD5t-ivR0aQRIKu9lFqKuha948GSx5jUWLEHm-4KL0_62KiTtshVIVVY7P0Qhw" className="w-full h-full object-cover" />
+                    <Image alt="Family 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOnUk-eiwqrj-2prAx8vC9GG5bosLGw3WVr9bwWC_5BBp7mml479PHq9aGdC9hRL35rOUSKuGFAZeigtiRSfBS_jgd_Qxnx_duKM29Cx-JnPFBjFNNv6U_CotH3mj3v9iASNG6okbqY7ae9Jx0K8hggKgZFzR4YdjjHSrIp_6ScviYP60OvZFQ2faVA0f_hyVS2tAbFknmtJuvgD5t-ivR0aQRIKu9lFqKuha948GSx5jUWLEHm-4KL0_62KiTtshVIVVY7P0Qhw" width={40} height={40} className="w-full h-full object-cover" />
                   </div>
                 </div>
                 <p className="text-sm text-gray-400">
@@ -84,7 +86,7 @@ export default function LandingPage() {
             <div className="hero-image-container flex justify-end">
               <div className="hero-image-bg-shape"></div>
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl max-w-sm lg:max-w-md">
-                <img alt="Couple looking at each other" className="w-full h-auto object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg" />
+                <Image alt="Couple looking at each other" className="w-full h-auto object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg" width={300} height={300} />
                 {/* Floating Verification Card */}
                 <div className="absolute bottom-6 left-6 right-6 landing-glass-card p-4 rounded-2xl flex items-center gap-4">
                   <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-mitan-teal">

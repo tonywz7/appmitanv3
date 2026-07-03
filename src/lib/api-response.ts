@@ -66,3 +66,16 @@ export function handleApiError(error: unknown): NextResponse<ApiFailure> {
   console.error("[v0] Unhandled API error:", error);
   return fail("INTERNAL", "Something went wrong", 500);
 }
+
+/**
+ * Legacy apiResponse object for backward compatibility with existing route handlers.
+ * Provides simplified error/success response methods.
+ */
+export const apiResponse = {
+  success<T>(data: T, init?: ResponseInit): NextResponse<ApiSuccess<T>> {
+    return ok(data, init);
+  },
+  error(status: number, message: string): NextResponse<ApiFailure> {
+    return fail("API_ERROR", message, status);
+  },
+};
