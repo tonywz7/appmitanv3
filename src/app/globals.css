@@ -62,6 +62,15 @@
     box-shadow: 0 4px 20px rgba(26, 54, 54, 0.04);
   }
 
+  /* Blog/card editorial shadow — mirrors .editorial-shadow from the Stitch source */
+  .editorial-shadow {
+    box-shadow: 0px 4px 20px rgba(26, 54, 54, 0.04);
+    transition: box-shadow 0.3s ease;
+  }
+  .editorial-shadow:hover {
+    box-shadow: 0px 8px 30px rgba(26, 54, 54, 0.08);
+  }
+
   .brand-gradient-overlay {
     background: linear-gradient(
       180deg,

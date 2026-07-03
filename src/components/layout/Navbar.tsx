@@ -4,10 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
-  { label: "Discover", href: "#discover" },
-  { label: "Matches", href: "#matches" },
-  { label: "Messages", href: "#messages" },
-  { label: "Events", href: "#events" },
+  { label: "Cari Pasangan", href: "/discovery" },
+  { label: "Blog", href: "/blog-insights" },
+  { label: "Tentang Kami", href: "#tentang" },
+  { label: "Bantuan", href: "/faq" },
 ] as const;
 
 /**
@@ -31,31 +31,38 @@ export function Navbar() {
         </Link>
 
         {/* Nav links — desktop only */}
-        <nav className="hidden items-center space-x-8 md:flex">
-          {NAV_ITEMS.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary"
-            >
-              {item.label}
-            </a>
-          ))}
+        <nav className="hidden items-center gap-8 md:flex">
+          {NAV_ITEMS.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`font-body-md text-body-md transition-colors active:opacity-80 ${
+                  isActive
+                    ? "border-b-2 border-primary font-bold text-primary"
+                    : "text-on-surface-variant hover:text-primary"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center gap-4">
           <Link
             href="/login"
-            className="rounded-lg border border-primary px-6 py-2 font-label-md text-label-md text-primary transition-all hover:bg-surface-container-low active:scale-95"
+            className="hidden font-body-md text-body-md font-semibold text-primary transition-all hover:opacity-80 lg:block"
           >
-            Sign In
+            Masuk
           </Link>
           <Link
             href="/register"
-            className="rounded-lg bg-secondary-container px-6 py-2 font-label-md text-label-md text-on-secondary-container shadow-ambient transition-all hover:shadow-md active:scale-95"
+            className="rounded-lg bg-primary-container px-6 py-2.5 font-label-md text-label-md font-bold text-on-primary-container shadow-sm transition-all hover:bg-primary hover:text-on-primary active:scale-95"
           >
-            Premium
+            Daftar Sekarang
           </Link>
         </div>
       </div>
