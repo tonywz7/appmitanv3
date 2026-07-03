@@ -113,35 +113,38 @@ export default function DiscoveryPage() {
           <h3 className="text-label-md font-semibold text-on-surface">Filters</h3>
           <div className="grid gap-4 md:grid-cols-3">
             <SelectField
+              id="age-range"
               label="Age Range"
+              placeholder="Select age range"
               value={filters.ageRange}
               onChange={(e) => setFilters({ ...filters, ageRange: e.target.value })}
-              options={[
-                { value: '18-25', label: '18-25' },
-                { value: '20-35', label: '20-35' },
-                { value: '25-40', label: '25-40' },
-              ]}
-            />
+            >
+              <option value='18-25'>18-25</option>
+              <option value='20-35'>20-35</option>
+              <option value='25-40'>25-40</option>
+            </SelectField>
             <SelectField
+              id="religion-level"
               label="Religion Level"
+              placeholder="Select religion level"
               value={filters.religionLevel}
               onChange={(e) => setFilters({ ...filters, religionLevel: e.target.value })}
-              options={[
-                { value: 'all', label: 'All' },
-                { value: 'practicing', label: 'Practicing' },
-                { value: 'very-religious', label: 'Very Religious' },
-              ]}
-            />
+            >
+              <option value='all'>All</option>
+              <option value='practicing'>Practicing</option>
+              <option value='very-religious'>Very Religious</option>
+            </SelectField>
             <SelectField
+              id="location"
               label="Location"
+              placeholder="Select location"
               value={filters.location}
               onChange={(e) => setFilters({ ...filters, location: e.target.value })}
-              options={[
-                { value: 'all', label: 'All' },
-                { value: 'nearby', label: 'Nearby (50km)' },
-                { value: 'country', label: 'My Country' },
-              ]}
-            />
+            >
+              <option value='all'>All</option>
+              <option value='nearby'>Nearby (50km)</option>
+              <option value='country'>My Country</option>
+            </SelectField>
           </div>
         </Card>
 
@@ -217,7 +220,7 @@ export default function DiscoveryPage() {
                 {/* Actions */}
                 <div className="flex gap-4 pt-4">
                   <Button
-                    variant="secondary"
+                    variant="outline"
                     className="flex-1"
                     onClick={handlePass}
                   >
@@ -275,7 +278,7 @@ export default function DiscoveryPage() {
                   <Badge label="Mutual Match" variant="success" size="sm" />
                 )}
                 <div className="flex gap-2 pt-2">
-                  <Button variant="secondary" className="flex-1 text-sm">
+                  <Button variant="outline" className="flex-1 text-sm">
                     Pass
                   </Button>
                   <Button variant="primary" className="flex-1 text-sm">

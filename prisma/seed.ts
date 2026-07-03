@@ -13,36 +13,26 @@ async function main() {
     create: {
       email: 'fatima@example.com',
       passwordHash: hashedPassword,
-      firstName: 'Fatima',
-      lastName: 'Ahmed',
+      fullName: 'Fatima Ahmed',
       role: 'USER',
       profile: {
         create: {
-          age: 28,
+          gender: 'FEMALE',
+          dateOfBirth: new Date('1995-06-15'),
           city: 'London',
           country: 'UK',
-          gender: 'FEMALE',
-          height: '165',
-          maritalStatus: 'SINGLE',
+          heightCm: 165,
+          maritalStatus: 'NEVER_MARRIED',
           education: 'University',
-          occupation: 'Software Engineer',
+          profession: 'Software Engineer',
           bio: 'Looking for someone kind and sincere',
-          photos: ['https://via.placeholder.com/400'],
         },
       },
       religiousProfile: {
         create: {
-          religiousLevel: 'PRACTICING',
-          prayerFrequency: 'FIVE_TIMES',
-          quranRecitation: true,
-          hijab: true,
-          values: ['FAMILY', 'FAITH', 'EDUCATION'],
-        },
-      },
-      onboardingProgress: {
-        create: {
-          completedSteps: ['personal-information', 'religious-profile'],
-          lastCompletedStep: 'religious-profile',
+          prayerFrequency: 'ALWAYS',
+          halalLifestyle: 'ALWAYS',
+          hijabStatus: 'WEARS',
         },
       },
     },
@@ -55,36 +45,25 @@ async function main() {
     create: {
       email: 'ahmad@example.com',
       passwordHash: hashedPassword,
-      firstName: 'Ahmad',
-      lastName: 'Hassan',
+      fullName: 'Ahmad Hassan',
       role: 'USER',
       profile: {
         create: {
-          age: 32,
+          gender: 'MALE',
+          dateOfBirth: new Date('1992-02-10'),
           city: 'Manchester',
           country: 'UK',
-          gender: 'MALE',
-          height: '180',
-          maritalStatus: 'SINGLE',
+          heightCm: 180,
+          maritalStatus: 'NEVER_MARRIED',
           education: 'University',
-          occupation: 'Consultant',
+          profession: 'Consultant',
           bio: 'Seeking a life partner for marriage',
-          photos: ['https://via.placeholder.com/400'],
         },
       },
       religiousProfile: {
         create: {
-          religiousLevel: 'PRACTICING',
-          prayerFrequency: 'FIVE_TIMES',
-          quranRecitation: false,
-          hijab: false,
-          values: ['FAMILY', 'FAITH', 'HONESTY'],
-        },
-      },
-      onboardingProgress: {
-        create: {
-          completedSteps: ['personal-information', 'religious-profile'],
-          lastCompletedStep: 'religious-profile',
+          prayerFrequency: 'ALWAYS',
+          halalLifestyle: 'USUALLY',
         },
       },
     },
@@ -94,8 +73,15 @@ async function main() {
   // Create sample match
   const match = await prisma.match.create({
     data: {
-      user1Id: user1.id,
-      user2Id: user2.id,
+      userAId: user1.id,
+      userBId: user2.id,
+    },
+  });
+
+  // Create sample conversation
+  const conversation = await prisma.conversation.create({
+    data: {
+      matchId: match.id,
     },
   });
 
@@ -103,14 +89,14 @@ async function main() {
   await prisma.message.createMany({
     data: [
       {
-        matchId: match.id,
+        conversationId: conversation.id,
         senderId: user1.id,
-        content: 'Assalamu alaikum! How are you?',
+        body: 'Assalamu alaikum! How are you?',
       },
       {
-        matchId: match.id,
+        conversationId: conversation.id,
         senderId: user2.id,
-        content: 'Wa alaikum assalam! I am well, alhamdulillah.',
+        body: 'Wa alaikum assalam! I am well, alhamdulillah.',
       },
     ],
   });

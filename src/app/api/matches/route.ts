@@ -1,14 +1,13 @@
-import { NextResponse } from 'next/server';
+import { type NextRequest } from 'next/server';
 import { interactionService } from '@/services/interaction.service';
 import { getCurrentUser } from '@/server/session';
-import { ApiError } from '@/lib/errors';
-import { apiResponse } from '@/lib/api-response';
+import { ok, handleApiError, fail } from '@/lib/api-response';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     const user = await getCurrentUser(request);
     if (!user) {
-      return apiResponse.error(401, 'Unauthorized');
+      return fail("UNAUTHORIZED", "Unauthorized", 401);
     }
 
     const url = new URL(request.url);
@@ -16,12 +15,8 @@ export async function GET(request: Request) {
     const take = parseInt(url.searchParams.get('take') || '20');
 
     const matches = await interactionService.getMatches(user.id, skip, take);
-    return apiResponse.success(matches, 'Matches retrieved');
+    return ok(matches);
   } catch (error) {
-    if (error instanceof ApiError) {
-      return apiResponse.error(error.statusCode, error.message);
-    }
-    console.error('[matches] GET Error:', error);
-    return apiResponse.error(500, 'Internal server error');
+    return handleApiError(error);
   }
 }

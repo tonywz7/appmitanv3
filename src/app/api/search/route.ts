@@ -1,14 +1,13 @@
-import { NextResponse } from 'next/server';
+import { type NextRequest } from 'next/server';
 import { discoveryService } from '@/services/discovery.service';
 import { getCurrentUser } from '@/server/session';
-import { ApiError } from '@/lib/errors';
-import { apiResponse } from '@/lib/api-response';
+import { ok, handleApiError, fail } from '@/lib/api-response';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     const user = await getCurrentUser(request);
     if (!user) {
-      return apiResponse.error(401, 'Unauthorized');
+      return fail("UNAUTHORIZED", "Unauthorized", 401);
     }
 
     const url = new URL(request.url);
@@ -17,16 +16,12 @@ export async function GET(request: Request) {
     const take = parseInt(url.searchParams.get('take') || '20');
 
     if (!query) {
-      return apiResponse.error(400, 'Search query is required');
+      return fail("VALIDATION_ERROR", "Search query is required", 400);
     }
 
     const results = await discoveryService.searchProfiles(user.id, query, skip, take);
-    return apiResponse.success(results, 'Search results retrieved');
+    return ok(results);
   } catch (error) {
-    if (error instanceof ApiError) {
-      return apiResponse.error(error.statusCode, error.message);
-    }
-    console.error('[search] Error:', error);
-    return apiResponse.error(500, 'Internal server error');
+    return handleApiError(error);
   }
 }

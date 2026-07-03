@@ -76,6 +76,6 @@ export const apiResponse = {
     return ok(data, init);
   },
   error(status: number, message: string): NextResponse<ApiFailure> {
-    return fail("API_ERROR", message, status);
+    return fail("INTERNAL", message, status);
   },
 };

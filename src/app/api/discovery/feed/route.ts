@@ -1,14 +1,13 @@
-import { NextResponse } from 'next/server';
+import { type NextRequest } from 'next/server';
 import { discoveryService } from '@/services/discovery.service';
 import { getCurrentUser } from '@/server/session';
-import { ApiError } from '@/lib/errors';
-import { apiResponse } from '@/lib/api-response';
+import { ok, handleApiError, fail } from '@/lib/api-response';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     const user = await getCurrentUser(request);
     if (!user) {
-      return apiResponse.error(401, 'Unauthorized');
+      return fail("UNAUTHORIZED", "Unauthorized", 401);
     }
 
     const url = new URL(request.url);
@@ -26,12 +25,8 @@ export async function GET(request: Request) {
     };
 
     const feed = await discoveryService.getDiscoveryFeed(user.id, filters, skip, take);
-    return apiResponse.success(feed, 'Discovery feed retrieved');
+    return ok(feed);
   } catch (error) {
-    if (error instanceof ApiError) {
-      return apiResponse.error(error.statusCode, error.message);
-    }
-    console.error('[discovery/feed] Error:', error);
-    return apiResponse.error(500, 'Internal server error');
+    return handleApiError(error);
   }
 }

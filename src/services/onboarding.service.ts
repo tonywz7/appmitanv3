@@ -1,11 +1,20 @@
-/**
- * Onboarding service stub for API routes.
- * Minimal implementation to resolve TypeScript errors without breaking the build.
- */
+import type { PersonalInformationPayload, ReligiousProfilePayload } from "@/types/onboarding";
 
+/**
+ * Onboarding service layer — persists step-by-step profile data. Backend
+ * logic intentionally left as a stub; see prisma/schema.prisma for the
+ * matching data model scaffold.
+ */
 export const onboardingService = {
-  savePersonalInformation: async () => ({ success: true }),
-  saveReligiousProfile: async () => ({ success: true }),
-  getProgress: async () => ({ completedSteps: [], lastCompletedStep: null }),
-  isComplete: async () => false,
+  async savePersonalInformation(_userId: string, _payload: PersonalInformationPayload): Promise<{ success: boolean }> {
+    throw new Error("Not implemented: persist to profiles table via Supabase/Prisma.");
+  },
+
+  async saveReligiousProfile(_userId: string, _payload: ReligiousProfilePayload): Promise<{ success: boolean }> {
+    throw new Error("Not implemented: persist to religious_profiles table.");
+  },
+
+  async getProgress(_userId: string): Promise<{ completedSteps: string[]; currentStep: string }> {
+    throw new Error("Not implemented: retrieve onboarding progress.");
+  },
 };

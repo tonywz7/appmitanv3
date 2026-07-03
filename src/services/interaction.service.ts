@@ -4,11 +4,11 @@
  */
 
 export const interactionService = {
-  likeUser: async () => ({ like: null, match: null }),
-  unlikeUser: async () => ({ success: true }),
-  passUser: async () => null,
-  getMatches: async () => [],
-  getMatch: async () => null,
-  sendMessage: async () => null,
-  getMessages: async () => [],
+  likeUser: async (_userId: string, _targetUserId: string) => ({ like: null, match: null }),
+  unlikeUser: async (_userId: string, _targetUserId: string) => ({ success: true }),
+  passUser: async (_userId: string, _targetUserId: string) => null,
+  getMatches: async (_userId: string, _skip: number, _take: number) => [],
+  getMatch: async (_userId: string, _matchId: string) => null,
+  sendMessage: async (_userId: string, _matchId: string, _content: string) => null,
+  getMessages: async (_userId: string, _matchId: string, _skip: number, _take: number) => [],
 };

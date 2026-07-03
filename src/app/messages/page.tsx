@@ -282,7 +282,7 @@ export default function MessagesPage() {
                     placeholder="Type a message..."
                     className="flex-1 rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-2 text-body-md text-on-surface placeholder-on-surface-variant focus:border-primary focus:outline-none"
                   />
-                  <Button variant="primary" size="sm" onClick={handleSendMessage}>
+                  <Button variant="primary" onClick={handleSendMessage}>
                     <Icon name="send" className="h-5 w-5" />
                   </Button>
                 </div>

@@ -149,13 +149,14 @@ export default function ProfilePage() {
                   Religion Level
                 </label>
                 <ChipRadioGroup
+                  label="Religion Level"
+                  name="religion-level"
                   options={[
-                    { value: 'any', label: 'Any' },
                     { value: 'practicing', label: 'Practicing' },
+                    { value: 'moderate', label: 'Moderate' },
                     { value: 'very-religious', label: 'Very Religious' },
                   ]}
-                  value="practicing"
-                  onChange={() => {}}
+                  defaultValue="practicing"
                 />
               </div>
               <div>
@@ -163,13 +164,14 @@ export default function ProfilePage() {
                   Location Preference
                 </label>
                 <ChipRadioGroup
+                  label="Location Preference"
+                  name="location"
                   options={[
                     { value: 'anywhere', label: 'Anywhere' },
                     { value: 'nearby', label: 'Nearby' },
                     { value: 'country', label: 'My Country' },
                   ]}
-                  value="country"
-                  onChange={() => {}}
+                  defaultValue="country"
                 />
               </div>
             </div>
@@ -212,13 +214,14 @@ export default function ProfilePage() {
               Profile Visibility
             </label>
             <ChipRadioGroup
+              label="Profile Visibility"
+              name="visibility"
               options={[
                 { value: 'public', label: 'Public' },
                 { value: 'members', label: 'Members Only' },
                 { value: 'matches_only', label: 'Matches Only' },
               ]}
-              value={visibility}
-              onChange={(val) => setVisibility(val as any)}
+              defaultValue={visibility}
             />
           </div>
         </Card>
