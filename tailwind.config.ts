@@ -26,6 +26,7 @@ const config: Config = {
     "text-headline-sm",
     "text-headline-lg",
     "text-headline-xl",
+    "font-headline-xl",
     "text-body-lg",
     "text-body-md",
     "text-body-sm",
