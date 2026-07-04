@@ -28,7 +28,7 @@ export function ForgotPasswordForm() {
           <h3 className="font-manrope text-[32px] font-bold leading-tight tracking-[-0.025em] text-on-surface">
             Reset your password
           </h3>
-          <p className="mt-4 font-jakarta text-base leading-relaxed text-secondary">
+          <p className="mt-4 font-jakarta text-base leading-relaxed text-on-surface-variant">
             Enter your email address and we will send you a secure link to reset your password.
           </p>
         </div>
