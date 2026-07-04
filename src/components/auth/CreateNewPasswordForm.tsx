@@ -32,7 +32,7 @@ export function CreateNewPasswordForm() {
     <div className="w-full max-w-[480px] fade-in-up" data-visible="true">
       <div className="rounded-2xl border border-outline-variant/30 bg-surface-container-lowest p-8 shadow-[0_4px_20px_rgba(26,54,54,0.04)] md:p-12">
         <div className="mb-8 inline-flex items-center gap-2 rounded-full bg-surface-container-low px-3 py-1">
-          <Icon name="lock" className="text-[16px] text-primary" />
+          <Icon name="lock" className="text-[16px] text-success-green" />
           <span className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
             Secure Authentication
           </span>
@@ -70,7 +70,7 @@ export function CreateNewPasswordForm() {
                     key={req.key}
                     className={cn(
                       "flex items-center gap-2 font-body-md text-[13px] transition-colors",
-                      met ? "text-primary" : "text-outline"
+                      met ? "text-success-green" : "text-outline"
                     )}
                   >
                     <Icon name="check_circle" filled={met} className="text-[18px]" />
@@ -81,7 +81,7 @@ export function CreateNewPasswordForm() {
             </ul>
           </div>
 
-          <Button type="submit" fullWidth className="h-14">
+          <Button type="submit" variant="success" fullWidth className="h-14">
             Update Password
           </Button>
         </form>

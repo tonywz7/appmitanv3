@@ -15,10 +15,10 @@ export default function CheckEmailPage() {
   return (
     <>
       <Navbar />
-      <main className="flex items-center justify-center pt-[88px]">
-        <div className="mx-auto grid w-full max-w-max-width grid-cols-1 gap-gutter px-margin-desktop py-12 lg:grid-cols-2">
-          {/* Side image */}
-          <div className="relative hidden overflow-hidden rounded-xl shadow-2xl lg:block">
+      <main className="flex flex-grow items-center justify-center pt-[88px]">
+        <div className="mx-auto grid h-screen max-h-[900px] w-full max-w-max-width grid-cols-1 gap-gutter px-margin-desktop py-12 lg:grid-cols-2">
+          {/* Side image — matches Stitch left panel with gradient overlay & editorial copy */}
+          <div className="relative hidden overflow-hidden rounded-xl shadow-2xl lg:block fade-in-up" data-visible="true">
             <Image src={IMAGE} alt="A serene, minimalist prayer hall with soft natural light." fill className="object-cover" priority />
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-primary/60 to-transparent" />
             <div className="absolute bottom-16 left-16 right-16 z-20">
@@ -34,7 +34,7 @@ export default function CheckEmailPage() {
             </div>
           </div>
 
-          {/* Card */}
+          {/* Card column */}
           <div className="flex flex-col items-center justify-center lg:items-start">
             <CheckEmailCard />
           </div>
