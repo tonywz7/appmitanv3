@@ -39,10 +39,10 @@ export function CreateNewPasswordForm() {
         </div>
 
         <header className="mb-10">
-          <h2 className="mb-3 font-headline-lg text-headline-lg font-bold tracking-tight text-primary">
+          <h2 className="mb-3 font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface">
             Create new password
           </h2>
-          <p className="font-body-md text-body-md leading-relaxed text-secondary">
+          <p className="font-body-md text-body-md leading-relaxed text-on-surface-variant">
             Choose a strong, unique password to secure your account and continue your journey.
           </p>
         </header>

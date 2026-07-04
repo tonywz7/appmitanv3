@@ -36,7 +36,7 @@ export default function OnboardingWelcomePage() {
         </section>
 
         {/* Right Pane: Welcome Card */}
-        <section className="w-full md:w-1/2 flex items-center justify-center p-margin-mobile md:p-margin-desktop bg-surface-container-lowest">
+        <section className="w-full md:w-1/2 flex min-h-[calc(100vh-88px)] items-center justify-center p-margin-mobile md:p-margin-desktop bg-surface-container-lowest">
           <WelcomeCard />
         </section>
       </main>
