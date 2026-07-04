@@ -48,7 +48,7 @@ export default function PasswordUpdatedPage() {
           <p className="font-body-sm text-body-sm text-on-surface-variant">
             If you did not make this change, please contact support immediately.
           </p>
-          <Link href="/support" className="font-label-md text-label-md font-bold text-on-surface hover:text-primary">
+          <Link href="/hubungi-kami" className="font-label-md text-label-md font-bold text-on-surface hover:text-primary">
             Contact Support
           </Link>
         </div>

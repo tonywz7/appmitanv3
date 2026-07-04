@@ -98,7 +98,7 @@ export default function DiscoveryPage() {
                   : "text-on-surface-variant hover:bg-surface-container"
               }`}
             >
-              <Icon name="view_agenda" style={{ fontSize: "20px" }} />
+              <Icon name="view_agenda" className="text-[20px]" />
             </button>
             <button
               onClick={() => setViewMode("grid")}
@@ -109,7 +109,7 @@ export default function DiscoveryPage() {
                   : "text-on-surface-variant hover:bg-surface-container"
               }`}
             >
-              <Icon name="grid_view" style={{ fontSize: "20px" }} />
+              <Icon name="grid_view" className="text-[20px]" />
             </button>
           </div>
         </div>
@@ -117,22 +117,22 @@ export default function DiscoveryPage() {
         {/* Filters strip */}
         <div className="mb-6 flex flex-wrap items-end gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-4">
           <div className="min-w-[140px] flex-1">
-            <SelectField id="age_range" name="age_range" label="Age Range">
+            <SelectField id="age_range" name="age_range" label="Age Range" placeholder="Select age range">
               <option value="18-25">18 – 25</option>
-              <option value="20-35" selected>20 – 35</option>
+              <option value="20-35">20 – 35</option>
               <option value="25-40">25 – 40</option>
             </SelectField>
           </div>
           <div className="min-w-[140px] flex-1">
-            <SelectField id="religion" name="religion" label="Religion Level">
-              <option value="all" selected>All</option>
+            <SelectField id="religion" name="religion" label="Religion Level" placeholder="Select level">
+              <option value="all">All</option>
               <option value="practicing">Practicing</option>
               <option value="very_religious">Very Religious</option>
             </SelectField>
           </div>
           <div className="min-w-[140px] flex-1">
-            <SelectField id="location" name="location" label="Location">
-              <option value="all" selected>All Locations</option>
+            <SelectField id="location" name="location" label="Location" placeholder="Select location">
+              <option value="all">All Locations</option>
               <option value="nearby">Nearby (50 km)</option>
               <option value="country">My Country</option>
             </SelectField>
@@ -140,13 +140,13 @@ export default function DiscoveryPage() {
         </div>
 
         {/* Likes counter */}
-        <div className="mb-6 flex items-center justify-between rounded-xl border border-outline-variant bg-primary-container px-5 py-4">
+        <div className="mb-6 flex items-center justify-between rounded-xl bg-primary px-5 py-4">
           <div>
-            <p className="font-label-sm text-label-sm text-on-primary-container">Daily Likes Remaining</p>
-            <p className="font-headline-md text-headline-md font-bold text-primary">{remaining} / {MAX_LIKES}</p>
+            <p className="font-label-sm text-label-sm text-on-primary/80">Daily Likes Remaining</p>
+            <p className="font-headline-md text-headline-md font-bold text-on-primary">{remaining} / {MAX_LIKES}</p>
           </div>
           {remaining === 0 && (
-            <p className="font-body-sm text-body-sm font-semibold text-primary">Come back tomorrow!</p>
+            <p className="font-body-sm text-body-sm font-semibold text-on-primary">Come back tomorrow!</p>
           )}
         </div>
 
@@ -170,7 +170,7 @@ export default function DiscoveryPage() {
                   <div className="absolute bottom-4 left-4 right-4 text-white">
                     <p className="font-headline-lg text-headline-lg font-bold">{current.name}, {current.age}</p>
                     <p className="flex items-center gap-1 font-body-sm text-body-sm opacity-90">
-                      <Icon name="location_on" style={{ fontSize: "14px" }} />{current.location}
+                      <Icon name="location_on" className="text-[14px]" />{current.location}
                     </p>
                   </div>
                 </div>
@@ -189,11 +189,11 @@ export default function DiscoveryPage() {
                   {/* Actions */}
                   <div className="flex gap-4">
                     <Button variant="outline" fullWidth onClick={handlePass}>
-                      <Icon name="close" style={{ fontSize: "20px" }} />
+                      <Icon name="close" className="text-[20px]" />
                       Pass
                     </Button>
                     <Button variant="primary" fullWidth onClick={handleLike}>
-                      <Icon name="favorite" style={{ fontSize: "20px" }} />
+                      <Icon name="favorite" className="text-[20px]" />
                       Like
                     </Button>
                   </div>
@@ -207,7 +207,7 @@ export default function DiscoveryPage() {
               </div>
             ) : (
               <div className="flex flex-col items-center gap-4 rounded-2xl border border-outline-variant bg-surface-container-lowest p-12 text-center">
-                <Icon name="favorite" className="text-outline" style={{ fontSize: "56px" }} />
+                <Icon name="favorite" className="text-outline text-[56px]" />
                 <h2 className="font-headline-sm text-headline-sm text-on-surface">Daily Limit Reached</h2>
                 <p className="font-body-md text-body-md text-on-surface-variant">
                   You have used all your likes for today. Come back tomorrow for more!
@@ -238,7 +238,7 @@ export default function DiscoveryPage() {
                   <div className="absolute bottom-3 left-3 text-white">
                     <p className="font-headline-sm text-headline-sm font-bold">{profile.name}, {profile.age}</p>
                     <p className="flex items-center gap-1 font-body-sm text-body-sm opacity-80">
-                      <Icon name="location_on" style={{ fontSize: "13px" }} />{profile.location}
+                      <Icon name="location_on" className="text-[13px]" />{profile.location}
                     </p>
                   </div>
                 </div>

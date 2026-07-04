@@ -8,11 +8,10 @@ export const NAV_LINKS = [
 ] as const;
 
 export const FOOTER_LINKS = [
-  { label: "Privacy Policy", href: "/legal/privacy" },
-  { label: "Terms of Service", href: "/legal/terms" },
-  { label: "Safety Guidelines", href: "/safety" },
-  { label: "Support", href: "/support" },
-  { label: "Press", href: "/press" },
+  { label: "Privacy & Security", href: "/keamanan-privasi" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Blog & Insights", href: "/blog-insights" },
+  { label: "Support", href: "/hubungi-kami" },
 ] as const;
 
 /** Total number of steps in the onboarding flow (used to drive progress bars). */
