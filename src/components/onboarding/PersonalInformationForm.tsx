@@ -7,7 +7,6 @@ import { TextField } from "@/components/ui/TextField";
 import { SelectField } from "@/components/ui/SelectField";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { ONBOARDING_TOTAL_STEPS } from "@/lib/constants";
 
 export function PersonalInformationForm() {
   const router = useRouter();
@@ -19,8 +18,9 @@ export function PersonalInformationForm() {
   }
 
   return (
-    <div className="w-full max-w-md fade-in-up" data-visible="true">
-      <ProgressBar step={2} totalSteps={ONBOARDING_TOTAL_STEPS} className="mb-8" />
+    <div className="w-full max-w-md fade-in-up" data-visible="true" style={{ animationDelay: "0.1s" }}>
+      {/* Stitch: Step 2 of 7, 25% — percent override matches the hardcoded Stitch value */}
+      <ProgressBar step={2} totalSteps={7} percent={25} className="mb-8" />
 
       <div className="mb-8 space-y-3">
         <h1 className="font-headline-md text-headline-md text-primary">Personal Information</h1>

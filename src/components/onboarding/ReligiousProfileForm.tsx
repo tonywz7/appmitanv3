@@ -7,7 +7,6 @@ import { SelectField } from "@/components/ui/SelectField";
 import { ChipRadioGroup } from "@/components/ui/ChipRadioGroup";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { ONBOARDING_TOTAL_STEPS } from "@/lib/constants";
 
 export function ReligiousProfileForm() {
   const router = useRouter();
@@ -19,7 +18,15 @@ export function ReligiousProfileForm() {
 
   return (
     <div className="w-full max-w-[540px] rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-6 ambient-shadow fade-in-up md:p-10" data-visible="true">
-      <ProgressBar step={3} totalSteps={ONBOARDING_TOTAL_STEPS} className="mb-10 hidden md:block" />
+      {/* Stitch: Step 3 of 7, 42% — label row is desktop-only, bar is always visible */}
+      <ProgressBar
+        step={3}
+        totalSteps={7}
+        percent={42}
+        percentLabelClass="text-action-blue font-bold"
+        labelDesktopOnly
+        className="mb-10"
+      />
 
       <div className="mb-10 text-center md:text-left">
         <h2 className="mb-3 font-headline-lg-mobile text-headline-lg-mobile text-primary md:font-headline-lg md:text-headline-lg">

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ONBOARDING_TOTAL_STEPS } from "@/lib/constants";
 import { Icon } from "@/components/ui/Icon";
 
 export function WelcomeCard() {
@@ -7,12 +6,11 @@ export function WelcomeCard() {
     <div
       className="w-full max-w-md rounded-xl border border-outline-variant bg-surface-container-lowest p-card-p shadow-[0_4px_20px_rgba(26,54,54,0.04)] fade-in-up"
       data-visible="true"
+      style={{ animationDelay: "0.2s" }}
     >
+      {/* Progress bar — Stitch: w-1/5 (step 1 of 5 displayed segments) */}
       <div className="mb-8 h-1 w-full overflow-hidden rounded-full bg-surface-container-highest">
-        <div
-          className="h-full rounded-full bg-primary"
-          style={{ width: `${(1 / ONBOARDING_TOTAL_STEPS) * 100}%` }}
-        />
+        <div className="h-full w-1/5 rounded-full bg-primary" />
       </div>
 
       <div className="mb-8">

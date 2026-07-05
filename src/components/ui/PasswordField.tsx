@@ -42,7 +42,7 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
             type={visible ? "text" : "password"}
             placeholder="••••••••"
             className={cn(
-              "block h-12 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-4 pr-12 text-body-md text-on-surface outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary",
+              "block h-14 w-full rounded-lg border border-outline-variant bg-surface px-4 pr-12 text-body-md text-on-surface outline-none transition-all duration-200 focus:border-success-green focus:ring-1 focus:ring-success-green",
               className
             )}
             {...props}

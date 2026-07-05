@@ -10,9 +10,146 @@ body {
   background-color: #F3F4F6;
 }
 
+<<<<<<< HEAD
 .glass-card {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+=======
+@layer components {
+  /* Material Symbols Outlined baseline (variable font axes controlled inline
+     per-icon via style="font-variation-settings: ..." exactly as the source
+     screens did). */
+  .material-symbols-outlined {
+    font-family: "Material Symbols Outlined";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Shared entrance animation used across every screen */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .fade-in-up.visible,
+  .fade-in-up[data-visible="true"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* glass-panel — matches FAQ Stitch: background 0.7, blur 10px, border rgba(229,226,218,0.5) */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(229, 226, 218, 0.5);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(198, 198, 205, 0.3);
+    box-shadow: 0 4px 24px rgba(26, 54, 54, 0.04);
+  }
+
+  /* Forgot-password card shadow — from Stitch mitan_forgot_password */
+  .auth-card-shadow {
+    box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.08);
+  }
+
+  .ambient-shadow {
+    box-shadow: 0 4px 20px rgba(26, 54, 54, 0.04);
+  }
+
+  /* Blog/card editorial shadow — mirrors .editorial-shadow from the Stitch source */
+  .editorial-shadow {
+    box-shadow: 0px 4px 20px rgba(26, 54, 54, 0.04);
+    transition: box-shadow 0.3s ease;
+  }
+  .editorial-shadow:hover {
+    box-shadow: 0px 8px 30px rgba(26, 54, 54, 0.08);
+  }
+
+  .brand-gradient-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+  }
+
+  /* Landing Page Styles */
+  .text-mitan-teal { @apply text-[#10b981]; }
+  .bg-mitan-teal { @apply bg-[#10b981]; }
+  .border-mitan-teal { @apply border-[#10b981]; }
+  
+  .main-canvas {
+    max-width: 1100px;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 12px #94a3b8;
+    border: 1px solid #e2e8f0;
+  }
+
+  .hero-image-container {
+    position: relative;
+  }
+
+  .hero-image-bg-shape {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 105%;
+    height: 105%;
+    background-color: #ecfdf5;
+    border-radius: 40px;
+    z-index: 0;
+  }
+
+  .landing-glass-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  /* Login page card — from login/index.html */
+  .tonal-card {
+    background: #ffffff;
+    box-shadow: 0px 4px 20px rgba(26, 54, 54, 0.04);
+    transition: box-shadow 0.3s ease;
+  }
+  .tonal-card:hover {
+    box-shadow: 0px 8px 30px rgba(26, 54, 54, 0.08);
+  }
+
+  /* Register page card — from register/index.html */
+  .premium-card-shadow {
+    box-shadow: 0px 4px 20px rgba(26, 54, 54, 0.04);
+    transition: box-shadow 0.3s ease;
+  }
+  .premium-card-shadow:hover {
+    box-shadow: 0px 8px 30px rgba(26, 54, 54, 0.08);
+  }
+  
+  /* on-primary-fixed-variant as hover bg for primary button */
+  .hover\:bg-on-primary-fixed-variant:hover {
+    background-color: #005137;
+  }
+>>>>>>> 726b96b967303924dac6ff5d984b2fa36e649493
 }

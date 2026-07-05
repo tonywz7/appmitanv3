@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { CheckEmailCard } from "@/components/auth/CheckEmailCard";
+import { SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Check Your Email | MITAN",
@@ -13,13 +12,25 @@ const IMAGE =
 
 export default function CheckEmailPage() {
   return (
-    <>
-      <Navbar />
-      <main className="flex items-center justify-center pt-[88px]">
-        <div className="mx-auto grid w-full max-w-max-width grid-cols-1 gap-gutter px-margin-desktop py-12 lg:grid-cols-2">
-          {/* Side image */}
+    <div className="flex min-h-screen flex-col bg-background">
+      {/* Minimal brand header — no nav links, matches Stitch auth flow pattern */}
+      <header className="fixed top-0 z-50 flex h-[88px] w-full items-center px-margin-desktop bg-background/80 backdrop-blur-md border-b border-outline-variant/30">
+        <div className="font-headline-md text-headline-md font-bold tracking-tight text-primary">
+          {SITE_NAME}
+        </div>
+      </header>
+
+      <main className="flex flex-grow items-center justify-center pt-[88px]">
+        <div className="mx-auto grid w-full max-w-max-width grid-cols-1 gap-gutter px-margin-desktop py-12 lg:grid-cols-2" style={{ minHeight: "calc(100vh - 88px)" }}>
+          {/* Left: Editorial image panel */}
           <div className="relative hidden overflow-hidden rounded-xl shadow-2xl lg:block">
-            <Image src={IMAGE} alt="A serene, minimalist prayer hall with soft natural light." fill className="object-cover" priority />
+            <Image
+              src={IMAGE}
+              alt="A serene, minimalist prayer hall with soft natural light."
+              fill
+              className="object-cover"
+              priority
+            />
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-primary/60 to-transparent" />
             <div className="absolute bottom-16 left-16 right-16 z-20">
               <h2 className="mb-4 font-headline-xl text-headline-xl leading-tight text-white">
@@ -34,13 +45,12 @@ export default function CheckEmailPage() {
             </div>
           </div>
 
-          {/* Card */}
+          {/* Right: Card */}
           <div className="flex flex-col items-center justify-center lg:items-start">
             <CheckEmailCard />
           </div>
         </div>
       </main>
-      <Footer />
-    </>
+    </div>
   );
 }

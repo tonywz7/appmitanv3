@@ -13,7 +13,7 @@ export default function ForgotPasswordPage() {
   return (
     <main className="flex min-h-screen w-full flex-col overflow-hidden lg:flex-row">
       {/* Left Column: Brand Imagery */}
-      <section className="relative hidden h-full w-full flex-col justify-between overflow-hidden p-12 lg:flex lg:w-1/2">
+      <section className="relative hidden min-h-screen w-full flex-col justify-between overflow-hidden p-12 lg:flex lg:w-1/2">
         <div className="absolute inset-0 z-0">
           <Image src={IMAGE} alt="A quiet, authentic moment shared in a sun-drenched minimalist space." fill className="object-cover" priority />
           <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/10 to-black/55" />

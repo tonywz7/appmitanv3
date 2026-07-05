@@ -25,8 +25,9 @@ export default function ReligiousProfilePage() {
 
       {/* Main Container */}
       <main className="flex h-screen w-full flex-col pt-[72px] md:flex-row md:pt-0">
-        {/* Left Pane — background-image div with gradient nested inside, matching Stitch HTML */}
+        {/* Left Pane: Image & Branding (Desktop Only) — Stitch structure: bg-image div with overlay nested inside */}
         <div className="relative hidden h-full flex-col justify-between overflow-hidden border-r border-outline-variant bg-surface-container-low p-12 md:flex md:w-1/2 lg:w-[45%]">
+          {/* Background Image with gradient overlay nested inside — matches Stitch HTML exactly */}
           <div
             className="absolute inset-0 z-0 bg-cover bg-center"
             role="img"
@@ -35,6 +36,7 @@ export default function ReligiousProfilePage() {
           >
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent mix-blend-multiply" />
           </div>
+          {/* Branding Top */}
           <div className="relative z-10 flex items-start justify-between text-white">
             <div className="font-headline-md text-headline-md font-bold tracking-tight">
               {SITE_NAME}
@@ -43,6 +45,7 @@ export default function ReligiousProfilePage() {
               EST. 2024
             </div>
           </div>
+          {/* Tagline Bottom */}
           <div className="relative z-10 text-white">
             <h1 className="mb-4 font-headline-xl text-headline-xl">
               For Life,
