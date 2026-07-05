@@ -21,9 +21,14 @@ const config: Config = {
         'text-muted': '#9CA3AF',
 
         // Accent — locked to teal/emerald (Phase 3 decision)
+        // `deep` (#047857) is the interactive fill: it is the only green
+        // that passes WCAG AA (5.3:1) with white text. DEFAULT (#10B981)
+        // is reserved for highlights, tints, and decorative use.
         accent: {
           DEFAULT: '#10B981',
           hover: '#059669',
+          deep: '#047857',
+          'deep-hover': '#065F46',
           light: '#D1FAE5',
         },
 

@@ -6,8 +6,26 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   background-color: #F3F4F6;
+}
+
+@layer base {
+  /* Global visible focus indicator (WCAG 2.4.7). Never suppressed. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent-deep ring-offset-2 ring-offset-surface;
+  }
+
+  /* Skip link — first focusable element on every page that opts in. */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent-deep focus:px-5 focus:py-3 focus:text-sm focus:font-bold focus:text-white;
+  }
 }
 
 @layer components {
