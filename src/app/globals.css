@@ -17,14 +17,42 @@ body {
 }
 
 @layer base {
-  /* Global visible focus indicator (WCAG 2.4.7). Never suppressed. */
+  /* Global visible focus indicator (WCAG 2.4.7). Never suppressed.
+     Uses accent.deep (#047857) — the AA-compliant interactive green. */
   :focus-visible {
-    @apply outline-none ring-2 ring-accent-deep ring-offset-2 ring-offset-surface;
+    outline: 2px solid #047857;
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 
   /* Skip link — first focusable element on every page that opts in. */
   .skip-link {
-    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent-deep focus:px-5 focus:py-3 focus:text-sm focus:font-bold focus:text-white;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  .skip-link:focus {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 100;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    background-color: #047857;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 700;
   }
 }
 
