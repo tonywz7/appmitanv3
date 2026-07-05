@@ -108,12 +108,12 @@ export default function ProfilePage() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={src} alt={`Photo ${i + 1}`} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
                 <button className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all group-hover:bg-black/30 group-hover:opacity-100">
-                  <Icon name="delete" className="text-white" style={{ fontSize: "24px" }} />
+                  <Icon name="delete" className="text-white text-[24px]" />
                 </button>
               </div>
             ))}
             <label className="flex aspect-square cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-outline-variant transition-colors hover:border-primary hover:bg-surface-container-low">
-              <Icon name="add_photo_alternate" className="text-on-surface-variant" style={{ fontSize: "28px" }} />
+              <Icon name="add_photo_alternate" className="text-on-surface-variant text-[28px]" />
               <span className="font-label-sm text-label-sm text-on-surface-variant">Add Photo</span>
               <input type="file" accept="image/*" className="hidden" />
             </label>
@@ -190,12 +190,12 @@ export default function ProfilePage() {
             <div className="flex gap-3">
               <Link href="/kyc">
                 <Button variant="outline">
-                  <Icon name="verified_user" style={{ fontSize: "18px" }} />
+                  <Icon name="verified_user" className="text-[18px]" />
                   Verification
                 </Button>
               </Link>
               <Button variant="primary">
-                <Icon name="edit" style={{ fontSize: "18px" }} />
+                <Icon name="edit" className="text-[18px]" />
                 Edit Profile
               </Button>
             </div>

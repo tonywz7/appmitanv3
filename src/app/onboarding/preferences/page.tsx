@@ -58,12 +58,12 @@ export default function PreferencesPage() {
                 Demographics
               </h3>
               <div className="grid grid-cols-2 gap-4">
-                <SelectField id="age_min" name="age_min" label="Min Age" required>
+                <SelectField id="age_min" name="age_min" label="Min Age" placeholder="Min" required>
                   {Array.from({ length: 43 }, (_, i) => i + 18).map((a) => (
                     <option key={a} value={a}>{a}</option>
                   ))}
                 </SelectField>
-                <SelectField id="age_max" name="age_max" label="Max Age" required>
+                <SelectField id="age_max" name="age_max" label="Max Age" placeholder="Max" required>
                   {Array.from({ length: 43 }, (_, i) => i + 18).map((a) => (
                     <option key={a} value={a}>{a}</option>
                   ))}

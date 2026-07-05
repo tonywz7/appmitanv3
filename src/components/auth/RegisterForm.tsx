@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 type StrengthLevel = 0 | 1 | 2 | 3 | 4;
@@ -22,12 +23,14 @@ const STRENGTH_LABELS = ["", "Sangat Lemah", "Lemah", "Cukup Kuat", "Sangat Kuat
  * Centered card with password strength indicator and Material Symbols icons.
  */
 export function RegisterForm() {
+  const router = useRouter();
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const strength = password.length === 0 ? 0 : getStrength(password);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    router.push("/onboarding/welcome");
   }
 
   return (

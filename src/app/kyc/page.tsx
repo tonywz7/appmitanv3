@@ -97,7 +97,7 @@ export default function KYCPage() {
         {kycStatus === 'rejected' && (
           <Card className="mb-6 border-error-red bg-red-50">
             <div className="flex gap-4">
-              <Icon name="error" className="h-6 w-6 text-error-red flex-shrink-0 mt-1" />
+              <Icon name="error" className="mt-1 shrink-0 text-[24px] text-error-red" />
               <div>
                 <h3 className="font-semibold text-error-red">KYC Verification Rejected</h3>
                 <p className="mt-1 text-body-md text-error-red/80">
@@ -121,7 +121,7 @@ export default function KYCPage() {
                   Step 1: Upload ID Document
                 </h2>
                 {documents.ktp.uploaded && (
-                  <Icon name="check" className="h-6 w-6 text-success-green" />
+                  <Icon name="check" className="text-[24px] text-success-green" />
                 )}
               </div>
               <p className="mb-4 text-body-md text-on-surface-variant">
@@ -133,7 +133,7 @@ export default function KYCPage() {
                     key={docType}
                     className="flex items-center gap-3 rounded-lg border-2 border-dashed border-outline-variant p-4 cursor-pointer hover:border-primary hover:bg-primary-container"
                   >
-                    <Icon name="cloud-upload" className="h-6 w-6 text-on-surface-variant" />
+                    <Icon name="cloud_upload" className="shrink-0 text-[24px] text-on-surface-variant" />
                     <div className="flex-1">
                       <p className="font-semibold text-on-surface">
                         {documents[docType].name}
@@ -165,14 +165,14 @@ export default function KYCPage() {
                   Step 2: Upload Selfie with ID
                 </h2>
                 {documents.selfie.uploaded && (
-                  <Icon name="check" className="h-6 w-6 text-success-green" />
+                  <Icon name="check" className="text-[24px] text-success-green" />
                 )}
               </div>
               <p className="mb-4 text-body-md text-on-surface-variant">
                 Take a selfie while holding your ID document
               </p>
               <label className="flex items-center gap-3 rounded-lg border-2 border-dashed border-outline-variant p-4 cursor-pointer hover:border-primary hover:bg-primary-container">
-                <Icon name="cloud-upload" className="h-6 w-6 text-on-surface-variant" />
+                <Icon name="cloud_upload" className="shrink-0 text-[24px] text-on-surface-variant" />
                 <div className="flex-1">
                   <p className="font-semibold text-on-surface">
                     Upload Selfie
@@ -216,7 +216,7 @@ export default function KYCPage() {
         {kycStatus === 'approved' && (
           <Card className="border-success-green bg-green-50">
             <div className="flex gap-4">
-              <Icon name="check-circle" className="h-8 w-8 text-success-green flex-shrink-0" />
+                <Icon name="check_circle" className="shrink-0 text-[32px] text-success-green" />
               <div>
                 <h3 className="text-headline-md font-semibold text-success-green">
                   KYC Verification Approved
@@ -236,7 +236,7 @@ export default function KYCPage() {
         {(kycStatus === 'pending' || kycStatus === 'under_review') && (
           <Card className="border-warning-amber bg-amber-50">
             <div className="flex gap-4">
-              <Icon name="schedule" className="h-8 w-8 text-warning-amber flex-shrink-0" />
+              <Icon name="schedule" className="shrink-0 text-[32px] text-warning-amber" />
               <div>
                 <h3 className="text-headline-md font-semibold text-warning-amber">
                   {kycStatus === 'pending'

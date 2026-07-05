@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Icon } from "@/components/ui/Icon";
-import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
 
 interface Conversation {
@@ -111,7 +110,7 @@ export default function MessagesPage() {
           {/* Search */}
           <div className="border-b border-outline-variant px-4 py-3">
             <div className="flex items-center gap-2 rounded-lg border border-outline-variant bg-surface-container px-3 py-2">
-              <Icon name="search" className="shrink-0 text-on-surface-variant" style={{ fontSize: "18px" }} />
+              <Icon name="search" className="shrink-0 text-on-surface-variant text-[18px]" />
               <input
                 type="text"
                 placeholder="Search conversations..."
@@ -187,7 +186,7 @@ export default function MessagesPage() {
               </div>
             </div>
             <button className="rounded-lg p-2 text-on-surface-variant hover:bg-surface-container hover:text-on-surface">
-              <Icon name="more_vert" style={{ fontSize: "20px" }} />
+              <Icon name="more_vert" className="text-[20px]" />
             </button>
           </div>
 
@@ -210,7 +209,7 @@ export default function MessagesPage() {
                   >
                     <span>{msg.timestamp}</span>
                     {msg.sender === "user" && (
-                      <Icon name="done_all" style={{ fontSize: "14px" }} />
+                      <Icon name="done_all" className="text-[14px]" />
                     )}
                   </div>
                 </div>
@@ -223,7 +222,7 @@ export default function MessagesPage() {
           <div className="border-t border-outline-variant bg-surface-container-lowest px-4 py-3">
             <div className="flex items-center gap-3">
               <button className="shrink-0 rounded-lg p-2 text-on-surface-variant hover:bg-surface-container hover:text-on-surface">
-                <Icon name="attach_file" style={{ fontSize: "20px" }} />
+                <Icon name="attach_file" className="text-[20px]" />
               </button>
               <input
                 type="text"
@@ -234,7 +233,7 @@ export default function MessagesPage() {
                 className="flex-1 rounded-lg border border-outline-variant bg-surface-container px-4 py-2.5 font-body-md text-body-md text-on-surface outline-none placeholder:text-on-surface-variant focus:border-primary"
               />
               <Button variant="primary" onClick={sendMessage} aria-label="Send">
-                <Icon name="send" style={{ fontSize: "18px" }} />
+                <Icon name="send" className="text-[18px]" />
               </Button>
             </div>
           </div>

@@ -77,7 +77,7 @@ export default function PhotosPage() {
                 {isUploaded ? (
                   <>
                     <div className="flex h-full w-full flex-col items-center justify-center bg-primary/10">
-                      <Icon name="image" className="text-primary" style={{ fontSize: "32px" }} />
+                      <Icon name="image" className="text-primary text-[32px]" />
                       {index === 0 && (
                         <span className="mt-1 font-label-sm text-[10px] uppercase tracking-wider text-primary">Main</span>
                       )}
@@ -86,12 +86,12 @@ export default function PhotosPage() {
                       onClick={(e) => handleRemove(index, e)}
                       className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all group-hover:bg-black/30 group-hover:opacity-100"
                     >
-                      <Icon name="delete" className="text-white" style={{ fontSize: "24px" }} />
+                      <Icon name="delete" className="text-white text-[24px]" />
                     </button>
                   </>
                 ) : (
                   <div className="flex h-full w-full flex-col items-center justify-center gap-1">
-                    <Icon name="add_photo_alternate" className="text-on-surface-variant" style={{ fontSize: "28px" }} />
+                    <Icon name="add_photo_alternate" className="text-on-surface-variant text-[28px]" />
                     <span className="font-label-sm text-[10px] text-on-surface-variant">
                       {index === 0 ? "Main Photo" : `Photo ${index + 1}`}
                     </span>

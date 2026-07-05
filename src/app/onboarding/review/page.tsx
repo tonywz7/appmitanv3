@@ -25,7 +25,7 @@ export default function ReviewPage() {
       <div className="relative hidden w-1/2 bg-surface-container-highest lg:flex">
         <div className="flex h-full w-full flex-col items-center justify-center bg-primary/10 p-12">
           <div className="flex h-32 w-32 items-center justify-center rounded-full bg-primary/20">
-            <Icon name="check_circle" className="text-primary" style={{ fontSize: "72px" }} />
+            <Icon name="check_circle" className="text-primary text-[72px]" />
           </div>
           <p className="mt-8 font-headline-md text-headline-md font-bold text-primary">{SITE_NAME}</p>
         </div>
@@ -38,7 +38,7 @@ export default function ReviewPage() {
 
           <div className="mb-8 space-y-3">
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
-              <Icon name="check_circle" className="text-primary" style={{ fontSize: "36px" }} />
+              <Icon name="check_circle" className="text-primary text-[36px]" />
             </div>
             <h1 className="font-headline-md text-headline-md text-primary">Profile Complete!</h1>
             <p className="font-body-sm text-body-sm text-on-surface-variant">
@@ -63,7 +63,7 @@ export default function ReviewPage() {
 
           {/* Privacy note */}
           <div className="mb-8 flex gap-3 rounded-xl border border-outline-variant bg-surface-container-low p-4">
-            <Icon name="info" className="mt-0.5 shrink-0 text-on-surface-variant" style={{ fontSize: "18px" }} />
+            <Icon name="info" className="mt-0.5 shrink-0 text-on-surface-variant text-[18px]" />
             <p className="font-body-sm text-body-sm text-on-surface-variant">
               Your profile will be visible to other members. All communication goes through MITAN to protect your privacy.
             </p>
