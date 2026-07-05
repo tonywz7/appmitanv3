@@ -1,13 +1,6 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, Manrope } from 'next/font/google';
 import './globals.css';
-
-// FIX (carried from Phase 3 audit): the original Stitch/prototype HTML
-// loaded Manrope + Plus Jakarta Sans via a <link> tag but the body CSS
-// still referenced 'Inter', so neither font actually rendered. Using
-// next/font here removes that failure mode structurally — the font
-// objects below are the only source of truth, and Tailwind's
-// font-display / font-body utilities point directly at them.
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -23,8 +16,16 @@ const manrope = Manrope({
   display: 'swap',
 });
 
-// NOTE: replace with the real production domain at launch.
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mitan.app';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  colorScheme: 'light',
+  themeColor: '#047857',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -37,13 +38,27 @@ export const metadata: Metadata = {
     'halal marriage platform',
     'Wali system',
     'taaruf',
+    'Muslim dating',
+    'family marriage',
   ],
+  authors: [{ name: 'MITAN' }],
+  creator: 'MITAN',
+  publisher: 'MITAN',
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
   alternates: {
     canonical: '/',
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
   openGraph: {
     title: 'MITAN — Intentional Marriage, Built for Family & Faith',
@@ -51,12 +66,15 @@ export const metadata: Metadata = {
       'Verified profiles, guided introductions, and family involvement through the Wali System. No swiping — just intentional marriage.',
     type: 'website',
     siteName: 'MITAN',
+    locale: 'en_US',
+    url: siteUrl,
     images: [
       {
         url: '/images/og-image.png',
         width: 1200,
         height: 630,
         alt: 'MITAN — Intentional Marriage, Built for Family & Faith',
+        type: 'image/png',
       },
     ],
   },
@@ -66,7 +84,18 @@ export const metadata: Metadata = {
     description:
       'Verified profiles, guided introductions, and family involvement through the Wali System.',
     images: ['/images/og-image.png'],
+    creator: '@mitan',
   },
+  appLinks: [
+    {
+      url: 'https://apps.apple.com/app/mitan',
+      platform: 'iphone',
+    },
+    {
+      url: 'https://play.google.com/store/apps/details?id=com.mitan',
+      platform: 'android',
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -75,8 +104,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${plusJakarta.variable} ${manrope.variable}`}>
-      <body className="font-body text-text-primary antialiased">
+    <html
+      lang="en"
+      className={`${plusJakarta.variable} ${manrope.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <meta charSet="utf-8" />
+        <meta httpEquiv="x-ua-compatible" content="IE=edge" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link
+          rel="icon"
+          href="/icon.svg"
+          type="image/svg+xml"
+        />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta
+          name="apple-mobile-web-app-capable"
+          content="yes"
+        />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+      </head>
+      <body className="font-body text-text-primary antialiased bg-canvas">
         {children}
       </body>
     </html>

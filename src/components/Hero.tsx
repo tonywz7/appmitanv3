@@ -1,10 +1,11 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section className="px-6 md:px-10 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
-      {/* Left: text content */}
+    <section 
+      className="px-6 md:px-10 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center"
+      aria-label="Hero section"
+    >
       <div className="space-y-8">
         <div className="inline-flex items-center gap-2 bg-surface-accent-tint border border-accent-light px-4 py-1.5 rounded-full">
           <span className="text-label-sm font-bold text-accent-deep uppercase">
@@ -18,7 +19,7 @@ export default function Hero() {
 
         <h1 className="font-display font-extrabold text-display-lg-mobile md:text-display-lg text-text-primary text-balance">
           Find your life partner, built on{' '}
-          <span className="text-accent">Family</span> &amp; Faith.
+          <span className="text-accent-deep">Family</span> &amp; Faith.
         </h1>
 
         <p className="text-text-secondary text-body-lg leading-relaxed max-w-md text-pretty">
@@ -30,13 +31,13 @@ export default function Hero() {
         <div className="flex flex-wrap gap-4 pt-2">
           <Link
             href="/onboarding"
-            className="bg-accent-deep text-white px-8 py-4 rounded-full text-base font-bold shadow-primary hover:bg-accent-deep-hover motion-safe:hover:scale-[0.98] transition-all"
+            className="bg-accent-deep text-white px-8 py-4 rounded-full text-base font-bold shadow-primary hover:bg-accent-deep-hover motion-safe:hover:scale-[0.98] transition-all focus:outline-none focus:ring-2 focus:ring-accent-deep focus:ring-offset-2"
           >
             Start Your Journey
           </Link>
           <a
             href="#how-it-works"
-            className="flex items-center gap-2 border border-border px-6 py-4 rounded-full text-base font-bold text-text-primary hover:bg-surface-secondary transition-colors"
+            className="flex items-center gap-2 border border-border px-6 py-4 rounded-full text-base font-bold text-text-primary hover:bg-surface-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent-deep focus:ring-offset-2"
           >
             <svg
               aria-hidden="true"
@@ -46,20 +47,17 @@ export default function Hero() {
               viewBox="0 0 24 24"
             >
               <path
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
               />
             </svg>
             How it Works
           </a>
         </div>
 
-        {/* Social proof */}
         <div className="flex items-center gap-4 pt-4 border-t border-border">
-          {/* Anonymized member avatars — initials only, consistent with the
-              privacy-by-default brand promise (no member photos shown). */}
           <div aria-hidden="true" className="flex -space-x-3">
             {['A', 'N', 'S'].map((initial, i) => (
               <div
@@ -82,20 +80,18 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Right: image */}
       <div className="relative flex justify-end">
         <div
           aria-hidden="true"
           className="absolute -top-5 -right-5 w-[105%] h-[105%] bg-surface-accent-tint rounded-canvas -z-10"
         />
         <div className="relative rounded-3xl overflow-hidden shadow-canvas max-w-sm lg:max-w-md w-full">
-          <Image
+          <img
             alt="A warm family moment over tea, symbolizing a respectful, family-involved introduction"
             className="w-full h-auto object-cover aspect-[4/5]"
             src="/images/hero-couple.png"
             width={448}
             height={560}
-            priority
           />
           <div
             aria-hidden="true"

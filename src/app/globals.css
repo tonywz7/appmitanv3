@@ -4,28 +4,43 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
-  background-color: #F3F4F6;
+  background-color: #f3f4f6;
 }
 
 @layer base {
-  /* Global visible focus indicator (WCAG 2.4.7). Never suppressed.
-     Uses accent.deep (#047857) — the AA-compliant interactive green. */
   :focus-visible {
     outline: 2px solid #047857;
     outline-offset: 2px;
     border-radius: 4px;
   }
 
-  /* Skip link — first focusable element on every page that opts in. */
+  /* High-contrast mode support */
+  @media (prefers-contrast: more) {
+    :focus-visible {
+      outline: 3px solid #047857;
+      outline-offset: 3px;
+    }
+  }
+
+  /* Skip link — first focusable element */
   .skip-link {
     position: absolute;
     width: 1px;
@@ -37,6 +52,7 @@ body {
     white-space: nowrap;
     border-width: 0;
   }
+
   .skip-link:focus {
     position: fixed;
     left: 1rem;
@@ -53,15 +69,20 @@ body {
     color: #ffffff;
     font-size: 0.875rem;
     font-weight: 700;
+    text-decoration: none;
+  }
+
+  /* Reduce motion for animations */
+  @media (prefers-reduced-motion: reduce) {
+    .skip-link {
+      transition: none;
+    }
   }
 }
 
 @layer components {
-  /* Material Symbols Outlined baseline (variable font axes controlled inline
-     per-icon via style="font-variation-settings: ..." exactly as the source
-     screens did). */
   .material-symbols-outlined {
-    font-family: "Material Symbols Outlined";
+    font-family: 'Material Symbols Outlined';
     font-weight: normal;
     font-style: normal;
     font-size: 24px;
@@ -72,23 +93,32 @@ body {
     white-space: nowrap;
     word-wrap: normal;
     direction: ltr;
-    -webkit-font-feature-settings: "liga";
+    -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Shared entrance animation used across every screen */
+  /* Shared entrance animation */
   .fade-in-up {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
   }
+
   .fade-in-up.visible,
-  .fade-in-up[data-visible="true"] {
+  .fade-in-up[data-visible='true'] {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* glass-panel — matches FAQ Stitch: background 0.7, blur 10px, border rgba(229,226,218,0.5) */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in-up {
+      transition: none;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Glass panel effects */
   .glass-panel {
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(10px);
@@ -104,7 +134,7 @@ body {
     box-shadow: 0 4px 24px rgba(26, 54, 54, 0.04);
   }
 
-  /* Forgot-password card shadow — from Stitch mitan_forgot_password */
+  /* Shadow utilities */
   .auth-card-shadow {
     box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.08);
   }
@@ -113,15 +143,16 @@ body {
     box-shadow: 0 4px 20px rgba(26, 54, 54, 0.04);
   }
 
-  /* Blog/card editorial shadow — mirrors .editorial-shadow from the Stitch source */
   .editorial-shadow {
     box-shadow: 0px 4px 20px rgba(26, 54, 54, 0.04);
     transition: box-shadow 0.3s ease;
   }
+
   .editorial-shadow:hover {
     box-shadow: 0px 8px 30px rgba(26, 54, 54, 0.08);
   }
 
+  /* Gradients */
   .brand-gradient-overlay {
     background: linear-gradient(
       180deg,
@@ -130,21 +161,32 @@ body {
     );
   }
 
-  /* Landing Page Styles */
-  .text-mitan-teal { @apply text-[#10b981]; }
-  .bg-mitan-teal { @apply bg-[#10b981]; }
-  .border-mitan-teal { @apply border-[#10b981]; }
-  
+  /* Color utilities */
+  .text-mitan-teal {
+    @apply text-[#10b981];
+  }
+
+  .bg-mitan-teal {
+    @apply bg-[#10b981];
+  }
+
+  .border-mitan-teal {
+    @apply border-[#10b981];
+  }
+
+  /* Main canvas */
   .main-canvas {
     max-width: 1100px;
     margin: 40px auto;
     background-color: white;
     border-radius: 40px;
     overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 12px #94a3b8;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15),
+      0 0 0 12px #94a3b8;
     border: 1px solid #e2e8f0;
   }
 
+  /* Hero image handling */
   .hero-image-container {
     position: relative;
   }
@@ -160,6 +202,7 @@ body {
     z-index: 0;
   }
 
+  /* Landing glass card */
   .landing-glass-card {
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
@@ -167,27 +210,56 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
-  /* Login page card — from login/index.html */
+  /* Card shadows */
   .tonal-card {
     background: #ffffff;
     box-shadow: 0px 4px 20px rgba(26, 54, 54, 0.04);
     transition: box-shadow 0.3s ease;
   }
+
   .tonal-card:hover {
     box-shadow: 0px 8px 30px rgba(26, 54, 54, 0.08);
   }
 
-  /* Register page card — from register/index.html */
   .premium-card-shadow {
     box-shadow: 0px 4px 20px rgba(26, 54, 54, 0.04);
     transition: box-shadow 0.3s ease;
   }
+
   .premium-card-shadow:hover {
     box-shadow: 0px 8px 30px rgba(26, 54, 54, 0.08);
   }
-  
-  /* on-primary-fixed-variant as hover bg for primary button */
+
+  /* Interactive states */
   .hover\:bg-on-primary-fixed-variant:hover {
     background-color: #005137;
+  }
+
+  /* Utility for accessible images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Ensure proper link focus */
+  a {
+    position: relative;
+  }
+
+  a:focus-visible {
+    outline: 2px solid #047857;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+  }
+
+  .no-print {
+    display: none;
   }
 }
