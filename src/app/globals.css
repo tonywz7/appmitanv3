@@ -10,13 +10,6 @@ body {
   background-color: #F3F4F6;
 }
 
-<<<<<<< HEAD
-.glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-=======
 @layer components {
   /* Material Symbols Outlined baseline (variable font axes controlled inline
      per-icon via style="font-variation-settings: ..." exactly as the source
@@ -151,5 +144,4 @@ body {
   .hover\:bg-on-primary-fixed-variant:hover {
     background-color: #005137;
   }
->>>>>>> 726b96b967303924dac6ff5d984b2fa36e649493
 }
