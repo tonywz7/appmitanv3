@@ -36,7 +36,7 @@ export default function Hero() {
           </Link>
           <a
             href="#how-it-works"
-            className="flex items-center gap-2 border border-gray-200 px-6 py-4 rounded-full text-base font-bold text-text-primary hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-2 border border-border px-6 py-4 rounded-full text-base font-bold text-text-primary hover:bg-surface-secondary transition-colors"
           >
             <svg
               aria-hidden="true"
@@ -58,10 +58,21 @@ export default function Hero() {
 
         {/* Social proof */}
         <div className="flex items-center gap-4 pt-4 border-t border-border">
+          {/* Anonymized member avatars — initials only, consistent with the
+              privacy-by-default brand promise (no member photos shown). */}
           <div aria-hidden="true" className="flex -space-x-3">
-            <div className="w-10 h-10 rounded-full border-2 border-white bg-gray-300" />
-            <div className="w-10 h-10 rounded-full border-2 border-white bg-gray-400" />
-            <div className="w-10 h-10 rounded-full border-2 border-white bg-gray-500" />
+            {['A', 'N', 'S'].map((initial, i) => (
+              <div
+                key={initial}
+                className={`w-10 h-10 rounded-full border-2 border-white flex items-center justify-center text-body-sm font-bold ${
+                  i === 2
+                    ? 'bg-accent-deep text-white'
+                    : 'bg-accent-light text-accent-deep'
+                }`}
+              >
+                {initial}
+              </div>
+            ))}
           </div>
           <p className="text-body-sm text-text-muted">
             Trusted by{' '}

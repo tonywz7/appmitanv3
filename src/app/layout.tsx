@@ -23,7 +23,11 @@ const manrope = Manrope({
   display: 'swap',
 });
 
+// NOTE: replace with the real production domain at launch.
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mitan.app';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'MITAN — Intentional Marriage, Built for Family & Faith',
   description:
     'MITAN is an intentional Muslim marriage platform built on trust, privacy, and family involvement — not casual dating. Verified profiles, guided introductions, and the integrated Wali System.',
@@ -34,18 +38,34 @@ export const metadata: Metadata = {
     'Wali system',
     'taaruf',
   ],
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: 'MITAN — Intentional Marriage, Built for Family & Faith',
     description:
       'Verified profiles, guided introductions, and family involvement through the Wali System. No swiping — just intentional marriage.',
     type: 'website',
     siteName: 'MITAN',
+    images: [
+      {
+        url: '/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'MITAN — Intentional Marriage, Built for Family & Faith',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'MITAN — Intentional Marriage, Built for Family & Faith',
     description:
       'Verified profiles, guided introductions, and family involvement through the Wali System.',
+    images: ['/images/og-image.png'],
   },
 };
 
