@@ -68,7 +68,7 @@ export default function TrustSafety() {
         {chips.map((chip) => (
           <div
             key={chip.label}
-            className="flex items-center gap-2 bg-white border border-border-strong px-4 py-2 rounded-full text-accent"
+            className="flex items-center gap-2 bg-white border border-border-strong px-4 py-2 rounded-full text-accent-deep"
           >
             <ChipIcon icon={chip.icon} />
             <span className="text-body-sm font-semibold text-text-secondary">
@@ -76,6 +76,18 @@ export default function TrustSafety() {
             </span>
           </div>
         ))}
+      </div>
+
+      <div className="pt-8">
+        <a
+          href="/keamanan-privasi"
+          className="inline-flex items-center gap-2 font-bold text-accent-deep hover:text-accent-deep-hover transition-colors"
+        >
+          Read our safety &amp; privacy standards
+          <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
       </div>
     </section>
   );

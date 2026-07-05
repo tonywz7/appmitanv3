@@ -26,7 +26,27 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: 'MITAN — Intentional Marriage, Built for Family & Faith',
   description:
-    'MITAN is an intentional Muslim marriage platform built on trust, privacy, and family involvement — not casual dating.',
+    'MITAN is an intentional Muslim marriage platform built on trust, privacy, and family involvement — not casual dating. Verified profiles, guided introductions, and the integrated Wali System.',
+  keywords: [
+    'Muslim matrimony',
+    'intentional marriage',
+    'halal marriage platform',
+    'Wali system',
+    'taaruf',
+  ],
+  openGraph: {
+    title: 'MITAN — Intentional Marriage, Built for Family & Faith',
+    description:
+      'Verified profiles, guided introductions, and family involvement through the Wali System. No swiping — just intentional marriage.',
+    type: 'website',
+    siteName: 'MITAN',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'MITAN — Intentional Marriage, Built for Family & Faith',
+    description:
+      'Verified profiles, guided introductions, and family involvement through the Wali System.',
+  },
 };
 
 export default function RootLayout({
