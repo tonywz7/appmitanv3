@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import TrustSafety from '@/components/TrustSafety';
@@ -17,34 +18,64 @@ const structuredData = {
       name: 'MITAN',
       description:
         'An intentional Muslim marriage platform built on trust, privacy, and family involvement.',
+      url: 'https://mitan.app',
+      logo: 'https://mitan.app/logo.png',
+      sameAs: [
+        'https://twitter.com/mitan',
+        'https://instagram.com/mitan',
+      ],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'Customer Service',
+        availableLanguage: ['en'],
+      },
+    },
+    {
+      '@type': 'WebApplication',
+      name: 'MITAN',
+      description:
+        'An intentional Muslim marriage platform built on trust, privacy, and family involvement.',
+      url: 'https://mitan.app',
+      applicationCategory: 'SocialNetworkingApplication',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
     },
     {
       '@type': 'FAQPage',
       mainEntity: faqs.map((faq) => ({
         '@type': 'Question',
         name: faq.question,
-        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
       })),
     },
   ],
 };
 
-// Funnel order: promise → proof of safety → process → product →
-// numbers → stories → objections → ask.
+export const metadata: Metadata = {
+  title: 'MITAN — Intentional Marriage, Built for Family & Faith',
+  description:
+    'MITAN is an intentional Muslim marriage platform built on trust, privacy, and family involvement — not casual dating. Verified profiles, guided introductions, and the integrated Wali System.',
+};
+
 export default function Home() {
   return (
     <>
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <a href="#content" className="skip-link">
-        Skip to content
+      <a href="#main-content" className="skip-link">
+        Skip to main content
       </a>
       <div className="max-w-[1200px] mx-auto my-4 md:my-10 bg-surface rounded-canvas overflow-hidden shadow-canvas border border-gray-200">
         <Header />
-        <main id="content">
+        <main id="main-content" className="focus:outline-none">
           <Hero />
           <TrustSafety />
           <HowItWorks />
