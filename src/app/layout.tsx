@@ -86,16 +86,7 @@ export const metadata: Metadata = {
     images: ['/images/og-image.png'],
     creator: '@mitan',
   },
-  appLinks: [
-    {
-      url: 'https://apps.apple.com/app/mitan',
-      platform: 'iphone',
-    },
-    {
-      url: 'https://play.google.com/store/apps/details?id=com.mitan',
-      platform: 'android',
-    },
-  ],
+
 };
 
 export default function RootLayout({

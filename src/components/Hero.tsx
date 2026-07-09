@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Hero() {
   return (
@@ -86,12 +87,14 @@ export default function Hero() {
           className="absolute -top-5 -right-5 w-[105%] h-[105%] bg-surface-accent-tint rounded-canvas -z-10"
         />
         <div className="relative rounded-3xl overflow-hidden shadow-canvas max-w-sm lg:max-w-md w-full">
-          <img
+          <Image
             alt="A warm family moment over tea, symbolizing a respectful, family-involved introduction"
             className="w-full h-auto object-cover aspect-[4/5]"
             src="/images/hero-couple.png"
             width={448}
             height={560}
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 60vw, 50vw"
           />
           <div
             aria-hidden="true"
