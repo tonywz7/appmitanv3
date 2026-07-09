@@ -78,6 +78,7 @@ export function AdminLayout({ children, currentPage }: AdminLayoutProps) {
         <div className="border-t border-outline-variant p-2">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
+            aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
             className="flex w-full items-center justify-center rounded-lg px-4 py-3 text-on-surface-variant hover:bg-surface-container"
           >
             <Icon
@@ -97,9 +98,9 @@ export function AdminLayout({ children, currentPage }: AdminLayoutProps) {
               {currentPage}
             </h1>
             <div className="flex items-center gap-4">
-              <button className="relative text-on-surface-variant hover:text-on-surface">
+              <button className="relative text-on-surface-variant hover:text-on-surface" aria-label="Notifications">
                 <Icon name="notifications" className="h-6 w-6" />
-                <span className="absolute -right-1 -top-1 inline-block h-2 w-2 rounded-full bg-error" />
+                <span className="absolute -right-1 -top-1 inline-block h-2 w-2 rounded-full bg-error" aria-hidden="true" />
               </button>
               <div className="flex items-center gap-3">
                 <div className="h-10 w-10 rounded-full bg-primary-container" />
