@@ -29,6 +29,7 @@ export function LoginForm() {
             id="email"
             type="email"
             placeholder="nama@email.com"
+            required
             className="w-full rounded-lg border border-outline-variant bg-white px-4 py-3 font-body-md text-body-md placeholder:text-outline/50 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
           />
         </div>
@@ -46,14 +47,16 @@ export function LoginForm() {
               id="password"
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
+              required
               className="w-full rounded-lg border border-outline-variant bg-white px-4 py-3 font-body-md text-body-md placeholder:text-outline/50 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
               className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-outline-variant transition-colors hover:text-primary"
             >
-              <span className="material-symbols-outlined">
+              <span className="material-symbols-outlined" aria-hidden="true">
                 {showPassword ? "visibility_off" : "visibility"}
               </span>
             </button>
@@ -64,6 +67,7 @@ export function LoginForm() {
         <div className="flex items-center justify-between">
           <label className="group flex cursor-pointer items-center gap-2">
             <input
+              id="remember"
               type="checkbox"
               className="h-5 w-5 rounded border-outline-variant text-primary transition-all focus:ring-primary/20"
             />

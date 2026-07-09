@@ -62,6 +62,7 @@ export function RegisterForm() {
               name="email"
               type="email"
               placeholder="nama@email.com"
+              required
               className="w-full rounded-lg border border-outline-variant bg-surface-container-lowest py-3 pl-12 pr-4 font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary-container"
             />
           </div>
@@ -84,15 +85,18 @@ export function RegisterForm() {
               name="password"
               type={showPassword ? "text" : "password"}
               placeholder="Min. 8 karakter"
+              required
+              minLength={8}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full rounded-lg border border-outline-variant bg-surface-container-lowest py-3 pl-12 pr-12 font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary-container"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
               className="absolute right-4 top-1/2 -translate-y-1/2 text-outline transition-colors hover:text-primary"
             >
-              <span className="material-symbols-outlined">
+              <span className="material-symbols-outlined" aria-hidden="true">
                 {showPassword ? "visibility_off" : "visibility"}
               </span>
             </button>
@@ -143,6 +147,8 @@ export function RegisterForm() {
               name="confirm-password"
               type="password"
               placeholder="Ulangi kata sandi"
+              required
+              minLength={8}
               className="w-full rounded-lg border border-outline-variant bg-surface-container-lowest py-3 pl-12 pr-4 font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary-container"
             />
           </div>
@@ -152,7 +158,9 @@ export function RegisterForm() {
         <div className="space-y-3 pt-2">
           <label className="group flex cursor-pointer items-start gap-3">
             <input
+              id="terms"
               type="checkbox"
+              required
               className="peer mt-0.5 h-5 w-5 rounded border-outline-variant text-primary transition-all focus:ring-primary-container"
             />
             <span className="font-body-sm text-body-sm text-on-surface-variant transition-colors group-hover:text-on-surface">
@@ -164,7 +172,9 @@ export function RegisterForm() {
           </label>
           <label className="group flex cursor-pointer items-start gap-3">
             <input
+              id="privacy"
               type="checkbox"
+              required
               className="peer mt-0.5 h-5 w-5 rounded border-outline-variant text-primary transition-all focus:ring-primary-container"
             />
             <span className="font-body-sm text-body-sm text-on-surface-variant transition-colors group-hover:text-on-surface">
