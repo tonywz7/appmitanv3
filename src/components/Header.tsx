@@ -96,7 +96,7 @@ export default function Header() {
             Start Your Journey
           </Link>
           <Link
-            href="/auth"
+            href="/login"
             className="hidden sm:inline-flex bg-gray-100 text-text-primary px-6 py-2.5 rounded-full text-sm font-bold hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-deep focus:ring-offset-2"
           >
             Log In
@@ -175,7 +175,7 @@ export default function Header() {
               Start Your Journey
             </Link>
             <Link
-              href="/auth"
+              href="/login"
               onClick={closeMenu}
               className="bg-gray-100 text-text-primary px-6 py-3.5 rounded-full text-sm font-bold text-center hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-deep focus:ring-offset-2 block"
             >

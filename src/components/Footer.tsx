@@ -13,7 +13,7 @@ const linkColumns = [
     title: 'Company',
     links: [
       { label: 'Contact Us', href: '/hubungi-kami' },
-      { label: 'Log In', href: '/auth' },
+      { label: 'Log In', href: '/login' },
       { label: 'Start Your Journey', href: '/onboarding' },
     ],
   },
